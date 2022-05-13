@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const connectDB = require('./config/db')
@@ -17,6 +18,10 @@ if (process.env.NODE_ENV === 'development'){
 
 //EJS
 app.set('view engine', 'ejs');
+
+
+//Static
+app.use()
 
 
 //routes
