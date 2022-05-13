@@ -14,4 +14,8 @@ router.get('/dashboard', (req, res) => {
     res.render('dashboard.ejs', {adj: "fucking", title: "Dashboard"})
 })
 
+router.get('/login', (req, res) => {
+    res.render('login.ejs', {title: "Login"})
+})
+
 module.exports = router
