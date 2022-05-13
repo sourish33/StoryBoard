@@ -1,21 +1,21 @@
 const express = require('express')
 const router = express.Router()
+// const passport = require('passport')
 
 
-//  @desc Login/Landing page
+//  @desc landing page
 // @route GET /
-router.get('/', (req, res)=>{
-    res.render('main.ejs', {name: "Sourish Dutta", title: "Home"})
+
+router.get(['/', '/login'], (req,res)=>{
+    res.render('login.ejs', {title: "Logendro"})
 })
 
-// @desc Dashboard
-//@route  GET /dashboard
+// @desc dashboard
+//@route  GET /auth/google/callback
 router.get('/dashboard', (req, res) => {
-    res.render('dashboard.ejs', {adj: "fucking", title: "Dashboard"})
+    res.render('dashboard.ejs', {adj: "puta madre", title: "Dashboard"})
 })
 
-router.get('/login', (req, res) => {
-    res.render('login.ejs', {title: "Login"})
-})
+
 
 module.exports = router
