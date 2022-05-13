@@ -20,8 +20,8 @@ if (process.env.NODE_ENV === 'development'){
 app.set('view engine', 'ejs');
 
 
-//Static
-app.use()
+//Static folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 
 //routes
