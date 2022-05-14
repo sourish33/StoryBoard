@@ -7,7 +7,7 @@ const router = express.Router()
 // @route GET /
 
 router.get(['/', '/login'], (req,res)=>{
-    res.render('login.ejs', {title: "Logendro"})
+    res.render('login.ejs', {title: "Login"})
 })
 
 // @desc dashboard
