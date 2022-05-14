@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Dashboard</title>
-    </head>
+    <%- include('partials/header'); %>
+    <title>Dashboard</title>
+</head>
 <body>
-    <h1>Welcome to the Dashboard</h1>
+    <%- include('partials/nav.ejs') %> 
+    <div class="container login-container">
+        <div><h1>Welcome to the Dashboard</h1></div>
+        
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        M.Sidenav.init(document.querySelector(".sidenav"))
+    </script>
 </body>
 </html>

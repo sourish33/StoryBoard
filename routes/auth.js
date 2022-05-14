@@ -17,8 +17,9 @@ router.get(
     }
 )
 
-// router.get("/login", (req, res) => {
-//     res.render("login.ejs", { title: "Logindro" })
-// })
+router.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
+})
 
 module.exports = router
