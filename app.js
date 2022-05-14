@@ -7,7 +7,7 @@ const session = require('express-session')
 const connectDB = require('./config/db')
 const routes = require('./routes/index')
 const authRoutes = require('./routes/auth')
-const router = require('./routes/index')
+
 
 //Load config
 dotenv.config({path: './config/config.env'})
