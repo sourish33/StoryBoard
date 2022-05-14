@@ -13,7 +13,7 @@ router.get(['/', '/login'], (req,res)=>{
 // @desc dashboard
 //@route  GET /auth/google/callback
 router.get('/dashboard', (req, res) => {
-    res.render('dashboard.ejs', {adj: "puta madre", title: "Dashboard"})
+    res.render('dashboard.ejs')
 })
 
 

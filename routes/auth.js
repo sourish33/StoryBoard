@@ -13,7 +13,7 @@ router.get(
     "/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     (req, res) => {
-        res.redirect("dashboard.ejs", { adj: "fucking", title: "Dashboard" })
+        res.redirect("/dashboard")
     }
 )
 
