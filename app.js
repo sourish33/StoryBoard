@@ -4,9 +4,11 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
 const routes = require('./routes/index')
 const authRoutes = require('./routes/auth')
+const mongoose = require('mongoose')
 
 
 //Load config
@@ -31,6 +33,7 @@ app.use(session({
     secret: "hello",
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({mongoUrl: process.env.MONGO_URI})
 }))
 
 //Passport middleware
