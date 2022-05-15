@@ -11,6 +11,13 @@
             <h3>Welcome, <%= firstName %> </h3>
             <p>Here are your stories</p>
         </div>
+        <% if (stories.length!==0) { %>
+            <div>You have some juicy stories!</div>
+        <% } else { %>
+            <p>You have not created any stories</p>
+        <% } %>
+         
+         
         
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

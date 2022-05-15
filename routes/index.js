@@ -17,11 +17,11 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
         const stories = await Story.find({user: req.user.id})
         console.log(stories)
+        res.render('dashboard.ejs', {firstName: req.user.firstName, stories: stories})
     } catch (error) {
         console.log(error)
-        return res.render('error/500')
+        res.render('error/500')
     }
-    res.render('dashboard.ejs', {firstName: req.user.firstName})
 })
 
 
