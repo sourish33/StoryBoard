@@ -7,6 +7,7 @@ const Story= require('../models/Story')
 //  @desc landing page
 // @route GET /
 
+
 router.get(['/', '/login'], ensureGuest,(req,res)=>{
     res.render('login.ejs', {title: "Login"})
 })
@@ -15,8 +16,7 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 //@route  GET /auth/google/callback
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
-        const stories = await Story.find({user: req.user.id})
-        console.log(stories)
+        let stories = await Story.find({user: req.user.id})
         res.render('dashboard.ejs', {firstName: req.user.firstName, stories: stories})
     } catch (error) {
         console.log(error)

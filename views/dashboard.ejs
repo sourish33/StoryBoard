@@ -12,7 +12,26 @@
             <p>Here are your stories</p>
         </div>
         <% if (stories.length!==0) { %>
-            <div>You have some juicy stories!</div>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stories.forEach(el => { %>
+                        <tr>
+                            <td><a href="/stories/"<%= el._id %> ></a><%= el.title%></td>
+                            <td><%= el.createdAt %> </td>
+                            <td><span class="dash-status"><%= el.status %> </span></td>
+                            <td></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
         <% } else { %>
             <p>You have not created any stories</p>
         <% } %>
