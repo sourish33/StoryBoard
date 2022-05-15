@@ -13,7 +13,7 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 // @desc dashboard
 //@route  GET /auth/google/callback
 router.get('/dashboard', ensureAuth, (req, res) => {
-    res.render('dashboard.ejs')
+    res.render('dashboard.ejs', {firstName: req.user.firstName})
 })
 
 

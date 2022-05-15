@@ -1,6 +1,6 @@
 const ensureAuth = (req, res, next) =>{
     if (req.isAuthenticated()) {
-        console.log(req)
+        // console.log(req.user.firstName)
         return next()
     } else {
         res.redirect('/')
@@ -9,8 +9,8 @@ const ensureAuth = (req, res, next) =>{
 
 const ensureGuest = (req, res, next) =>{
     if (req.isAuthenticated()){
-        console.log(req)
-        res.redirect('/dashboard')
+        console.log(req.user.firstName)
+        res.render('dashboard.ejs', {firstName: req.user.firstName})
     } else {
         console.log("EnsureGuest: was not authenticated!")
         return next()
