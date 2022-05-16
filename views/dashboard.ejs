@@ -25,7 +25,7 @@
                     <% stories.forEach(el => { %>
                         <tr>
                             <td><a href="/stories/"<%= el._id %> ></a><%= el.title%></td>
-                            <td><%= el.createdAt %> </td>
+                            <td><%= formatTime(el.createdAt) %> </td>
                             <td><span class="dash-status"><%= el.status %> </span></td>
                             <td></td>
                         </tr>
