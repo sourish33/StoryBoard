@@ -6,9 +6,13 @@ const passport = require('passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
+const mongoose = require('mongoose')
+
+
+
 const routes = require('./routes/index')
 const authRoutes = require('./routes/auth')
-const mongoose = require('mongoose')
+const storyRoutes = require('./routes/stories')
 
 
 //Load config
@@ -49,6 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 //routes
 app.use('/', routes)
 app.use('/auth', authRoutes)
+app.use('/stories', storyRoutes)
 
 
 const PORT = process.env.PORT || 3000
