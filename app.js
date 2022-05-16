@@ -24,6 +24,10 @@ require('./config/passport')(passport)
 
 const app = express()
 
+//Body parser
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
+
 //Logging
 if (process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
