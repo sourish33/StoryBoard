@@ -15,7 +15,6 @@ router.get('/add', ensureAuth,(req,res)=>{
 router.post('/', ensureAuth, async (req, res)=>{
     try {
         req.body.user = req.user.id
-        console.log(req.body)
         await Story.create(req.body)
         res.redirect('/dashboard')
     } catch (error) {
