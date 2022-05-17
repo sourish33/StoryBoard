@@ -1,4 +1,5 @@
 register new user
+user page
 registration without google
 toggle private to public
 upvote/downvote stries

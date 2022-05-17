@@ -24,5 +24,9 @@ router.post('/', ensureAuth, async (req, res)=>{
     }
 })
 
+router.get('/', ensureAuth,(req,res)=>{
+    res.render('./stories/index.ejs')
+})
+
 
 module.exports = router
