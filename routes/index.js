@@ -10,7 +10,7 @@ const Story= require('../models/Story')
 
 
 router.get(['/', '/login'], ensureGuest,(req,res)=>{
-    res.render('login.ejs', {title: "Login"})
+    res.render('login.ejs')
 })
 
 // @desc dashboard

@@ -2,4 +2,4 @@ register new user
 registration without google
 toggle private to public
 upvote/downvote stries
-sort displayed stories
+sort displayed stories (maybe with an option to sort by different criteria)
