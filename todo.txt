@@ -4,3 +4,4 @@ registration without google
 toggle private to public
 upvote/downvote stries
 sort displayed stories (maybe with an option to sort by different criteria)
+search text of public stories

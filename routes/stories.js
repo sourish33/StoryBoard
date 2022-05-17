@@ -24,6 +24,11 @@ router.post('/', ensureAuth, async (req, res)=>{
     }
 })
 
+/*
+stories which are public
+title, body, user.name, user.image
+
+*/
 router.get('/', ensureAuth,(req,res)=>{
     res.render('./stories/index.ejs')
 })
