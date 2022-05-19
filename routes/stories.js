@@ -9,6 +9,16 @@ const User = require('../models/User')
 // @route GET /
 
 
+const processStory = (story) =>{
+    let str = story.body
+    str = str.replace(/<[^>]*>?/gm, '');
+    if (str.length>200 && str.length>0){
+        str = str.slice(0, 200)
+    }
+    story.body = str
+    return story
+}
+
 router.get('/add', ensureAuth,(req,res)=>{
     res.render('./partials/add.ejs')
 })
@@ -34,15 +44,16 @@ router.get('/', ensureAuth,async (req,res)=>{
     try {
         const retrievedStories = await Story.find(
             {status: "public"}
-            ).lean().populate('user').select({body: 0}).exec()
-
-        return res.json(retrievedStories)
+            ).lean().populate('user').exec()
+        retrievedStories.forEach(story => story = processStory(story))
+        // return res.json(retrievedStories)
+        res.render('./stories/index.ejs', {retrievedStories: retrievedStories})
         
     } catch (error) {
         console.log(error)
     }
 
-    res.render('./stories/index.ejs')
+    
 })
 
 
