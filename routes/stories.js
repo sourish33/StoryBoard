@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {ensureAuth} = require('../middleware/auth')
 const Story= require('../models/Story')
+const User = require('../models/User')
 
 
 //  @desc Show Add page
@@ -29,7 +30,18 @@ stories which are public
 title, body, user.name, user.image
 
 */
-router.get('/', ensureAuth,(req,res)=>{
+router.get('/', ensureAuth,async (req,res)=>{
+    try {
+        const retrievedStories = await Story.find(
+            {status: "public"}
+            ).lean().populate('user').select({body: 0}).exec()
+
+        return res.json(retrievedStories)
+        
+    } catch (error) {
+        console.log(error)
+    }
+
     res.render('./stories/index.ejs')
 })
 
