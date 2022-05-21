@@ -24,6 +24,10 @@ p {
     flex-wrap: wrap;
 }
 
+.story-body {
+    margin: 10px;
+}
+
 .card {
     width: 400px;
     margin: 20px;
