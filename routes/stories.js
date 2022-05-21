@@ -1,5 +1,5 @@
 const express = require('express')
-const { processText } = require('../helpers')
+const { processText, formatTime } = require('../helpers')
 const router = express.Router()
 const {ensureAuth} = require('../middleware/auth')
 const Story= require('../models/Story')
@@ -37,12 +37,13 @@ router.get('/', ensureAuth,async (req,res)=>{
     try {
         const retrievedStories = await Story.find(
             {status: "public"}
-            ).lean().populate('user').exec()
+            ).sort({'createdAt': -1}).lean().populate('user').exec()
         retrievedStories.forEach(story => {
             story.body = processText(story.body, 200)
             story.title = processText(story.title, 25)
             story.editIcon = story.user.googleId === req.user.googleId ? "" : "hidden"
             story.storyID = story._id
+            story.createdAt = formatTime(story.createdAt)
         })
         res.render('./stories/index.ejs', {retrievedStories: retrievedStories})
         

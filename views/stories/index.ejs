@@ -11,11 +11,11 @@
                 <% for( let story of retrievedStories) { %>
                     <div class="card">
                         <div class="card-image center-align">
-                            <a href="stories/edit/<%= story.storyID %> " class="btn-floating halfway-fab blue <%= story.editIcon %>"><i class="fas fa-edit fa-2xl   "></i></a>
-                            
+                            <a href="stories/edit/<%= story.storyID %> " class="btn-floating halfway-fab blue <%= story.editIcon %>"><i class="fas fa-edit fa-2xl   "></i></a>  
                         </div>
                         <div class="card-content center-align">
                             <h5><%= story.title %>  </h5>
+                            <p><%= story.createdAt %> </p>
                             <div class="story-body"><%- story.body %> </div>
                             <div class="chip">
                                 <img src=<%= story.user.image %>  alt="user image">
