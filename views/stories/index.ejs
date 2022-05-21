@@ -11,7 +11,7 @@
                 <% for( let story of retrievedStories) { %>
                     <div class="card">
                         <div class="card-image center-align">
-                            <a href="#"><i class="fas fa-edit fa-2xl <%= story.editIcon %>  "></i></a>
+                            <a href="stories/edit/<%= story.storyID %> "><i class="fas fa-edit fa-2xl <%= story.editIcon %>  "></i></a>
                             
                         </div>
                         <div class="card-content center-align">
