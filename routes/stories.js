@@ -9,17 +9,15 @@ const User = require('../models/User')
 // @route GET /
 
 
-const processStory = (story) =>{
-    let str = story.body
-    str = str.replace(/<[^>]*>?/gm, '');
-    if (str.length>200 && str.length>0){
-        str = str.slice(0, 200)
-        const lastSpaceIndex = str.lastIndexOf(" ")
-        str=str.slice(0, lastSpaceIndex)
-        str+="..."
+const processText = (str, chars=200) =>{
+    if (str.length<chars || str.length===0){
+        return str
     }
-    story.body = str
-    return story
+    str = str.replace(/<[^>]*>?/gm, '');
+    str = str.slice(0, chars)
+    const lastSpaceIndex = str.lastIndexOf(" ")
+    str=lastSpaceIndex>0 ? str.slice(0, lastSpaceIndex)+"..." : str
+    return str
 }
 
 router.get('/add', ensureAuth,(req,res)=>{
@@ -48,7 +46,10 @@ router.get('/', ensureAuth,async (req,res)=>{
         const retrievedStories = await Story.find(
             {status: "public"}
             ).lean().populate('user').exec()
-        retrievedStories.forEach(story => story = processStory(story))
+        retrievedStories.forEach(story => {
+            story.body = processText(story.body, 200)
+            story.title = processText(story.title, 25)
+        })
         // return res.json(retrievedStories)
         res.render('./stories/index.ejs', {retrievedStories: retrievedStories})
         
