@@ -15,11 +15,7 @@ const processStory = (story) =>{
     if (str.length>200 && str.length>0){
         str = str.slice(0, 200)
         const lastSpaceIndex = str.lastIndexOf(" ")
-        if (lastSpaceIndex<200){
-            console.log(`story length: ${str.length}`)
-            console.log(`last space index: ${lastSpaceIndex}`)
-            str=str.slice(0, lastSpaceIndex)
-        }
+        str=str.slice(0, lastSpaceIndex)
         str+="..."
     }
     story.body = str
