@@ -1,4 +1,5 @@
 const express = require('express')
+const { processText } = require('../helpers')
 const router = express.Router()
 const {ensureAuth} = require('../middleware/auth')
 const Story= require('../models/Story')
@@ -9,16 +10,7 @@ const User = require('../models/User')
 // @route GET /
 
 
-const processText = (str, chars=200) =>{
-    if (str.length<chars || str.length===0){
-        return str
-    }
-    str = str.replace(/<[^>]*>?/gm, '');
-    str = str.slice(0, chars)
-    const lastSpaceIndex = str.lastIndexOf(" ")
-    str=lastSpaceIndex>0 ? str.slice(0, lastSpaceIndex)+"..." : str
-    return str
-}
+
 
 router.get('/add', ensureAuth,(req,res)=>{
     res.render('./partials/add.ejs')
