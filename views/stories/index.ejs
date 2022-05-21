@@ -7,9 +7,8 @@
     <%- include('../partials/nav.ejs') %> 
     <div class="container">
         <h1>Stories</h1>
-            <div class="row">
+            <div class="story-holder">
                 <% for( let story of retrievedStories) { %>
-                <div class="col s12 m4">
                     <div class="card">
                         <div class="card-image center-align">
                             <i class="fas fa-edit fa-2xl"></i>
@@ -30,9 +29,7 @@
                             <a href="#" class="btn">Read More</a>
                         </div>
                     </div>
-                </div>
-                <% } %>
-    
+                    <% } %>
             </div>
         
 

@@ -17,6 +17,15 @@ p {
     margin-bottom: 20px;
 }
 
-.card-image{
-    padding-top: 20px;
+
+
+.story-holder{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 400px;
+    margin: 20px;
+    padding: 10px;
 }
