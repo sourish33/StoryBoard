@@ -41,8 +41,8 @@ router.get('/', ensureAuth,async (req,res)=>{
         retrievedStories.forEach(story => {
             story.body = processText(story.body, 200)
             story.title = processText(story.title, 25)
+            story.editIcon = story.user.googleId === req.user.googleId ? "" : "hidden"
         })
-        // return res.json(retrievedStories)
         res.render('./stories/index.ejs', {retrievedStories: retrievedStories})
         
     } catch (error) {
