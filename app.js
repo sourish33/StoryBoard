@@ -7,6 +7,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
 const mongoose = require('mongoose')
+var methodOverride = require('method-override')
 
 
 
@@ -55,6 +56,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 
 //routes
+app.use(methodOverride('_method'))
 app.use('/', routes)
 app.use('/auth', authRoutes)
 app.use('/stories', storyRoutes)

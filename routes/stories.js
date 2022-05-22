@@ -23,6 +23,19 @@ router.post("/", ensureAuth, async (req, res) => {
     }
 })
 
+router.post("/:id", ensureAuth, async (req, res) => {
+    try {
+        req.body.user = req.user.id
+        await Story.create(req.body)
+        res.redirect("/dashboard")
+    } catch (error) {
+        console.error(error)
+        res.render("./error/500.ejs")
+    }
+})
+
+
+
 /*
 stories which are public
 title, body, user.name, user.image
@@ -51,7 +64,7 @@ router.get("/", ensureAuth, async (req, res) => {
     }
 })
 
-router.get("/edit/:id", ensureAuth, async (req, res) =>{
+router.get("/:id", ensureAuth, async (req, res) =>{
     const story = await Story.findOne({_id: req.params.id}).populate("user").lean()
     if(!story){
         return res.render("error/404")
@@ -60,6 +73,18 @@ router.get("/edit/:id", ensureAuth, async (req, res) =>{
         return res.redirect("/stories")
     }
     res.render("./partials/edit.ejs", {story: story})
+})
+
+router.put('/:id', ensureAuth, async(req, res)=>{
+    req.body.user = req.user.id
+    console.log(req.params.id)
+    console.log(req.body)
+    try {
+        await Story.findOneAndUpdate({_id: req.params.id}, req.body)
+        res.redirect("/dashboard")   
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 module.exports = router
