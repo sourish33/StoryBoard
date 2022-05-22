@@ -77,8 +77,6 @@ router.get("/:id", ensureAuth, async (req, res) =>{
 
 router.put('/:id', ensureAuth, async(req, res)=>{
     req.body.user = req.user.id
-    console.log(req.params.id)
-    console.log(req.body)
     try {
         await Story.findOneAndUpdate({_id: req.params.id}, req.body)
         res.redirect("/dashboard")   
