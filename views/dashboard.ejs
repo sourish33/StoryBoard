@@ -8,9 +8,9 @@
     <div class="container">
         <div>
             <h3>Welcome, <%= firstName %> </h3>
-            <p>Here are your stories</p>
         </div>
         <% if (stories.length!==0) { %>
+            <p>Here are your stories</p>
             <table class="striped">
                 <thead>
                     <tr>
@@ -32,15 +32,16 @@
                 </tbody>
             </table>
         <% } else { %>
-            <p>You have not created any stories</p>
+            <p>You have not created any stories. Go ahead and create some!</p>
         <% } %>
     </div>
     <%- include('partials/add-btn.ejs') %> 
     <%- include('partials/footer.ejs') %> 
     <script>
-
-        const handleSubmit = () =>{
-            document.getElementById("myform").submit()
+        const handleSubmit= () => {
+            let form = event.currentTarget.parentNode
+            console.log(form)
+            form.submit()
             return false
         }
 
