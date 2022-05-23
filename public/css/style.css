@@ -1,5 +1,5 @@
 body {
-    background-color: aqua;
+    background-color: lightpink;
 }
 
 p {
@@ -68,13 +68,7 @@ p {
     font-family: 'Offside', cursive;
 }
 
-.viewstory__body{
-    background: url("/images/bgd.jpg") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
+
 
 .viewstory__container{
     background-color: white;
