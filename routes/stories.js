@@ -83,6 +83,7 @@ router.get("/:id", ensureAuth, async (req, res) =>{
     if (story.user.googleId !== req.user.googleId && story.status !== "public"){
         return res.redirect("/stories")
     }
+    story.editIcon = story.user.googleId === req.user.googleId ? "" : "hidden"
     res.render("viewstory.ejs", {story: story})
 })
 
