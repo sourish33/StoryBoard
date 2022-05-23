@@ -64,7 +64,7 @@ router.get("/", ensureAuth, async (req, res) => {
     }
 })
 
-router.get("/:id", ensureAuth, async (req, res) =>{
+router.get("/edit/:id", ensureAuth, async (req, res) =>{
     const story = await Story.findOne({_id: req.params.id}).populate("user").lean()
     if(!story){
         return res.render("error/404")
