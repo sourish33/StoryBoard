@@ -91,4 +91,11 @@ p {
 
 .table-icons{
     display: flex;
+    align-items: center;
+}
+
+.edit-btns{
+    display: flex;
+    margin:0;
+    padding:0;
 }
