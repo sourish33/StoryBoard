@@ -11,6 +11,7 @@
     <div class="container viewstory__container">
         <div>
             <h3 class="viewstory__storytitle"><%= story.title %> </h3>
+            <h5 class="viewstory__storytitle">- <%= story.user.displayName %> </h5>
         </div>
         <div class="viewstory__storybody"><%- story.body %> </div>
     </div>
