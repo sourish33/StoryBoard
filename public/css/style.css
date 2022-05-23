@@ -52,6 +52,7 @@ p {
     border: none; /* Remove borders */
     color: white; /* White text */
     padding: 12px 16px; /* Some padding */
+    margin:5px;
     font-size: 16px; /* Set a font size */
     cursor: pointer; /* Mouse pointer on hover */
 }
@@ -76,4 +77,8 @@ p {
     padding: 10px;
     border-radius: 10px;
     margin-top: 20px;
+}
+
+.table-icons{
+    display: flex;
 }
