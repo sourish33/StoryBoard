@@ -75,6 +75,17 @@ router.get("/edit/:id", ensureAuth, async (req, res) =>{
     res.render("./partials/edit.ejs", {story: story})
 })
 
+router.get("/:id", ensureAuth, async (req, res) =>{
+    const story = await Story.findOne({_id: req.params.id}).populate("user").lean()
+    if(!story){
+        return res.render("error/404")
+    }
+    if (story.user.googleId !== req.user.googleId && story.status !== "public"){
+        return res.redirect("/stories")
+    }
+    res.render("viewstory.ejs", {story: story})
+})
+
 router.put('/:id', ensureAuth, async(req, res)=>{
     req.body.user = req.user.id
     try {

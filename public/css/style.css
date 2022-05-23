@@ -59,3 +59,11 @@ p {
 .delete-icon{
     cursor: pointer;
 }
+
+.storytitle{
+    font-family: 'Lobster Two', cursive;
+}
+
+.storybody{
+    font-family: 'Offside', cursive;
+}

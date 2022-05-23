@@ -24,7 +24,7 @@
                 <tbody>
                     <% stories.forEach(el => { %>
                         <tr>
-                            <td><a href="stories/edit/<%= el._id %>" ><%= el.title%></a></td>
+                            <td><a href="stories/<%= el._id %>" ><%= el.title%></a></td>
                             <td><%= formatTime(el.createdAt) %> </td>
                             <td><span class="dash-status"><%= el.status %> </span></td>
                             <td><a href="stories/edit/<%= el._id %>" ><button type="button" class="submit-button"><i class="fas fa-edit"></i></button></a></td>
