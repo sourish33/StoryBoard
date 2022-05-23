@@ -6,13 +6,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Offside&display=swap" rel="stylesheet"> 
     <title>StoryBoard</title>
 </head>
-<body>
+<body class="viewstory__body">
     <%- include('partials/nav.ejs') %> 
-    <div class="container">
+    <div class="container viewstory__container">
         <div>
-            <h3 class="storytitle"><%= story.title %> </h3>
+            <h3 class="viewstory__storytitle"><%= story.title %> </h3>
         </div>
-        <div class="storybody"><%- story.body %> </div>
+        <div class="viewstory__storybody"><%- story.body %> </div>
     </div>
     <%- include('partials/footer.ejs') %> 
 </body>
