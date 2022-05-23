@@ -39,8 +39,12 @@
     <%- include('partials/footer.ejs') %> 
     <script>
         const handleSubmit= () => {
-            let form = event.currentTarget.parentNode
-            form.submit()
+            if (confirm("Are you sure?")){
+                let form = event.currentTarget.parentNode
+                form.submit()
+            }
+            let button = event.currentTarget
+            button.style.backgroundColor="DodgerBlue"
             return false
         }
 
