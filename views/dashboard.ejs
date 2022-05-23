@@ -18,6 +18,7 @@
                         <th>Date</th>
                         <th>Status</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +27,8 @@
                             <td><a href="stories/edit/<%= el._id %>" ><%= el.title%></a></td>
                             <td><%= formatTime(el.createdAt) %> </td>
                             <td><span class="dash-status"><%= el.status %> </span></td>
-                            <td><form id="myform" method="POST" action="/stories/<%= el._id %>?_method=DELETE"><button type="button" class="submit-button" onclick="handleSubmit()"><i class="fa-solid fa-trash-can delete-icon"></i></button></form></td>
+                            <td><a href="stories/edit/<%= el._id %>" ><button type="button" class="submit-button"><i class="fas fa-edit"></i></button></a></td>
+                            <td><form id="myform" method="POST" action="/stories/<%= el._id %>?_method=DELETE"><button type="button" class="submit-button" onclick="handleDelete()"><i class="fa-solid fa-trash-can delete-icon"></i></button></form></td>
                         </tr>
                     <% }) %>
                 </tbody>
@@ -38,7 +40,7 @@
     <%- include('partials/add-btn.ejs') %> 
     <%- include('partials/footer.ejs') %> 
     <script>
-        const handleSubmit= () => {
+        const handleDelete= () => {
             if (confirm("Are you sure?")){
                 let form = event.currentTarget.parentNode
                 form.submit()
