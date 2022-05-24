@@ -26,11 +26,11 @@
                             <td><a href="stories/<%= el._id %>" ><%= el.title%></a></td>
                             <td><%= formatTime(el.createdAt) %> </td>
                             <td>
-                                <form action="#">
+                                <form action="/stories" method="GET">
                                     <div class="switch">
                                         <label>
                                           Off
-                                          <input type="checkbox" <%= el.status==="public" ? "checked": "" %> >
+                                          <input type="checkbox" <%= el.status==="public" ? "checked": "" %> onchange="handleToggle()">
                                           <span class="lever"></span>
                                           On
                                         </label>
@@ -50,5 +50,14 @@
     <%- include('partials/add-btn.ejs') %> 
     <%- include('partials/footer.ejs') %> 
     <script src="/myscript.js"></script> 
+    <script>
+
+        function handleToggle(){
+            let form = event.currentTarget.parentNode.parentNode.parentNode
+            form.submit()
+        }
+
+
+    </script>
 </body>
 </html>
