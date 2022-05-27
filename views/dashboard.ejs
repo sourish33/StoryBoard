@@ -14,7 +14,7 @@
         </div>
         <% if (stories.length!==0) { %>
             <h5>Here are your stories</h5>
-            <table class="highlight responsive-table dash-table">
+            <table class="highlight">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -32,10 +32,10 @@
                                 <form method = "POST" action="/stories/<%= el._id %>?_method=PATCH" </form>
                                     <div class="switch">
                                         <label>
-                                          Off
+                                          
                                           <input type="checkbox"  name="check" <%= el.status==="public" ? "checked": "" %> onchange="handleToggle()">
                                           <span class="lever"></span>
-                                          On
+                                          
                                         </label>
                                     </div>
                                     <input type="hidden" name="status">
