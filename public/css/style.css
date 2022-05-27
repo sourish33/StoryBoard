@@ -32,6 +32,7 @@ p {
 .story-holder{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     /* justify-content: space-evenly; */
     /* display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
