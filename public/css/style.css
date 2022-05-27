@@ -123,4 +123,8 @@ p {
     .header-box {
         justify-content: center;
     }
+
+    .story-holder{
+        justify-content: center;
+    }
   }
