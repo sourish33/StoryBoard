@@ -111,13 +111,16 @@ router.delete('/:id', ensureAuth, async(req, res)=>{
 
 //Update
 router.patch('/:id', ensureAuth, async(req, res)=>{
-    // const id = req.params.id
-    // const status = req.params.status
+    const id = req.params.id
+    const status = req.body.status
     // console.log("id: "+id)
     // console.log("status: "+status)
-    console.log(req.params)
-    console.log(req.body)
-    res.redirect("/dashboard") 
+    try {
+        await Story.findByIdAndUpdate({_id:id}, {status: status})
+        res.redirect("/dashboard") 
+    } catch(error){
+        console.log(error)
+    }
 })
 
 module.exports = router
