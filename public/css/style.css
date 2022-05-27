@@ -30,14 +30,14 @@ p {
 
 
 .story-holder{
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around; */
     /* justify-content: space-evenly; */
-    /* display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
-    justify-content: space-between;
-    grid-gap: 10px; */
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+    justify-content: start;
 }
 
 .story-body {
@@ -45,9 +45,9 @@ p {
 }
 
 .card {
-    width: 400px;
+    /* width: 400px; */
     /* min-width: 400px; */
-    margin: 20px;
+    /* margin: 20px; */
     padding:10px;
     display: flex;
     flex-direction: column;
