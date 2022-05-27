@@ -112,3 +112,15 @@ p {
     margin:0;
     padding:0;
 }
+
+/* Media Queries */
+
+@media only screen and (max-width: 600px) {
+    .extra-button {
+      display: none;
+    }
+
+    .header-box {
+        justify-content: center;
+    }
+  }

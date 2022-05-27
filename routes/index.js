@@ -1,5 +1,5 @@
 const express = require('express')
-const { formatTime } = require('../helpers')
+const { formatTime, formatTimeShort } = require('../helpers')
 const router = express.Router()
 const {ensureAuth, ensureGuest} = require('../middleware/auth')
 const Story= require('../models/Story')
@@ -18,7 +18,7 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
         let stories = await Story.find({user: req.user.id}).sort({ createdAt: -1 }).lean()
-        res.render('dashboard.ejs', {firstName: req.user.firstName, stories: stories, formatTime: formatTime})
+        res.render('dashboard.ejs', {firstName: req.user.firstName, stories: stories, formatTimeShort: formatTimeShort})
     } catch (error) {
         console.log(error)
         res.render('error/500')

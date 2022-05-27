@@ -10,7 +10,7 @@
             <div>
                 <h3>Welcome, <%= firstName %> </h3>
             </div>
-            <a href="/stories" class="waves-effect waves-light btn">Public Stories</a>
+            <a href="/stories" class="waves-effect waves-light btn extra-button">Public Stories</a>
         </div>
         <% if (stories.length!==0) { %>
             <h5>Here are your stories</h5>
@@ -27,7 +27,7 @@
                     <% stories.forEach(el => { %>
                         <tr>
                             <td><a href="stories/<%= el._id %>" ><%= el.title%></a></td>
-                            <td><%= formatTime(el.createdAt) %> </td>
+                            <td><%= formatTimeShort(el.createdAt) %> </td>
                             <td>
                                 <form method = "POST" action="/stories/<%= el._id %>?_method=PATCH" </form>
                                     <div class="switch">
