@@ -111,10 +111,13 @@ router.delete('/:id', ensureAuth, async(req, res)=>{
 
 //Update
 router.patch('/:id', ensureAuth, async(req, res)=>{
-    const id = req.params.id
-    const status = req.params.status
-    console.log("id: "+id)
-    console.log("status: "+status)
+    // const id = req.params.id
+    // const status = req.params.status
+    // console.log("id: "+id)
+    // console.log("status: "+status)
+    console.log(req.params)
+    console.log(req.body)
+    res.redirect("/dashboard") 
 })
 
 module.exports = router

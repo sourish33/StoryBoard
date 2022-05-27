@@ -26,15 +26,16 @@
                             <td><a href="stories/<%= el._id %>" ><%= el.title%></a></td>
                             <td><%= formatTime(el.createdAt) %> </td>
                             <td>
-                                <form method = "POST" action="/stories/<%= el._id %>?status= <%= el.status==="public" ? "private": "public" %>?_method=PATCH" </form>
+                                <form method = "POST" action="/stories/<%= el._id %>?_method=PATCH" </form>
                                     <div class="switch">
                                         <label>
                                           Off
-                                          <input type="checkbox" <%= el.status==="public" ? "checked": "" %> onchange="handleToggle()">
+                                          <input type="checkbox"  name="check" <%= el.status==="public" ? "checked": "" %> onchange="handleToggle()">
                                           <span class="lever"></span>
                                           On
                                         </label>
-                                      </div>
+                                    </div>
+                                    <input type="hidden" name="status">
                                 </form>
                             </td>
                             <td class="table-icons"><a href="stories/edit/<%= el._id %>" ><button type="button" class="submit-button"><i class="fas fa-edit"></i></button></a>
@@ -53,7 +54,9 @@
     <script>
 
         function handleToggle(){
-            let form = event.currentTarget.parentNode.parentNode.parentNode
+            let checkbox = event.currentTarget
+            let form =checkbox.parentNode.parentNode.parentNode
+            checkbox.parentNode.parentNode.nextElementSibling.value = checkbox.checked ? "public" : "private"
             form.submit()
         }
 
