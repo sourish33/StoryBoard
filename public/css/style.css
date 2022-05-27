@@ -24,14 +24,19 @@ p {
 }
 
 
-.dash-table{
-    
+.sidenav-overlay{
+    z-index: 10;
 }
 
 
 .story-holder{
     display: flex;
     flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    justify-content: space-between;
+    grid-gap: 10px; */
 }
 
 .story-body {
@@ -40,6 +45,7 @@ p {
 
 .card {
     width: 400px;
+    /* min-width: 400px; */
     margin: 20px;
     padding:10px;
     display: flex;
