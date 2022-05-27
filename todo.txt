@@ -1,8 +1,8 @@
 register new user
 user page
 registration without google
-toggle private to public
-upvote/downvote stries
+toggle private to public -DONE
+Like and dislike buttons, and count number of likes/displikes
 sort displayed stories (maybe with an option to sort by different criteria)
 search text of public stories
 
