@@ -1,4 +1,5 @@
 const express = require("express")
+const { route } = require(".")
 const { processText, formatTime } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
@@ -98,7 +99,7 @@ router.put('/:id', ensureAuth, async(req, res)=>{
 })
 
 router.delete('/:id', ensureAuth, async(req, res)=>{
-    console.log("Deleting story"+req.params.id)
+    console.log("Deleting story"+req.params.id)                                                                           
     try {
         await Story.findByIdAndDelete({_id: req.params.id})
         res.redirect("/dashboard") 
@@ -106,6 +107,20 @@ router.delete('/:id', ensureAuth, async(req, res)=>{
         console.log(error)
     }
    
+})
+
+//Update
+router.patch('/:id', ensureAuth, async(req, res)=>{
+    const id = req.params.id
+    const status = req.body.status
+    // console.log("id: "+id)
+    // console.log("status: "+status)
+    try {
+        await Story.findByIdAndUpdate({_id:id}, {status: status})
+        res.redirect("/dashboard") 
+    } catch(error){
+        console.log(error)
+    }
 })
 
 module.exports = router
