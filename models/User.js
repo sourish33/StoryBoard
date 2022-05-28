@@ -23,6 +23,15 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type:Date,
         default: Date.now()
+    },
+    email: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
+    },
+    password: {
+        type: String,
     }
 })
 
