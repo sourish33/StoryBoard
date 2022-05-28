@@ -25,6 +25,7 @@ const initializePassport  = function(passport) {
             
         } catch (err) {
             console.log(err)
+            return done(error)
         }
     }
 
