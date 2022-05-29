@@ -7,6 +7,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
 const mongoose = require('mongoose')
+const flash = require('connect-flash');
 var methodOverride = require('method-override')
 
 
@@ -46,9 +47,13 @@ app.use(session({
     store: new MongoStore({mongoUrl: process.env.MONGO_URI})
 }))
 
+//Flash
+app.use(flash());
+
 //Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+
 
 
 

@@ -27,6 +27,12 @@ router.get('/logout', (req, res) => {
 
 router.post("/register", ensureGuest, async (req, res)=>{
     try {
+        const existingUser = await User.findOne({email: req.body.email})
+        if (existingUser) {
+            req.flash('message', 'Email already exists')
+            console.log("already exists")
+            return res.redirect("/login")
+        }
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         const user = {
             displayName: `${req.body.firstName} ${req.body.lastName}`,
@@ -36,7 +42,9 @@ router.post("/register", ensureGuest, async (req, res)=>{
             password:req.body.password
         }
         await User.create(user)
-        res.redirect("/dashboard")
+        req.flash('message', 'Account Successfully Created!!');
+        console.log("created")
+        res.redirect("/login")
     } catch (err) {
         res.render("./error/500.ejs", {error: err})
     }
