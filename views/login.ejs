@@ -6,7 +6,7 @@
 <body>
     <%- include('partials/nav-login.ejs') %> 
     <div class="container login-container">
-        <div class="card">
+        <div class="card" id="home">
             <div class="card-content">
                 <h3><i class="fas fa-book-reader"></i>  StoryBoard</h3>
                 <div class="section">
@@ -26,9 +26,88 @@
                 </a>
             </div>
         </div>
+        <div class="card" id="register">
+            <div class="card-header"> <h3>Register</h3></div>
+            <div class="card-content">
+                <form class="col s12">
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                        <label for="first_name">First Name</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">Last Name</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                          <input id="email" type="email" class="validate">
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="btn blue darken-1">
+                            Register
+                        </a>
+                    </div>
+                    <a href="#">Login</a>
+                    <!-- <input type="file" id="myFile" name="filename">
+                    <input type="submit"> -->
+                  </form>
+            </div>
+        </div>
+        <div class="card" id="login">
+                <div class="card-header"> <h3>Login</h3></div>
+                <div class="card-content">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                              <input id="email" type="email" class="validate">
+                              <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <a href="#" class="btn blue darken-1">
+                                Login
+                            </a>
+                        </div>
+                        <div><a href="#">Login with Google</a>
+                            <a href="#">Register</a>
+                        </div>
+                        
+                        <!-- <input type="file" id="myFile" name="filename">
+                        <input type="submit"> -->
+                      </form>
+                </div>
+        </div>
         
     </div>
     <%- include('partials/footer.ejs') %> 
+    <script>
+        const home = document.getElementById("home")
+        const register = document.getElementById("register")
+        const login = document.getElementById("login")
+
+        const onlyHome = () =>{
+            home.style.display="block"
+            register.style.display="none"
+            login.style.display="none"
+        }
+        window.onload = onlyHome
+    </script>
 
 </body>
 </html>
