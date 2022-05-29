@@ -113,6 +113,15 @@ p {
     padding:0;
 }
 
+.login__others{
+    display: flex;
+    justify-content: space-between;
+}
+
+.login__fauxlink{
+    cursor: pointer;
+}
+
 /* Media Queries */
 
 @media only screen and (max-width: 600px) {

@@ -17,11 +17,11 @@
                     <i class="fab fa-google left"></i> Log in with Google
                 </a>
                 <div class="divider"></div>
-                <a href="#" class="btn blue darken-1">
+                <a class="btn blue darken-1" onclick="onlyLogin()">
                     <i class="fa fa-sign-in left" aria-hidden="true"></i> Log in with email
                 </a>
                 <div class="divider"></div>
-                <a href="#" class="btn blue darken-1">
+                <a class="btn blue darken-1" onclick="onlyRegister()">
                     Register
                 </a>
             </div>
@@ -57,9 +57,10 @@
                             Register
                         </a>
                     </div>
-                    <a href="#">Login</a>
-                    <!-- <input type="file" id="myFile" name="filename">
-                    <input type="submit"> -->
+                    <div class="login__others">
+                        <a href="/auth/google" >Login with Google</a>
+                        <a class="login__fauxlink" onclick="onlyLogin()">Login with email</a>
+                    </div>
                   </form>
             </div>
         </div>
@@ -80,12 +81,13 @@
                           </div>
                         </div>
                         <div class="row">
-                            <a href="#" class="btn blue darken-1">
+                            <a href="#" class="btn-large blue darken-1">
                                 Login
                             </a>
                         </div>
-                        <div><a href="#">Login with Google</a>
-                            <a href="#">Register</a>
+                        <div class="login__others">
+                            <a href="/auth/google" >Login with Google</a>
+                            <a class="login__fauxlink" onclick="onlyRegister()">Register</a>
                         </div>
                         
                         <!-- <input type="file" id="myFile" name="filename">
@@ -105,6 +107,17 @@
             home.style.display="block"
             register.style.display="none"
             login.style.display="none"
+        }
+
+        const onlyRegister = () =>{
+            home.style.display="none"
+            register.style.display="block"
+            login.style.display="none"
+        }
+        const onlyLogin = () =>{
+            home.style.display="none"
+            register.style.display="none"
+            login.style.display="block"
         }
         window.onload = onlyHome
     </script>
