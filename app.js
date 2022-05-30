@@ -7,6 +7,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
 const mongoose = require('mongoose')
+const User = require('./models/User')
 const flash = require('connect-flash');
 var methodOverride = require('method-override')
 
@@ -22,8 +23,26 @@ dotenv.config({path: './config/config.env'})
 connectDB()
 
 //Passport config
-const initializePassportGoogle = require('./config/passport-config-google')
-initializePassportGoogle(passport)
+const initializePassportLocal = require('./config/passport-config-local')
+
+initializePassportLocal(passport, async email =>{
+    console.log("getUserByEmail speaking!")
+    try {
+        const user = await User.findOne({email:email}).lean()
+        return user
+    } catch (error) {
+        throw new Error(error)
+    }
+
+}, async id =>{
+    console.log("getUserById speaking!")
+    try {
+        const user = await User.findById(id).lean()
+        return user
+    } catch (error) {
+        throw new Error(error)
+    }
+})
 
 const app = express()
 

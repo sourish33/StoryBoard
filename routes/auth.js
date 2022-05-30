@@ -25,6 +25,12 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
+router.post('/login', ensureGuest, passport.authenticate('local', {
+    successRedirect: '/dashboard',
+    failureRedirect:'/login',
+    failureFlash: true
+}))
+
 router.post("/register", ensureGuest, async (req, res)=>{
     try {
         const existingUser = await User.findOne({email: req.body.email})
