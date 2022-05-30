@@ -53,7 +53,7 @@ router.get("/", ensureAuth, async (req, res) => {
             story.body = processText(story.body, 200)
             story.title = processText(story.title, 25)
             story.editIcon =
-                story.user.googleId === req.user.googleId ? "" : "hidden"
+                story.user._id.equals(req.user._id) ? "" : "hidden"
             story.storyID = story._id
             story.createdAt = formatTime(story.createdAt)
         })
@@ -70,7 +70,7 @@ router.get("/edit/:id", ensureAuth, async (req, res) =>{
     if(!story){
         return res.render("error/404")
     }
-    if (story.user.googleId !== req.user.googleId){
+    if (!story.user._id.equals(req.user._id)){
         return res.redirect("/stories")
     }
     res.render("./partials/edit.ejs", {story: story})
@@ -81,10 +81,10 @@ router.get("/:id", ensureAuth, async (req, res) =>{
     if(!story){
         return res.render("error/404")
     }
-    if (story.user.googleId !== req.user.googleId && story.status !== "public"){
+    if (!story.user._id.equals(req.user._id) && story.status !== "public"){
         return res.redirect("/stories")
     }
-    story.editIcon = story.user.googleId === req.user.googleId ? "" : "hidden"
+    story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
     res.render("viewstory.ejs", {story: story})
 })
 
@@ -113,8 +113,6 @@ router.delete('/:id', ensureAuth, async(req, res)=>{
 router.patch('/:id', ensureAuth, async(req, res)=>{
     const id = req.params.id
     const status = req.body.status
-    // console.log("id: "+id)
-    // console.log("status: "+status)
     try {
         await Story.findByIdAndUpdate({_id:id}, {status: status})
         res.redirect("/dashboard") 
