@@ -122,6 +122,13 @@ p {
     cursor: pointer;
 }
 
+.login__message{
+    background-color: lightpink;
+    text-align: center;
+    transition: opacity 3s ease-in-out;
+    opacity: 1;
+}
+
 /* Media Queries */
 
 @media only screen and (max-width: 600px) {
