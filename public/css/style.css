@@ -122,12 +122,21 @@ p {
     cursor: pointer;
 }
 
-.login__message{
+.login__animated {
     background-color: lightpink;
     text-align: center;
-    transition: opacity 3s ease-in-out;
-    opacity: 1;
-}
+    animation-duration: 5s;
+    animation-fill-mode: both;
+    animation-name: fadeOut;
+ }
+
+ 
+
+ @keyframes fadeOut {
+    0% {opacity: 1; height:100%}
+    100% {opacity: 0; height: 0;}
+ }
+
 
 /* Media Queries */
 
