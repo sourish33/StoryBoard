@@ -6,6 +6,9 @@
 <body>
     <%- include('partials/nav-login.ejs') %> 
     <div class="container login-container">
+        <% if (messages) { %> 
+            <%= messages %> 
+            <% } %> 
         <div class="card" id="home">
             <div class="card-content">
                 <h3><i class="fas fa-book-reader"></i>   StoryBoard</h3>

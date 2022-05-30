@@ -6,11 +6,11 @@ const Story= require('../models/Story')
 
 
 //  @desc landing page
-// @route GET /
+// @route GET / res.render('index', { messages: req.flash('info') });
 
 
 router.get(['/', '/login'], ensureGuest,(req,res)=>{
-    res.render('login.ejs')
+    res.render('login.ejs', { messages: req.flash('info') })
 })
 
 // @desc dashboard

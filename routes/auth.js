@@ -29,7 +29,7 @@ router.post("/register", ensureGuest, async (req, res)=>{
     try {
         const existingUser = await User.findOne({email: req.body.email})
         if (existingUser) {
-            req.flash('message', 'Email already exists')
+            req.flash('info', 'Email already exists')
             console.log("already exists")
             return res.redirect("/login")
         }
@@ -42,7 +42,7 @@ router.post("/register", ensureGuest, async (req, res)=>{
             password:req.body.password
         }
         await User.create(user)
-        req.flash('message', 'Account Successfully Created!!');
+        req.flash('info', 'Account Successfully Created!!');
         console.log("created")
         res.redirect("/login")
     } catch (err) {

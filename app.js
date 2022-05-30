@@ -47,12 +47,14 @@ app.use(session({
     store: new MongoStore({mongoUrl: process.env.MONGO_URI})
 }))
 
-//Flash
-app.use(flash());
 
 //Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+
+
+//Flash
+app.use(flash());
 
 
 
