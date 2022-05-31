@@ -45,10 +45,10 @@ router.post("/register", ensureGuest, async (req, res)=>{
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password:req.body.password
+            password:hashedPassword
         }
         await User.create(user)
-        req.flash('info', 'Account Successfully Created!!');
+        req.flash('message', 'Account Successfully Created!!');
         console.log("created")
         res.redirect("/login")
     } catch (err) {

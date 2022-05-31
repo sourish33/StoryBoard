@@ -8,7 +8,7 @@ const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
 const mongoose = require('mongoose')
 const User = require('./models/User')
-const flash = require('connect-flash');
+const flash = require('express-flash');
 var methodOverride = require('method-override')
 
 
@@ -23,12 +23,13 @@ dotenv.config({path: './config/config.env'})
 connectDB()
 
 //Passport config
-const initializePassportLocal = require('./config/passport-config-local')
+const initializePassport = require('./config/passport-config-local')
 
-initializePassportLocal(passport, async email =>{
+initializePassport(passport, async email =>{
     console.log("getUserByEmail speaking!")
     try {
         const user = await User.findOne({email:email}).lean()
+        // const user = {_id: "1", email: "a@a.com", password: "aaa", createdAt:"0"}
         return user
     } catch (error) {
         throw new Error(error)
@@ -38,6 +39,7 @@ initializePassportLocal(passport, async email =>{
     console.log("getUserById speaking!")
     try {
         const user = await User.findById(id).lean()
+        // const user = {_id: "1", email: "a@a.com", password: "aaa", createdAt:"0"}
         return user
     } catch (error) {
         throw new Error(error)
@@ -58,6 +60,9 @@ if (process.env.NODE_ENV === 'development'){
 //EJS
 app.set('view engine', 'ejs');
 
+//Flash
+app.use(flash());
+
 //Sessions
 app.use(session({
     secret: "hello",
@@ -72,8 +77,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-//Flash
-app.use(flash());
+
 
 
 
