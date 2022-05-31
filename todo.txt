@@ -1,12 +1,18 @@
-register new user
-user page
-registration without google
+register new user - DONE
+CANT HANDLE EMPTY STORY - DONE
+registration without google -DONE
 toggle private to public -DONE
+
+
+---------------------------------------------------
+
+user page
 Like and dislike buttons, and count number of likes/displikes
-sort displayed stories (maybe with an option to sort by different criteria)
+sort displayed stories
+sort options
+public page view options - List vs cards
+
+
 search text of public stories
+random collection of public stories previews on login page - Read more takes you to log in/register page
 
-
-random collection of stories previews on login page - Read more takes you to log in/register page
-
-CANT HANDLE EMPTY STORY
