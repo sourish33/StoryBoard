@@ -14,11 +14,11 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
     res.render('login.ejs', { messages: req.flash('info') })
 })
 
-// @desc dashboard
+// GET ALL stories belonging to user
 //@route  GET /auth/google/callback
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
-        let stories = await Story.find({user: req.user.id}).sort({ createdAt: -1 }).lean() || []
+        let stories = await Story.find({user: req.user._id}).sort({ createdAt: -1 }).lean() || []
         res.render('dashboard.ejs', {firstName: req.user.firstName, stories: stories, formatTimeShort: formatTimeShort})
     } catch (error) {
         console.log(error)

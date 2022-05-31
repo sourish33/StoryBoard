@@ -32,7 +32,7 @@ const initializePassport =  (passport, getUserByEmail, getUserById) =>{
         usernameField: 'email'
     }, authenticateUser))
 
-    passport.serializeUser((user, done) =>done(null,user._id.toString()))
+    passport.serializeUser((user, done) =>done(null,user._id))
 
     passport.deserializeUser(async (id, done) => {
         return done(null, await getUserById(id))
