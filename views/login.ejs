@@ -6,7 +6,7 @@
 <body>
     <%- include('partials/nav-login.ejs') %> 
     <div class="container login-container">
-        <div class="card" id="home">
+        <div class="card" id="home" style="display: block;">
             <div class="card-content">
                 <h3><i class="fas fa-book-reader"></i>   StoryBoard</h3>
                 <div class="section">
@@ -39,24 +39,24 @@
                 <form class="col s12" method="POST" action="/auth/register">
                     <div class="row">
                       <div class="input-field col s6">
-                        <input id="firstName" name = "firstName" type="text" class="validate">
-                        <label for="firstName">First Name</label>
+                        <input id="firstNameR" name = "firstName" type="text" class="validate">
+                        <label for="firstNameR">First Name</label>
                       </div>
                       <div class="input-field col s6">
-                        <input id="lastName" type="text" name="lastName" class="validate">
-                        <label for="lastName">Last Name</label>
+                        <input id="lastNameR" type="text" name="lastName" class="validate">
+                        <label for="lastNameR">Last Name</label>
                       </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                          <input id="email" name="email" type="email" class="validate">
-                          <label for="email">Email</label>
+                          <input id="emailR" name="email" type="email" class="validate">
+                          <label for="emailR">Email</label>
                         </div>
                       </div>
                     <div class="row">
                       <div class="input-field col s12">
-                        <input id="password" name="password" type="password" class="validate">
-                        <label for="password">Password</label>
+                        <input id="passwordR" name="password" type="password" class="validate">
+                        <label for="passwordR">Password</label>
                       </div>
                     </div>
                     <div class="row">
@@ -76,7 +76,7 @@
                 <div class="card-content">
                     <h3><i class="fas fa-book-reader"></i>   StoryBoard</h3>
                     <form action="/auth/login" method="POST">
-                        <div>
+                        <!-- <div>
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" required>
                         </div>
@@ -85,8 +85,28 @@
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" required>
                         </div> 
-                        <button type="submit">Login</button>
-                        
+                        <button type="submit">Login</button> -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                              <input id="email" name="email" type="email" class="validate">
+                              <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input id="password" name="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <a class="btn blue darken-1" onclick="formSubmit()">
+                                Login
+                            </a>
+                        </div>
+                        <div class="login__others">
+                            <a href="/login" >Home</a>
+                            <a class="login__fauxlink" onclick="onlyRegister()">Register</a>
+                        </div>
                     </form>
                 </div>
         </div>
@@ -98,16 +118,18 @@
         const register = document.getElementById("register")
         const login = document.getElementById("login")
 
+
         const onlyHome = () =>{
-            home.style.display="block"
             register.style.display="none"
             login.style.display="none"
+            home.style.display="block"
         }
 
         const onlyRegister = () =>{
             home.style.display="none"
-            register.style.display="block"
             login.style.display="none"
+            register.style.display="block"
+
         }
         const onlyLogin = () =>{
             home.style.display="none"
