@@ -8,10 +8,10 @@
 <div class="container">
     <h3>Add Story</h3>
     <div class="row">
-        <form action="/stories" method="POST" class="col s12">
+        <form action="/stories" method="POST" class="col s12" id="addStoryForm">
             <div class="row">
                 <div class="input-field">
-                    <input type="text" id="title" name="title" />
+                    <input type="text" id="title" name="title" required/>
                     <label for="title">Title</label>
                 </div>
             </div>
@@ -29,17 +29,35 @@
             <div class="row">
                 <div class="input-field">
                     <h5>Tell Us Your Story</h5>
-                    <textarea name="body" id="body"></textarea>
+                    <textarea name="body" id="storybody" required></textarea>
                 </div>
             </div>
     
             <div class="row">
-                <input type="submit" value="Save" , class="btn" />
+                <a class="btn blue darken-1" onclick="formSubmit()">Save</a>
                 <a href="/dashboard" class="btn orange">Cancel</a>
             </div>
         </form>
     </div>
 </div>
 <%- include('footer.ejs') %> 
+<script>
+    const formSubmit = () =>{
+
+        const form = document.getElementById('addStoryForm')
+        const title = document.getElementById('title').value
+        const storybody = CKEDITOR.instances['storybody'].getData()
+
+        if (title===""){
+            alert("Title cannot be empty")
+            return
+        }
+        if(storybody===""){
+            alert("Story body cannot be empty")
+            return
+        }
+        form.submit()
+    }
+</script>
 </body>
 </html>

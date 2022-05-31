@@ -15,21 +15,18 @@ router.get("/add", ensureAuth, (req, res) => {
 
 //@desc saving a new story 
 router.post("/", ensureAuth, async (req, res) => {
+    console.log(req.body)
+    if (req.body.body==="" || req.body.title===""){
+        return res.render("./partials/add.ejs")
+    }
     try {
-        console.log("HELLO!!!! creating story!!!!")
-        console.log("req.body:")
-        console.log(req.body)
-        console.log("req.user:")
-        console.log(req.user)
         req.body.user = req.user._id
-        console.log("*****************************")
-        console.log("req.body again:")
         console.log(req.body)
         await Story.create(req.body)
         res.redirect("/dashboard")
     } catch (error) {
-        console.error(error)
-        res.render("./error/500.ejs")
+        console.log(error)
+        res.render("./error/500.ejs", {error:error})
     }
 })
 
