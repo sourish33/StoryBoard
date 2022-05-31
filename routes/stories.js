@@ -15,10 +15,6 @@ router.get("/add", ensureAuth, (req, res) => {
 
 //@desc saving a new story 
 router.post("/", ensureAuth, async (req, res) => {
-    console.log(req.body)
-    if (req.body.body==="" || req.body.title===""){
-        return res.render("./partials/add.ejs")
-    }
     try {
         req.body.user = req.user._id
         console.log(req.body)
