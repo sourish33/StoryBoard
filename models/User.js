@@ -19,10 +19,6 @@ const UserSchema = new mongoose.Schema({
     image: {
         type: String,
     },
-    createdAt: {
-        type:Date,
-        default: Date.now()
-    },
     email: {
         type: String,
         trim: true,
@@ -33,5 +29,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
     }
 })
+
+UserSchema.set('timestamps', true)
 
 module.exports = mongoose.model('User', UserSchema);
