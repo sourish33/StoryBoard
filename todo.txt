@@ -8,3 +8,5 @@ search text of public stories
 
 
 random collection of stories previews on login page - Read more takes you to log in/register page
+
+CANT HANDLE EMPTY STORY

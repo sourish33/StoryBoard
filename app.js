@@ -26,20 +26,16 @@ connectDB()
 const initializePassport = require('./config/passport-config-local')
 
 initializePassport(passport, async email =>{
-    console.log("getUserByEmail speaking!")
     try {
         const user = await User.findOne({email:email}).lean()
-        // const user = {_id: "1", email: "a@a.com", password: "aaa", createdAt:"0"}
         return user
     } catch (error) {
         throw new Error(error)
     }
 
 }, async id =>{
-    console.log("getUserById speaking!")
     try {
         const user = await User.findById(id).lean()
-        // const user = {_id: "1", email: "a@a.com", password: "aaa", createdAt:"0"}
         return user
     } catch (error) {
         throw new Error(error)

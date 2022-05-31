@@ -1,7 +1,7 @@
 const ensureAuth = (req, res, next) =>{
     if (req.isAuthenticated()) {
-        console.log("EnsureAuth Speaking. The user is:")
-        console.log(req.user)
+        // console.log("EnsureAuth Speaking. The user is:")
+        // console.log(req.user)
         return next()
     } else {
         res.redirect('/')

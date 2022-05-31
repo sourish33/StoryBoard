@@ -10,8 +10,8 @@ const Story= require('../models/Story')
 
 
 router.get(['/', '/login'], ensureGuest,(req,res)=>{
-    console.log("the message is"+ req.flash('info'))
-    res.render('login.ejs', { messages: req.flash('info') })
+    // console.log("the message is"+ req.flash('message'))
+    res.render('login.ejs')
 })
 
 // GET ALL stories belonging to user
