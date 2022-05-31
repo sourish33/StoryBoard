@@ -47,7 +47,7 @@ SEARCHING PUBLIC STORIES
 router.get("/", ensureAuth, async (req, res) => {
     try {
         const retrievedStories = await Story.find({ status: "public" })
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .lean()
             .populate("user")
             .exec()
@@ -58,7 +58,7 @@ router.get("/", ensureAuth, async (req, res) => {
             story.editIcon =
                 story.user._id.equals(req.user._id) ? "" : "hidden"
             story.storyID = story._id
-            story.createdAt = formatTime(story.createdAt)
+            story.updatedAt = formatTime(story.updatedAt)
         })
         res.render("./stories/index.ejs", {
             retrievedStories: retrievedStories,
