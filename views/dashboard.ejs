@@ -19,6 +19,7 @@
                     <tr>
                         <th>Title</th>
                         <th>Created</th>
+                        <th>Updated</th>
                         <th>Public</th>
                         <th></th>
                     </tr>
@@ -28,6 +29,7 @@
                         <tr>
                             <td><a href="stories/<%= el._id %>" ><%= el.title%></a></td>
                             <td><%= formatTimeShort(el.createdAt) %> </td>
+                            <td><%= formatTimeShort(el.updatedAt) %> </td>
                             <td>
                                 <form method = "POST" action="/stories/<%= el._id %>?_method=PATCH" </form>
                                     <div class="switch">
