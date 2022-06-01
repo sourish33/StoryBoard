@@ -30,8 +30,7 @@
                         </div>
                         <div class="public__score">
                             <div class="public__arrows">
-                                <i class="fa-solid fa-circle-arrow-up"></i>
-                                <i class="fa-solid fa-circle-arrow-down"></i>
+                                <i class="fa-solid fa-circle-arrow-up" style="color: blue; cursor: pointer;" onclick="handleClick()"></i>
                             </div>
                             <span class="public__votenum">4 points</span>
                         </div>
@@ -44,6 +43,12 @@
     </div>
 
 <%- include('../partials/footer.ejs') %> 
+<script>
+    const handleClick= ()=>{
+        const icon = event.currentTarget
+        icon.classList.toggle("fa-2xl")
+    }
+</script>
 
 </body>
 </html>
