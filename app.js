@@ -23,9 +23,9 @@ dotenv.config({path: './config/config.env'})
 connectDB()
 
 //Passport config
-const initializePassport = require('./config/passport-config-local')
+const initializePassportLocal = require('./config/passport-config-local')
 
-initializePassport(passport, async email =>{
+initializePassportLocal(passport, async email =>{
     try {
         const user = await User.findOne({email:email}).lean()
         return user
@@ -41,6 +41,8 @@ initializePassport(passport, async email =>{
         throw new Error(error)
     }
 })
+const initializePassportGoogle = require('./config/passport-config-google')
+initializePassportGoogle(passport)
 
 const app = express()
 
