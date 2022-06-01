@@ -13,7 +13,7 @@
         <div class="viewstory__storyheader">
             <div>
                 <p class="viewstory__storytitle"><%= story.title %> </p>
-                <p class="viewstory__storyauthor">- <%= story.user.displayName %>, May 19 2018</p>
+                <p class="viewstory__storyauthor">- <%= story.user.displayName %>, <%= formatTimeDateOnly(story.createdAt) %> </p>
             </div>
             <div class="table-icons">
                     <div class="edit-btns <%= story.editIcon %> ">

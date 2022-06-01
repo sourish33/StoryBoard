@@ -74,12 +74,11 @@ body {
 
 .viewstory__storytitle{
     font-family: 'Roboto Slab', serif;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 .viewstory__storyauthor{
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: .8em;
 }
 
 .viewstory__storyheader{
@@ -90,6 +89,7 @@ body {
 
 .viewstory__storybody{
     font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
 }
 
 

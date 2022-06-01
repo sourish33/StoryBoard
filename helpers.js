@@ -12,6 +12,9 @@ return dayjs(time).format('MMM D, YYYY h:mm A')
 const formatTimeShort = (time) =>{
     return dayjs(time).format('	M/D/YY, h:mm A')
     }
+const formatTimeDateOnly = (time) =>{
+        return dayjs(time).format('MMMM D, YYYY')
+        }
 
 const processText = (str, chars=200) =>{
     if (str.length<chars || str.length===0){
@@ -26,4 +29,5 @@ const processText = (str, chars=200) =>{
 
 module.exports.formatTime = formatTime
 module.exports.formatTimeShort = formatTimeShort
+module.exports.formatTimeDateOnly = formatTimeDateOnly
 module.exports.processText=processText

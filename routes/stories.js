@@ -1,6 +1,6 @@
 const express = require("express")
 const { route } = require(".")
-const { processText, formatTime } = require("../helpers")
+const { processText, formatTime, formatTimeDateOnly, } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
@@ -67,7 +67,7 @@ router.get("/", ensureAuth, async (req, res) => {
         console.log(error)
     }
 })
-
+//Editing a story
 router.get("/edit/:id", ensureAuth, async (req, res) =>{
     const story = await Story.findOne({_id: req.params.id}).populate("user").lean()
     if(!story){
@@ -78,7 +78,7 @@ router.get("/edit/:id", ensureAuth, async (req, res) =>{
     }
     res.render("./partials/edit.ejs", {story: story})
 })
-
+//Viewing a story
 router.get("/:id", ensureAuth, async (req, res) =>{
     const story = await Story.findOne({_id: req.params.id}).populate("user").lean()
     if(!story){
@@ -88,7 +88,7 @@ router.get("/:id", ensureAuth, async (req, res) =>{
         return res.redirect("/stories")
     }
     story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
-    res.render("viewstory.ejs", {story: story})
+    res.render("viewstory.ejs", {story: story, formatTimeDateOnly: formatTimeDateOnly})
 })
 
 router.put('/:id', ensureAuth, async(req, res)=>{
