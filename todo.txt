@@ -2,12 +2,12 @@ register new user - DONE
 CANT HANDLE EMPTY STORY - DONE
 registration without google -DONE
 toggle private to public -DONE
-
+change font of story display (Roboto, Roboto-Slab, Roboto-Condensed) -DONE
 
 ---------------------------------------------------
 
 
-change font of story display (Roboto, Roboto-Slab, Roboto-Condensed)
+
 display (list and cards) and pagination
 upvotes and downvotes on stories (frontend and change story schema)
 sort stories by options (created, modified, votes)
