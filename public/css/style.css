@@ -141,6 +141,20 @@ body {
     100% {opacity: 0; height: 0;}
  }
 
+ .public__score{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .public__votenum{
+     background-color: rgb(0, 255, 13);
+     color:red;
+     font-size: small;
+     padding: 5px;
+     border-radius: 10px;
+ }
+
 
 /* Media Queries */
 
