@@ -6,13 +6,16 @@ toggle private to public -DONE
 
 ---------------------------------------------------
 
-user page
-Like and dislike buttons, and count number of likes/displikes
-sort displayed stories
-sort options
-public page view options - List vs cards
+
+change font of story display (Roboto, Roboto-Slab, Roboto-Condensed)
+display (list and cards) and pagination
+upvotes and downvotes on stories (frontend and change story schema)
+sort stories by options (created, modified, votes)
 
 
 search text of public stories
 random collection of public stories previews on login page - Read more takes you to log in/register page
+
+give users ability to upvote and downvote
+comments on stories? 
 
