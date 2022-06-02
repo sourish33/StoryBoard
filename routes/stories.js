@@ -90,7 +90,7 @@ router.get("/:id", ensureAuth, async (req, res) =>{
     story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
     res.render("viewstory.ejs", {story: story, formatTimeDateOnly: formatTimeDateOnly})
 })
-
+//update story
 router.put('/:id', ensureAuth, async(req, res)=>{
     req.body.user = req.user.id
     try {
@@ -101,6 +101,7 @@ router.put('/:id', ensureAuth, async(req, res)=>{
     }
 })
 
+//delete story
 router.delete('/:id', ensureAuth, async(req, res)=>{
     console.log("Deleting story"+req.params.id)                                                                           
     try {
@@ -112,7 +113,7 @@ router.delete('/:id', ensureAuth, async(req, res)=>{
    
 })
 
-//Update
+//Update status of story
 router.patch('/:id', ensureAuth, async(req, res)=>{
     const id = req.params.id
     const status = req.body.status
