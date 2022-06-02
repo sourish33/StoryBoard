@@ -94,3 +94,7 @@ app.use('/stories', storyRoutes)
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`))
+
+//Onetime update { field: { $exists: <boolean> } }
+
+
