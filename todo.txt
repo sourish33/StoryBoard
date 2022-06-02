@@ -7,10 +7,11 @@ toggle private to public -DONE
 ---------------------------------------------------
 
 
-change font of story display (Roboto, Roboto-Slab, Roboto-Condensed)
+change font of story display (Roboto, Roboto-Slab, Roboto-Condensed) DONE
 display (list and cards) and pagination
-upvotes and downvotes on stories (frontend and change story schema)
+upvotes on stories (frontend and change story schema)
 sort stories by options (created, modified, votes)
+modify User schema to include array of refs to (liked) stories
 
 
 search text of public stories
