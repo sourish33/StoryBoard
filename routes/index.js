@@ -28,22 +28,22 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
 })
 
 // One time route for adding the new field "liked" to all documents that don't have it
-router.post('/addfield', async (req, res) =>{
-    try {
-        const res = await User.updateMany( { liked: { $exists: false } },{$set : {liked: []} })   
-        console.log(res.matchedCount)
-        return res.send({
-            status: "Done"
-        })
+// router.post('/addfield', async (req, res) =>{
+//     try {
+//         const res = await User.updateMany( { liked: { $exists: false } },{$set : {liked: []} })   
+//         console.log(res.matchedCount)
+//         return res.send({
+//             status: "Done"
+//         })
         
-    } catch (err) {
-        res.send({
-            status:"Done",
-            error: err
-        })
-    }
+//     } catch (err) {
+//         res.send({
+//             status:"Done",
+//             error: err
+//         })
+//     }
 
-})
+// })
 
 
 

@@ -32,7 +32,7 @@
                             <div class="public__arrows">
                                 <form method="POST" action="/users/addlike?_method=PATCH" >
                                     <input type="hidden" name="storyID" value="<%=story.storyID%>">
-                                    <i class="fas fa-thumbs-up" style="color: limegreen; cursor: pointer;" onclick="handleClick()"></i>
+                                    <i class="fas fa-thumbs-up <%= story.user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %> " style="color: limegreen; cursor: pointer;" onclick="handleClick()"></i>
                                 </form>
                             </div>
                             <span class="public__votenum">4 likes</span>
@@ -49,7 +49,7 @@
 <script>
     const handleClick= ()=>{
         const icon = event.currentTarget
-        icon.classList.toggle("fa-2xl")
+        // icon.classList.toggle("fa-2xl")
         icon.parentNode.submit()
     }
 </script>
