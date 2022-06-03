@@ -16,6 +16,7 @@ var methodOverride = require('method-override')
 const routes = require('./routes/index')
 const authRoutes = require('./routes/auth')
 const storyRoutes = require('./routes/stories')
+const userRoutes = require('./routes/users')
 
 
 //Load config
@@ -89,6 +90,7 @@ app.use(methodOverride('_method'))
 app.use('/', routes)
 app.use('/auth', authRoutes)
 app.use('/stories', storyRoutes)
+app.use('/users', userRoutes)
 
 
 const PORT = process.env.PORT || 3000

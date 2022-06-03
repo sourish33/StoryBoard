@@ -52,7 +52,6 @@ router.get("/", ensureAuth, async (req, res) => {
             .populate("user")
             .exec()
         retrievedStories.forEach((story) => {
-            console.log(story.title)
             story.body = processText(story.body, 200)
             story.title = processText(story.title, 25)
             story.editIcon =
