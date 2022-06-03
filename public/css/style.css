@@ -6,6 +6,10 @@ body {
     margin: 10px 0  !important;
 } */
 
+/* li {
+    list-style-type: circle !important;
+} */
+
 .header-box{
     display: flex;
     justify-content: space-between;

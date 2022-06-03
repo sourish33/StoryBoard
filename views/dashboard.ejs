@@ -52,7 +52,17 @@
         <% } else { %>
             <p>You have not created any stories. Go ahead and create some!</p>
         <% } %>
+        <% if (stories.length!==0) { %>
+            <div class="likedStories">
+                <ul class="browser-default"> Stories you liked:
+                    <% for( let likedStory of likedStories ) { %>
+                        <li><%= likedStory.title %> </li>
+                    <% } %>
+                </ul>
+            </div>
+            <% } %>
     </div>
+
     <%- include('partials/add-btn.ejs') %> 
     <%- include('partials/footer.ejs') %> 
     <script src="/myscript.js"></script> 

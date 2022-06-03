@@ -61,6 +61,7 @@ router.get("/", ensureAuth, async (req, res) => {
         })
         res.render("./stories/index.ejs", {
             retrievedStories: retrievedStories,
+            user: req.user
         })
     } catch (error) {
         console.log(error)
