@@ -13,6 +13,8 @@ upvotes on stories (frontend and change story schema)
 sort stories by options (created, modified, votes)
 modify User schema to include array of refs to (liked) stories
 
+deleting a story must remove it from likes
+
 
 search text of public stories
 random collection of public stories previews on login page - Read more takes you to log in/register page

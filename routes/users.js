@@ -8,10 +8,11 @@ const User = require("../models/User")
 
 
 //add a story to a users list of liked stories
-router.patch("/addlike/:id", ensureAuth, async (req, res)=>{
+router.patch("/addlike", ensureAuth, async (req, res)=>{
     console.log("Hello from addlike!!!")
-    const userid = req.params.id
+    const userid = req.user._id
     const storyID = req.body.storyID
+    // console.log(`Author: ${req.user._id}`)
     console.log(`userid = ${userid}`)
     console.log(`storyid = ${storyID}`)
     try {
@@ -19,8 +20,8 @@ router.patch("/addlike/:id", ensureAuth, async (req, res)=>{
             {_id: userid}, 
             { $addToSet: { liked: [storyID] } }
             )
-        // res.redirect("/stories")
-        res.render("./error/output.ejs", {data: updatedUser})
+        res.redirect("/stories")
+        // res.render("./error/output.ejs", {data: updatedUser})
     } catch (err) {
         res.status(404).render("./error/500.ejs", {error: err})
     }
