@@ -14,16 +14,16 @@ router.patch("/addlike/:id", ensureAuth, async (req, res)=>{
     const storyID = req.body.storyID
     console.log(`userid = ${userid}`)
     console.log(`storyid = ${storyID}`)
-    // try {
-    //     const updatedUser = await User.findOneAndUpdate(
-    //         {_id: userid}, 
-    //         { $addToSet: { liked: [storyid] } }
-    //         )
-    //     res.redirect("/stories")
-    // } catch (err) {
-    //     res.status(404).render("./error/500.ejs", {error: err})
-    // }
-    res.redirect("/stories")
+    try {
+        const updatedUser = await User.findOneAndUpdate(
+            {_id: userid}, 
+            { $addToSet: { liked: [storyID] } }
+            )
+        // res.redirect("/stories")
+        res.render("./error/output.ejs", {data: updatedUser})
+    } catch (err) {
+        res.status(404).render("./error/500.ejs", {error: err})
+    }
 })
 
 router.get("/test", ensureAuth, async (req, res)=>{
