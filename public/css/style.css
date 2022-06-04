@@ -2,13 +2,10 @@ body {
     background-color: lightgreen;
 }
 
-/* p {
-    margin: 10px 0  !important;
-} */
 
-/* li {
-    list-style-type: circle !important;
-} */
+table {
+    border: 2px solid;
+}
 
 .header-box{
     display: flex;
@@ -157,6 +154,10 @@ body {
      font-size: small;
      padding: 5px;
      border-radius: 10px;
+ }
+
+ .dashboard__likedStories{
+    border: 2px solid;
  }
 
 

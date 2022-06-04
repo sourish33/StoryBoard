@@ -13,7 +13,7 @@
             <a href="/stories" class="waves-effect waves-light btn extra-button">Public Stories</a>
         </div>
         <% if (stories.length!==0) { %>
-            <h5>Here are your stories</h5>
+            <h5>Stories you wrote:</h5>
             <table class="highlight">
                 <thead>
                     <tr>
@@ -53,11 +53,12 @@
             <p>You have not created any stories. Go ahead and create some!</p>
         <% } %>
         <% if (likedStories.length!==0) { %>
+            <h5>Stories you liked:</h3>
             <div class="dashboard__likedStories">
-                <h3>Stories you liked:</h3>
                 <ul class="browser-default">
                     <% for( let likedStory of likedStories ) { %>
-                        <li><%= likedStory.title %> </li>
+                        <!-- <li><a href="stories/<%= likedStory._id %>><%= likedStory.title %></a></li> -->
+                        <li><%= likedStory.title %></li>
                     <% } %>
                 </ul>
             </div>
