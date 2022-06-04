@@ -4,7 +4,7 @@ body {
 
 
 table {
-    border: 2px solid;
+    border: solid 2px;
 }
 
 .header-box{
@@ -158,6 +158,7 @@ table {
 
  .dashboard__likedStories{
     border: 2px solid;
+    border-radius: 10px;
  }
 
  .dashboard__likedheader{
