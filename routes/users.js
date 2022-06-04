@@ -16,12 +16,24 @@ router.patch("/addlike", ensureAuth, async (req, res)=>{
     console.log(`userid = ${userid}`)
     console.log(`storyid = ${storyID}`)
     try {
-        const updatedUser = await User.findOneAndUpdate(
-            {_id: userid}, 
-            { $addToSet: { liked: [storyID] } }
+        const theUser = await User.findById(userid).lean()
+        const theUserLiked = theUser.liked.map(el=>el.toString())
+        console.log(theUserLiked)
+        if (theUserLiked.includes(storyID)) {
+            console.log("Has")
+            const updatedUser = await User.updateOne(
+                {_id: userid}, 
+                { $pull: { liked: storyID } }
             )
+        } else{
+            console.log("doesn't have")
+            const updatedUser = await User.updateOne(
+                {_id: userid}, 
+                { $addToSet: { liked: storyID } }
+            )
+        }
         res.redirect("/stories")
-        // res.render("./error/output.ejs", {data: updatedUser})
+
     } catch (err) {
         res.status(404).render("./error/500.ejs", {error: err})
     }
