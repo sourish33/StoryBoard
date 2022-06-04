@@ -160,6 +160,9 @@ table {
     border: 2px solid;
  }
 
+ .dashboard__likedheader{
+    font-size: 0.8em;
+ }
 
 /* Media Queries */
 

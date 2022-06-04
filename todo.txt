@@ -14,6 +14,8 @@ ive users ability to upvote and downvote DONE
 display (list and cards) and pagination
 upvotes on stories (frontend and change story schema)
 show number of likes
+like/dislike via ajax request
+clear all likes
 sort stories by options (created, modified, votes)
 image upload
 
@@ -24,6 +26,10 @@ deleting a story must remove it from likes
 search text of public stories
 random collection of public stories previews on login page - Read more takes you to log in/register page
 
-g
+
 comments on stories? 
+
+
+image (link) of user 
+dynamically generate the display name
 

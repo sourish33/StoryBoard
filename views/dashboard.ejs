@@ -53,7 +53,8 @@
             <p>You have not created any stories. Go ahead and create some!</p>
         <% } %>
         <% if (likedStories.length!==0) { %>
-            <h5>Stories you liked:</h3>
+
+            <h5>Stories you liked: <span class="dashboard__likedheader"><a href="#"> Remove all</a></span> </h5>
             <div class="dashboard__likedStories">
                 <ul class="browser-default">
                     <% for (let likedStory of likedStories ) { %>
@@ -63,6 +64,7 @@
                     <% } %>
                 </ul>
             </div>
+
             <% } %>
     </div>
 
