@@ -52,9 +52,10 @@
         <% } else { %>
             <p>You have not created any stories. Go ahead and create some!</p>
         <% } %>
-        <% if (stories.length!==0) { %>
-            <div class="likedStories">
-                <ul class="browser-default"> Stories you liked:
+        <% if (likedStories.length!==0) { %>
+            <div class="dashboard__likedStories">
+                <h3>Stories you liked:</h3>
+                <ul class="browser-default">
                     <% for( let likedStory of likedStories ) { %>
                         <li><%= likedStory.title %> </li>
                     <% } %>

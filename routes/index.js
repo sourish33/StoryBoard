@@ -20,14 +20,9 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
         let stories = await Story.find({user: req.user._id}).sort({ createdAt: -1 }).lean() || []
-        let thisUser  = await User.findOne({_id:req.user._id}).lean()
-        let likedStories = []
-        if (thisUser.liked.length!==0){
-            likedStories = await Story.find({ '_id': { $in: thisUser.liked  } }).lean()
-        }
-        // let likedStories = thisUser.liked.map(async el=>{
-        //     likedStory = Story.fin
-        // })
+        let thisUser  = await User.findOne({_id:req.user._id}).populate('liked').lean()
+        console.log(thisUser)
+        likedStories = thisUser.liked
         res.render('dashboard.ejs', {firstName: req.user.firstName, stories: stories, likedStories: likedStories, formatTimeShort: formatTimeShort})
     } catch (error) {
         console.log(error)
