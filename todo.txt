@@ -2,20 +2,34 @@ register new user - DONE
 CANT HANDLE EMPTY STORY - DONE
 registration without google -DONE
 toggle private to public -DONE
-change font of story display (Roboto, Roboto-Slab, Roboto-Condensed) -DONE
+change font of story display (Roboto, Roboto-Slab, Roboto-Condensed) DONE
+modify User schema to include array of refs to (liked) stories DONE
+show list of liked stories DONE
+ive users ability to upvote and downvote DONE
 
 ---------------------------------------------------
 
 
 
 display (list and cards) and pagination
-upvotes and downvotes on stories (frontend and change story schema)
+upvotes on stories (frontend and change story schema)
+show number of likes
+like/dislike via ajax request
+clear all likes
 sort stories by options (created, modified, votes)
+image upload
+
+
+deleting a story must remove it from likes
 
 
 search text of public stories
 random collection of public stories previews on login page - Read more takes you to log in/register page
 
-give users ability to upvote and downvote
+
 comments on stories? 
+
+
+image (link) of user 
+dynamically generate the display name
 

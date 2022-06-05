@@ -52,7 +52,6 @@ router.get("/", ensureAuth, async (req, res) => {
             .populate("user")
             .exec()
         retrievedStories.forEach((story) => {
-            console.log(story.title)
             story.body = processText(story.body, 200)
             story.title = processText(story.title, 25)
             story.editIcon =
@@ -60,8 +59,19 @@ router.get("/", ensureAuth, async (req, res) => {
             story.storyID = story._id
             story.updatedAt = formatTime(story.updatedAt)
         })
+        //creating an array of promises to get the number of likes for each story
+        const likePromises = retrievedStories.map(el=>{
+            return User.find({liked: el._id}).countDocuments()
+        })
+
+        const likesArray = await Promise.all(likePromises)
+        for (let i =0; i<retrievedStories.length; i++){
+            retrievedStories[i].likes = likesArray[i]
+        }
+
         res.render("./stories/index.ejs", {
             retrievedStories: retrievedStories,
+            user: req.user
         })
     } catch (error) {
         console.log(error)
@@ -90,7 +100,7 @@ router.get("/:id", ensureAuth, async (req, res) =>{
     story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
     res.render("viewstory.ejs", {story: story, formatTimeDateOnly: formatTimeDateOnly})
 })
-
+//update story
 router.put('/:id', ensureAuth, async(req, res)=>{
     req.body.user = req.user.id
     try {
@@ -101,8 +111,8 @@ router.put('/:id', ensureAuth, async(req, res)=>{
     }
 })
 
-router.delete('/:id', ensureAuth, async(req, res)=>{
-    console.log("Deleting story"+req.params.id)                                                                           
+//delete story
+router.delete('/:id', ensureAuth, async(req, res)=>{                                                                           
     try {
         await Story.findByIdAndDelete({_id: req.params.id})
         res.redirect("/dashboard") 
@@ -112,7 +122,7 @@ router.delete('/:id', ensureAuth, async(req, res)=>{
    
 })
 
-//Update
+//Update status of story
 router.patch('/:id', ensureAuth, async(req, res)=>{
     const id = req.params.id
     const status = req.body.status

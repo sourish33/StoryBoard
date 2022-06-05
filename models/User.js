@@ -27,7 +27,11 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-    }
+    },
+    liked: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Story' 
+    }]
 })
 
 UserSchema.set('timestamps', true)
