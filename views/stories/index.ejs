@@ -35,7 +35,7 @@
                                     <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: limegreen; cursor: pointer;" onclick="handleClick()"></i>
                                 </form>
                             </div>
-                            <span class="public__votenum">4 likes</span>
+                            <span class="public__votenum"><%= story.likes %>  likes</span>
                         </div>
                     </div>
                     <% } %>

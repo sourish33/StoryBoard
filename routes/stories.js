@@ -59,8 +59,16 @@ router.get("/", ensureAuth, async (req, res) => {
             story.storyID = story._id
             story.updatedAt = formatTime(story.updatedAt)
         })
-        const likedBy = await User.find({liked: retrievedStories[1]._id})
-        console.log(`This story has ${likedBy.length} likes!`)
+        //creating an array of promises to get the number of likes for each story
+        const likePromises = retrievedStories.map(el=>{
+            return User.find({liked: el._id}).countDocuments()
+        })
+
+        const likesArray = await Promise.all(likePromises)
+        for (let i =0; i<retrievedStories.length; i++){
+            retrievedStories[i].likes = likesArray[i]
+        }
+
         res.render("./stories/index.ejs", {
             retrievedStories: retrievedStories,
             user: req.user
@@ -104,8 +112,7 @@ router.put('/:id', ensureAuth, async(req, res)=>{
 })
 
 //delete story
-router.delete('/:id', ensureAuth, async(req, res)=>{
-    console.log("Deleting story"+req.params.id)                                                                           
+router.delete('/:id', ensureAuth, async(req, res)=>{                                                                           
     try {
         await Story.findByIdAndDelete({_id: req.params.id})
         res.redirect("/dashboard") 

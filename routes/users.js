@@ -13,20 +13,18 @@ router.patch("/addlike", ensureAuth, async (req, res)=>{
     const userid = req.user._id
     const storyID = req.body.storyID
     // console.log(`Author: ${req.user._id}`)
-    console.log(`userid = ${userid}`)
-    console.log(`storyid = ${storyID}`)
+    // console.log(`userid = ${userid}`)
+    // console.log(`storyid = ${storyID}`)
     try {
         const theUser = await User.findById(userid).lean()
         const theUserLiked = theUser.liked.map(el=>el.toString())
-        console.log(theUserLiked)
+        // console.log(theUserLiked)
         if (theUserLiked.includes(storyID)) {
-            console.log("Has")
             const updatedUser = await User.updateOne(
                 {_id: userid}, 
                 { $pull: { liked: storyID } }
             )
         } else{
-            console.log("doesn't have")
             const updatedUser = await User.updateOne(
                 {_id: userid}, 
                 { $addToSet: { liked: storyID } }
