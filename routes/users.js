@@ -39,7 +39,8 @@ router.patch('/addRemoveLike', ensureAuth, async (req, res) =>{
             numLikes: numLikes
         }
         console.log(data)
-        res.status(200).render('./error/output.ejs', {data: data})
+        res.status(200).json(data)
+        // res.status(200).render('./error/output.ejs', {data: data})
 
     } catch (err) {
         res.status(404).render("./error/500.ejs", {error: err})

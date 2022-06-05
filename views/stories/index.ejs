@@ -33,6 +33,7 @@
                                 <form method="POST" action="/users/addRemoveLike?_method=PATCH" >
                                     <input type="hidden" name="storyID" value="<%=story.storyID%>">
                                     <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: limegreen; cursor: pointer;" onclick="handleClick()"></i>
+                                    <div></div>
                                 </form>
                             </div>
                             <span class="public__votenum"><%= story.likes %>  likes</span>
@@ -48,9 +49,13 @@
 <%- include('../partials/footer.ejs') %> 
 <script>
     const handleClick= ()=>{
+        event.preventDefault()
         const icon = event.currentTarget
-        // icon.classList.toggle("fa-2xl")
-        icon.parentNode.submit()
+        const formElement = icon.parentNode
+        const inputField = icon.previousSibling
+        const outputField = icon.nextSibling
+
+        formElement.submit()
     }
 </script>
 
