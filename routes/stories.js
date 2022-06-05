@@ -59,6 +59,8 @@ router.get("/", ensureAuth, async (req, res) => {
             story.storyID = story._id
             story.updatedAt = formatTime(story.updatedAt)
         })
+        const likedBy = await User.find({liked: retrievedStories[1]._id})
+        console.log(`This story has ${likedBy.length} likes!`)
         res.render("./stories/index.ejs", {
             retrievedStories: retrievedStories,
             user: req.user
