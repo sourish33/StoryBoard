@@ -53,10 +53,10 @@
         // event.preventDefault()
         const icon = event.currentTarget
         const formElement = icon.parentNode
-        const inputField = icon.previousElementSibling
+        const inputField2 = icon.previousElementSibling
         const outputField = icon.nextElementSibling
         
-        const data = {storyID: inputField.value}
+
 
         
         //////WORKING XMLHTTP code
@@ -69,7 +69,7 @@
                 alert(`recd ${resp.data}, ${resp.status}`)
             }
         }
-        xhr.send(`${inputField.name}=${inputField.value}`)
+        xhr.send(`${inputField2.name}=${inputField2.value}`)
         
         // formElement.submit()
     }
