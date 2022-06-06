@@ -41,8 +41,8 @@ router.patch('/addRemoveLike', async (req, res) =>{
 
         //prepare data to send back
         const data = {
-            likeButtonSize: likeButtonSize,
-            numLikes: numLikes
+            likeButtonSize,
+            numLikes
         }
         console.log(data)
         res.status(200).json(data)
