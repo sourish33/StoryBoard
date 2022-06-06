@@ -60,16 +60,16 @@
 
         
         //////WORKING XMLHTTP code
-        // var xhr = new XMLHttpRequest();
-        // xhr.open("POST", '/users/test', true);
-        // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.onreadystatechange = function() {
-        //     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        //         // Request finished. Do processing here.
-        //         const datarecd = JSON.parse(this.responseText)
-        //         alert(`recd ${datarecd.data}, ${datarecd.status}`)
-        //     }
-        // }
-        // xhr.send(`${inputField.name}=${inputField.value}`)
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/users/test', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.onreadystatechange = function() {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                // Request finished. Do processing here.
+                const resp = JSON.parse(this.responseText)
+                alert(`recd ${resp.data}, ${resp.status}`)
+            }
+        }
+        xhr.send(`${inputField.name}=${inputField.value}`)
         
         // formElement.submit()
     }
