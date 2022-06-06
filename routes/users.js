@@ -6,47 +6,49 @@ const User = require("../models/User")
 
 
 //add or remove a like
-router.patch('/addRemoveLike', ensureAuth, async (req, res) =>{
+router.patch('/addRemoveLike', async (req, res) =>{
     console.log("Hello from addRemoveLike!!!")
-    const userid = req.user._id
+    const userid = req.body.userid
     const storyID = req.body.storyID
-    // console.log(`Author: ${req.user._id}`)
-    // console.log(`userid = ${userid}`)
-    // console.log(`storyid = ${storyID}`)
-    try {
-        const theUser = await User.findById(userid).lean()
-        const theUserLiked = theUser.liked.map(el=>el.toString())
-        // console.log(theUserLiked)
-        let likeButtonSize = "big"
-        if (theUserLiked.includes(storyID)) {
-            const updatedUser = await User.updateOne(
-                {_id: userid}, 
-                { $pull: { liked: storyID } }
-            )
-            likeButtonSize = "small"
-        } else{
-            const updatedUser = await User.updateOne(
-                {_id: userid}, 
-                { $addToSet: { liked: storyID } }
-            )
-        }
-        //get updated number of likes
-        const numLikes = await User.find({liked: storyID}).countDocuments()
+    res.status(200).json({
+        status: userid,
+        data: storyID
+    })
+    // // console.log(`userid = ${userid}`)
+    // // console.log(`storyid = ${storyID}`)
+    // try {
+    //     const theUser = await User.findById(userid).lean()
+    //     const theUserLiked = theUser.liked.map(el=>el.toString())
+    //     // console.log(theUserLiked)
+    //     let likeButtonSize = "big"
+    //     if (theUserLiked.includes(storyID)) {
+    //         const updatedUser = await User.updateOne(
+    //             {_id: userid}, 
+    //             { $pull: { liked: storyID } }
+    //         )
+    //         likeButtonSize = "small"
+    //     } else{
+    //         const updatedUser = await User.updateOne(
+    //             {_id: userid}, 
+    //             { $addToSet: { liked: storyID } }
+    //         )
+    //     }
+    //     //get updated number of likes
+    //     const numLikes = await User.find({liked: storyID}).countDocuments()
 
-        //prepare data to send back
-        const data = {
-            likeButtonSize: likeButtonSize,
-            numLikes: numLikes
-        }
-        console.log(data)
-        res.status(200).json(data)
+    //     //prepare data to send back
+    //     const data = {
+    //         likeButtonSize: likeButtonSize,
+    //         numLikes: numLikes
+    //     }
+    //     console.log(data)
+    //     res.status(200).json(data)
         // res.status(200).render('./error/output.ejs', {data: data})
 
-    } catch (err) {
-        res.status(404).render("./error/500.ejs", {error: err})
-    }
-    
-    
+    // } catch (err) {
+    //     res.status(404).render("./error/500.ejs", {error: err})
+    // }
+     
 }) 
 
 
