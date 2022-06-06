@@ -58,6 +58,23 @@
         
         const data = {storyID: inputField.value}
         
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/users/test', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.onreadystatechange = function() {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                // Request finished. Do processing here.
+                const datarecd = JSON.parse(this.responseText)
+                alert(`recd ${datarecd.data}, ${datarecd.status}`)
+            }
+        }
+        // xhr.send("name=Ketan&id=1");
+        xhr.send(`${inputField.name}=${inputField.value}`)
+        // axios.patch('/users/addRemoveLike', {storyID: inputField.value}).then((res)=>{
+        //     alert("back!")
+        //     outputField.innerHTML = res.numLikes
+        // })
+        // formElement.submit()
+
         //jquery works on two clicks
         // $(document).ready(function(){
         //     $(icon).click(function(){
@@ -70,19 +87,6 @@
         //         })
         //     });
         // });
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", '/users/test', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.onreadystatechange = function() {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                // Request finished. Do processing here.
-                alert("response recieved")
-            }
-        }
-        xhr.send("name=Ketan&id=1");
-        axios.patch('/users/addRemoveLike', {storyID: inputField.value}).then((res)=>{
-            alert("back!")
-            outputField.innerHTML = res.numLikes
-        })
         // var bodyFormData = new FormData();
         // bodyFormData.append(data)
         // axios({
@@ -99,8 +103,6 @@
         //     //handle error
         //     console.log(response);
         // });
-
-        // formElement.submit()
     }
 </script>
 
