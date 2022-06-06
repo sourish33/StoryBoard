@@ -20,13 +20,11 @@ router.patch('/addRemoveLike', async (req, res) =>{
         const theUser = await User.findById(userid).lean()
         const theUserLiked = theUser.liked.map(el=>el.toString())
         // console.log(theUserLiked)
-        let likeButtonSize = "big"
         if (theUserLiked.includes(storyID)) {
             const updatedUser = await User.updateOne(
                 {_id: userid}, 
                 { $pull: { liked: storyID } }
             )
-            likeButtonSize = "small"
         } else{
             const updatedUser = await User.updateOne(
                 {_id: userid}, 
@@ -35,10 +33,12 @@ router.patch('/addRemoveLike', async (req, res) =>{
         }
         //get updated number of likes
         const numLikes = await User.find({liked: storyID}).countDocuments()
+        const stillLikeIt = await User.find({_id:userid, liked: storyID}).countDocuments()
+        console.log(stillLikeIt)
 
         //prepare data to send back
         const data = {
-            likeButtonSize: likeButtonSize,
+            likeButtonSize: stillLikeIt === 0 ? "small" : "big",
             numLikes: numLikes
         }
         console.log(data)

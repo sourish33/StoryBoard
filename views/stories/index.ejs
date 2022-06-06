@@ -31,13 +31,13 @@
                         <div class="public__score">
                             <div class="public__arrows">
                                 <form method="POST" action="/users/addRemoveLike?_method=PATCH" >
-                                    <input type="hidden" name="userid" value="<%=story.user._id%>">
+                                    <input type="hidden" name="userid" value="<%=user._id%>">
                                     <input type="hidden" name="storyID" value="<%=story.storyID%>">
                                     <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: limegreen; cursor: pointer;" onclick="handleClick()"></i>
                                     <div class="dummy"></div>
                                 </form>
                             </div>
-                            <span class="public__votenum"><%= story.likes %>  likes</span>
+                            <span id="hello" class="public__votenum"><%= story.likes %>  likes</span>
                         </div>
                     </div>
                     <% } %>
@@ -56,6 +56,7 @@
         const inputField1 = icon.previousElementSibling.previousElementSibling
         const inputField2 = icon.previousElementSibling
         const outputField = icon.nextElementSibling
+        const numLikesBox = formElement.parentNode.nextElementSibling
         
 
 
@@ -68,7 +69,8 @@
                 // Request finished. Do processing here.
                 const resp = JSON.parse(this.responseText)
                 const {likeButtonSize, numLikes} = resp
-                likeButtonSize==="big" ? icon.classList.add("fa-2xl") : icon.classList.remove('fa-2xl')
+                likeButtonSize === "big" ? icon.classList.add("fa-2xl") : icon.classList.remove('fa-2xl')
+                numLikesBox.innerHTML = `${numLikes} likes`
                 // alert(`like button: ${resp.likeButtonSize}, number of likes: ${resp.numLikes}`)
             }
         }
