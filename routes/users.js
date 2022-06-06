@@ -83,7 +83,8 @@ router.patch("/addlike", ensureAuth, async (req, res)=>{
 //doesn't do anythng useful
 router.post("/test",  async (req, res)=>{
     console.log("Hello from test")
-    console.log(req)
+    // const keys = Object.keys(req)
+    console.log(req.body)
     res.status(200).json({
         status: "OK",
         data: "everything good"

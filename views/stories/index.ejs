@@ -47,6 +47,7 @@
     </div>
 
 <%- include('../partials/footer.ejs') %> 
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script> -->
 <script>
     const handleClick= ()=>{
         // event.preventDefault()
@@ -56,6 +57,19 @@
         const outputField = icon.nextElementSibling
         
         const data = {storyID: inputField.value}
+        
+        //jquery works on two clicks
+        // $(document).ready(function(){
+        //     $(icon).click(function(){
+        //         $.ajax({
+        //         type: 'POST',
+        //         url: '/users/test',
+        //         success: function(result) {
+        //             alert(`recd something`)
+        //             }
+        //         })
+        //     });
+        // });
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '/users/test', true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.onreadystatechange = function() {
@@ -65,10 +79,10 @@
             }
         }
         xhr.send("name=Ketan&id=1");
-        // axios.patch('/users/addRemoveLike', {storyID: inputField.value}).then((res)=>{
-        //     alert("back!")
-        //     outputField.innerHTML = res.numLikes
-        // })
+        axios.patch('/users/addRemoveLike', {storyID: inputField.value}).then((res)=>{
+            alert("back!")
+            outputField.innerHTML = res.numLikes
+        })
         // var bodyFormData = new FormData();
         // bodyFormData.append(data)
         // axios({
