@@ -36,8 +36,6 @@ router.patch('/addRemoveLike', async (req, res) =>{
         }
         //get updated number of likes
         const numLikes = await User.find({liked: storyID}).countDocuments()
-        const stillLikeIt = await User.find({_id:userid, liked: storyID}).countDocuments()
-        console.log(stillLikeIt)
 
         //prepare data to send back
         const data = {
