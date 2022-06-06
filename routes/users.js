@@ -16,6 +16,7 @@ router.patch('/addRemoveLike', async (req, res) =>{
     // })
     // console.log(`userid = ${userid}`)
     // console.log(`storyid = ${storyID}`)
+    let likeButtonSize ="small"
     try {
         const theUser = await User.findById(userid).lean()
         const theUserLiked = theUser.liked.map(el=>el.toString())
@@ -25,11 +26,13 @@ router.patch('/addRemoveLike', async (req, res) =>{
                 {_id: userid}, 
                 { $pull: { liked: storyID } }
             )
+            likeButtonSize="small"
         } else{
             const updatedUser = await User.updateOne(
                 {_id: userid}, 
                 { $addToSet: { liked: storyID } }
             )
+            likeButtonSize="big"
         }
         //get updated number of likes
         const numLikes = await User.find({liked: storyID}).countDocuments()
@@ -38,7 +41,7 @@ router.patch('/addRemoveLike', async (req, res) =>{
 
         //prepare data to send back
         const data = {
-            likeButtonSize: stillLikeIt === 0 ? "small" : "big",
+            likeButtonSize: likeButtonSize,
             numLikes: numLikes
         }
         console.log(data)
