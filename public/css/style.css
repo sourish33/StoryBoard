@@ -165,6 +165,23 @@ table {
     font-size: 0.8em;
  }
 
+
+ .spin{
+    animation-name: spin;
+    animation-duration: 200ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+ }
+
+ @keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
 /* Media Queries */
 
 @media only screen and (max-width: 600px) {
