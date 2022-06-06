@@ -67,7 +67,7 @@
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 // Request finished. Do processing here.
                 const resp = JSON.parse(this.responseText)
-                alert(`recd ${resp.data}, ${resp.status}`)
+                alert(`like button: ${resp.likeButtonSize}, number of likes: ${resp.numLikes}`)
             }
         }
         xhr.send(`${inputField2.name}=${inputField2.value}&${inputField1.name}=${inputField1.value}`)
