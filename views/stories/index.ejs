@@ -70,7 +70,7 @@
                 alert(`recd ${resp.data}, ${resp.status}`)
             }
         }
-        xhr.send(`${inputField2.name}=${inputField2.value}`)
+        xhr.send(`${inputField2.name}=${inputField2.value}&${inputField1.name}=${inputField1.value}`)
         
         // formElement.submit()
     }
