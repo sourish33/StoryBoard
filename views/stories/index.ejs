@@ -31,6 +31,7 @@
                         <div class="public__score">
                             <div class="public__arrows">
                                 <form method="POST" action="/users/addRemoveLike?_method=PATCH" >
+                                    <input type="hidden" name="userid" value="<%=story.user._id%>">
                                     <input type="hidden" name="storyID" value="<%=story.storyID%>">
                                     <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: limegreen; cursor: pointer;" onclick="handleClick()"></i>
                                     <div class="dummy"></div>
@@ -47,7 +48,6 @@
     </div>
 
 <%- include('../partials/footer.ejs') %> 
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script> -->
 <script>
     const handleClick= ()=>{
         // event.preventDefault()
@@ -57,52 +57,21 @@
         const outputField = icon.nextElementSibling
         
         const data = {storyID: inputField.value}
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", '/users/test', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.onreadystatechange = function() {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                // Request finished. Do processing here.
-                const datarecd = JSON.parse(this.responseText)
-                alert(`recd ${datarecd.data}, ${datarecd.status}`)
-            }
-        }
-        // xhr.send("name=Ketan&id=1");
-        xhr.send(`${inputField.name}=${inputField.value}`)
-        // axios.patch('/users/addRemoveLike', {storyID: inputField.value}).then((res)=>{
-        //     alert("back!")
-        //     outputField.innerHTML = res.numLikes
-        // })
-        // formElement.submit()
 
-        //jquery works on two clicks
-        // $(document).ready(function(){
-        //     $(icon).click(function(){
-        //         $.ajax({
-        //         type: 'POST',
-        //         url: '/users/test',
-        //         success: function(result) {
-        //             alert(`recd something`)
-        //             }
-        //         })
-        //     });
-        // });
-        // var bodyFormData = new FormData();
-        // bodyFormData.append(data)
-        // axios({
-        //     method: "post",
-        //     url: "/users/test",
-        //     data: bodyFormData,
-        //     headers: { "Content-Type": "multipart/form-data" },
-        // })
-        // axios.post('/users/test', data)
-        // .then(function (response) {
-        //     alert("response recieved!!!")
-        // })
-        // .catch(function (response) {
-        //     //handle error
-        //     console.log(response);
-        // });
+        
+        //////WORKING XMLHTTP code
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("POST", '/users/test', true);
+        // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.onreadystatechange = function() {
+        //     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        //         // Request finished. Do processing here.
+        //         const datarecd = JSON.parse(this.responseText)
+        //         alert(`recd ${datarecd.data}, ${datarecd.status}`)
+        //     }
+        // }
+        // xhr.send(`${inputField.name}=${inputField.value}`)
+        
+        // formElement.submit()
     }
 </script>
 
