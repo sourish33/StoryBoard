@@ -49,14 +49,43 @@
 <%- include('../partials/footer.ejs') %> 
 <script>
     const handleClick= ()=>{
-        event.preventDefault()
+        // event.preventDefault()
         const icon = event.currentTarget
         const formElement = icon.parentNode
         const inputField = icon.previousElementSibling
         const outputField = icon.nextElementSibling
         
         const data = {storyID: inputField.value}
-        alert(data.storyID)
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/users/test', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");xhr.onreadystatechange = function() {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                // Request finished. Do processing here.
+                alert("response recieved")
+            }
+        }
+        xhr.send("name=Ketan&id=1");
+        // axios.patch('/users/addRemoveLike', {storyID: inputField.value}).then((res)=>{
+        //     alert("back!")
+        //     outputField.innerHTML = res.numLikes
+        // })
+        // var bodyFormData = new FormData();
+        // bodyFormData.append(data)
+        // axios({
+        //     method: "post",
+        //     url: "/users/test",
+        //     data: bodyFormData,
+        //     headers: { "Content-Type": "multipart/form-data" },
+        // })
+        // axios.post('/users/test', data)
+        // .then(function (response) {
+        //     alert("response recieved!!!")
+        // })
+        // .catch(function (response) {
+        //     //handle error
+        //     console.log(response);
+        // });
+
         // formElement.submit()
     }
 </script>

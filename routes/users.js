@@ -81,10 +81,10 @@ router.patch("/addlike", ensureAuth, async (req, res)=>{
 })
 
 //doesn't do anythng useful
-router.get("/test", ensureAuth, async (req, res)=>{
+router.post("/test",  async (req, res)=>{
     console.log("Hello from test")
-    console.log(req.user)
-    res.status(200).send({
+    console.log(req)
+    res.status(200).json({
         status: "OK",
         data: "everything good"
     })
