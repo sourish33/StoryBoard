@@ -127,7 +127,7 @@ router.patch('/:id', ensureAuth, async(req, res)=>{
     const id = req.params.id
     const status = req.body.status
     try {
-        await Story.findByIdAndUpdate({_id:id}, {status: status})
+        await Story.findByIdAndUpdate({_id:id}, {status: status}, {timestamps: false})//prevents an updatedAt timestamp for this
         res.redirect("/dashboard") 
     } catch(error){
         console.log(error)
