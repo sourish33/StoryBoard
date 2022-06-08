@@ -55,14 +55,22 @@
         <% if (likedStories.length!==0) { %>
 
             <h5>Stories you liked: <span class="dashboard__likedheader"><a href="#"> Remove all</a></span> </h5>
-            <div class="dashboard__likedStories">
-                <ul class="browser-default">
+            <div>
+                <table class="likedStoriesTable">
                     <% for (let likedStory of likedStories ) { %>
                         <% if (likedStory.status==="public") { %>
-                            <li><a href="stories/<%= likedStory._id %>" target="_blank"><%= likedStory.title %></a></li>
+                            <tr>
+                                <td>
+                                    <a href="stories/<%= likedStory._id %>" target="_blank"><%= likedStory.title %></a>
+                                </td>
+                                <td>
+                                    <i class='fa fa-remove' style='color: red'></i>
+                                </td>
+                            </tr>
                         <% } %>
                     <% } %>
-                </ul>
+                </table>
+
             </div>
 
             <% } %>
