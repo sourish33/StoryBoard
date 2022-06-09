@@ -61,6 +61,19 @@ router.patch("/removeLike", ensureAuth, async (req, res)=>{
     }
 })
 
+//Remove all likes
+router.patch("/removeAllLikes", ensureAuth, async (req, res) =>{
+    console.log("Hello from removeAllLikes")
+    const userid = req.user._id
+    try {
+        await User.findByIdAndUpdate(userid, {$set: { liked: [] } })
+        res.redirect('/dashboard')
+
+    } catch (err) {
+        res.status(404).render("./error/500.ejs", {error: err})
+    }
+
+})
 //doesn't do anythng useful
 router.post("/test",  async (req, res)=>{
     console.log("Hello from test")

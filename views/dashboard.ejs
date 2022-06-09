@@ -54,7 +54,10 @@
         <% } %>
         <% if (likedStories.length!==0) { %>
 
-            <h5>Stories you liked: <span class="dashboard__likedheader"><a href="#"> Remove all</a></span> </h5>
+            <div class="likedHeaderBaap">
+                <h5>Stories you liked: </h5>
+                <form method="POST" action="/users/removeAllLikes?_method=PATCH"><span class="dashboard__likedheader" onclick="handleClick()"> <i class="fa fa-trash" aria-hidden="true"></i></span></form>
+            </div>
             <div>
                 <table class="likedStoriesTable">
                     <% for (let likedStory of likedStories ) { %>
