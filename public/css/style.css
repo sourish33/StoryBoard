@@ -198,6 +198,16 @@ table {
     font-weight: bold;
  }
 
+ .indexpage-header h3{
+    display:inline-block;
+ }
+
+ .indexpage-header a{
+    display: inline-block;
+    font-size: 1.5em;
+    margin-left: 10px;
+ }
+
  @keyframes spin {
     from {
         transform:rotate(0deg);
