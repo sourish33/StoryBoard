@@ -162,10 +162,15 @@ table {
  }
 
  .likedHeaderBaap{
-     display: flex;
-     align-items: baseline;
-     justify-content: space-between;
      width: 50%;
+ }
+
+ .likedHeaderBaap h5 {
+    display: inline-block;
+ }
+
+ .likedHeaderBaap form {
+    display: inline-block;
  }
 
  .dashboard__likedheader{
