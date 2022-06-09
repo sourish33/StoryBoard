@@ -7,15 +7,10 @@ const User = require("../models/User")
 
 //add or remove a like
 router.patch('/addRemoveLike', async (req, res) =>{
-    console.log("Hello from addRemoveLike!!!")
     const userid = req.body.userid
     const storyID = req.body.storyID
-    // res.status(200).json({
-    //     status: userid,
-    //     data: storyID
-    // })
-    // console.log(`userid = ${userid}`)
-    // console.log(`storyid = ${storyID}`)
+    console.log(`userid = ${userid}`)
+    console.log(`storyid = ${storyID}`)
     let likeButtonSize ="small"
     try {
         const theUser = await User.findById(userid).lean()
@@ -52,30 +47,14 @@ router.patch('/addRemoveLike', async (req, res) =>{
 }) 
 
 
-//add a story to a users list of liked stories
-router.patch("/addlike", ensureAuth, async (req, res)=>{
-    console.log("Hello from addlike!!!")
+//REMOVE a story from a users list of liked stories
+router.patch("/removeLike", ensureAuth, async (req, res)=>{
+    console.log("Hello from removelike!!!")
     const userid = req.user._id
     const storyID = req.body.storyID
-    // console.log(`Author: ${req.user._id}`)
-    // console.log(`userid = ${userid}`)
-    // console.log(`storyid = ${storyID}`)
     try {
-        const theUser = await User.findById(userid).lean()
-        const theUserLiked = theUser.liked.map(el=>el.toString())
-        // console.log(theUserLiked)
-        if (theUserLiked.includes(storyID)) {
-            const updatedUser = await User.updateOne(
-                {_id: userid}, 
-                { $pull: { liked: storyID } }
-            )
-        } else{
-            const updatedUser = await User.updateOne(
-                {_id: userid}, 
-                { $addToSet: { liked: storyID } }
-            )
-        }
-        res.redirect("/stories")
+        await User.findByIdAndUpdate(userid, { $pull: { liked: storyID } })
+        res.redirect('/dashboard')
 
     } catch (err) {
         res.status(404).render("./error/500.ejs", {error: err})
@@ -97,7 +76,7 @@ router.get("*", (req, res) => {
   
     // Here user can also design an
     // error page and render it 
-    res.send("You are in user but this page doesn't exist");
+    res.send("You are in users but this page doesn't exist");
   });
 
 

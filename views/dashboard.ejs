@@ -64,7 +64,10 @@
                                     <a href="stories/<%= likedStory._id %>" target="_blank"><%= likedStory.title %></a>
                                 </td>
                                 <td>
-                                    <i class='fa fa-remove' style='color: red'></i>
+                                    <form method="POST" action="/users/removeLike?_method=PATCH">
+                                        <input type="hidden" name="storyID" value="<%= likedStory._id %>">
+                                        <span class="removeFromLikes" onclick="handleClick()"><i class='fa fa-remove removeFromLikesIcon'></i></span>
+                                    </form>
                                 </td>
                             </tr>
                         <% } %>
@@ -86,6 +89,11 @@
             let form =checkbox.parentNode.parentNode.parentNode
             checkbox.parentNode.parentNode.nextElementSibling.value = checkbox.checked ? "public" : "private"
             form.submit()
+        }
+
+        function handleClick(){
+            let formElement = event.currentTarget.parentNode
+            formElement.submit()
         }
 
 
