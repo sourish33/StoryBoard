@@ -69,7 +69,7 @@ router.get("/", ensureAuth, async (req, res) => {
             retrievedStories[i].likes = likesArray[i]
         }
 
-        res.render("./stories/index.ejs", {
+        res.render("./index.ejs", {
             retrievedStories: retrievedStories,
             user: req.user
         })
