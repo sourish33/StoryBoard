@@ -203,15 +203,24 @@ table {
     font-weight: bold;
  }
 
- .indexpage-header h3{
-    display:inline-block;
+ .indexpage-header{
+    display:flex;
+    justify-content: left;
+    align-items: baseline;
  }
 
  .indexpage-header a{
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 1.5em;
     margin-left: 10px;
  }
+
+ .top-panel{
+    margin-left: 10px;
+    float: left;
+ }
+
+
 
  @keyframes spin {
     from {
