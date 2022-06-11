@@ -72,7 +72,12 @@ getting PUBLIC STORIES using middleware getPublicStories
 */
 router.get("/", ensureAuth, getPublicStories, async (req, res) => {
     try {
-        res.render("./index.ejs", {
+        let showfile = "index.ejs"
+        if (req.query.view ==="list"){
+            showfile = "indexlist.ejs"
+        }
+        console.log(showfile)
+        res.render(showfile, {
             retrievedStories: req.retrievedStories,
             user: req.user
         })
