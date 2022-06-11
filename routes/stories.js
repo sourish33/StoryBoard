@@ -37,46 +37,53 @@ router.post("/:id", ensureAuth, async (req, res) => {
     }
 })
 
+//Middleware to retrieve stories and likes
+const getPublicStories = async (req, res, next) =>{
+        const retrievedStories = await Story.find({ status: "public" })
+        .sort({ updatedAt: -1 })
+        .lean()
+        .populate("user")
+        .exec()
+    retrievedStories.forEach((story) => {
+        story.body = processText(story.body, 200)
+        story.title = processText(story.title, 25)
+        story.editIcon =
+            story.user._id.equals(req.user._id) ? "" : "hidden"
+        story.storyID = story._id
+        story.updatedAt = formatTime(story.updatedAt)
+    })
+    //creating an array of promises to get the number of likes for each story
+    const likePromises = retrievedStories.map(el=>{
+        return User.find({liked: el._id}).countDocuments()
+    })
+
+    const likesArray = await Promise.all(likePromises)
+    for (let i =0; i<retrievedStories.length; i++){
+        retrievedStories[i].likes = likesArray[i]
+    }
+    req.retrievedStories=retrievedStories
+    next()
+}
+
 
 
 /*
-stories which are public
-title, body, user.name, user.image
-SEARCHING PUBLIC STORIES
+getting PUBLIC STORIES using middleware getPublicStories
 */
-router.get("/", ensureAuth, async (req, res) => {
+router.get("/", ensureAuth, getPublicStories, async (req, res) => {
     try {
-        const retrievedStories = await Story.find({ status: "public" })
-            .sort({ updatedAt: -1 })
-            .lean()
-            .populate("user")
-            .exec()
-        retrievedStories.forEach((story) => {
-            story.body = processText(story.body, 200)
-            story.title = processText(story.title, 25)
-            story.editIcon =
-                story.user._id.equals(req.user._id) ? "" : "hidden"
-            story.storyID = story._id
-            story.updatedAt = formatTime(story.updatedAt)
-        })
-        //creating an array of promises to get the number of likes for each story
-        const likePromises = retrievedStories.map(el=>{
-            return User.find({liked: el._id}).countDocuments()
-        })
-
-        const likesArray = await Promise.all(likePromises)
-        for (let i =0; i<retrievedStories.length; i++){
-            retrievedStories[i].likes = likesArray[i]
-        }
-
         res.render("./index.ejs", {
-            retrievedStories: retrievedStories,
+            retrievedStories: req.retrievedStories,
             user: req.user
         })
     } catch (error) {
         console.log(error)
     }
 })
+
+
+
+
 //Editing a story
 router.get("/edit/:id", ensureAuth, async (req, res) =>{
     const story = await Story.findOne({_id: req.params.id}).populate("user").lean()

@@ -9,8 +9,8 @@ const User = require("../models/User")
 router.patch('/addRemoveLike', async (req, res) =>{
     const userid = req.body.userid
     const storyID = req.body.storyID
-    console.log(`userid = ${userid}`)
-    console.log(`storyid = ${storyID}`)
+    // console.log(`userid = ${userid}`)
+    // console.log(`storyid = ${storyID}`)
     let likeButtonSize ="small"
     try {
         const theUser = await User.findById(userid).lean()
@@ -37,7 +37,7 @@ router.patch('/addRemoveLike', async (req, res) =>{
             likeButtonSize,
             numLikes
         }
-        console.log(data)
+        // console.log(data)
         res.status(200).json(data)
 
     } catch (err) {
@@ -49,7 +49,7 @@ router.patch('/addRemoveLike', async (req, res) =>{
 
 //REMOVE a story from a users list of liked stories
 router.patch("/removeLike", ensureAuth, async (req, res)=>{
-    console.log("Hello from removelike!!!")
+    // console.log("Hello from removelike!!!")
     const userid = req.user._id
     const storyID = req.body.storyID
     try {
@@ -63,7 +63,7 @@ router.patch("/removeLike", ensureAuth, async (req, res)=>{
 
 //Remove all likes
 router.patch("/removeAllLikes", ensureAuth, async (req, res) =>{
-    console.log("Hello from removeAllLikes")
+    // console.log("Hello from removeAllLikes")
     const userid = req.user._id
     try {
         await User.findByIdAndUpdate(userid, {$set: { liked: [] } })
