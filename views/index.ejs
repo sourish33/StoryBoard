@@ -10,13 +10,16 @@
             <div class="indexpage-header">
                 <h3>Public Stories</h3>
                 <a href="/stories?view=list"> View as List</a>
-                <div class="top-panel">
-                    <select name="" class="browser-default">
-                        <option value="1">Likes</option>
-                        <option value="2">Oldest</option>
-                        <option value="3">Latest</option>
-                    </select>
-                </div>
+                
+                    <div class="top-panel">
+                        <form action="/stories" method="GET" id="sortOptions">
+                            <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
+                                <option value="Likes" <%= sortby === "Likes" ? "selected" : "" %> >Likes</option>
+                                <option value="Oldest"  <%= sortby === "Oldest" ? "selected" : "" %> >Oldest</option>
+                                <option value="Recent"  <%= sortby === "Recent" ? "selected" : "" %> >Recent</option>
+                            </select>
+                        </form>
+                    </div>
             </div>
             <a href="/dashboard" class="waves-effect waves-light btn extra-button">Dashboard</a>
         </div>
@@ -88,7 +91,11 @@
         }
         xhr.send(`${inputField2.name}=${inputField2.value}&${inputField1.name}=${inputField1.value}`)
         
-        // formElement.submit()
+    }
+
+    const handleSort = () =>{
+        const formElement = document.getElementById("sortOptions")
+        formElement.submit()
     }
 </script>
 

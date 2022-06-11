@@ -39,8 +39,13 @@ router.post("/:id", ensureAuth, async (req, res) => {
 
 //Middleware to retrieve stories and likes
 const getPublicStories = async (req, res, next) =>{
+        const sortby = req.query.sortby || "Recent"
+        let sortOption=-1
+        if (sortby==="Oldest"){
+            sortOption = +1
+        }
         const retrievedStories = await Story.find({ status: "public" })
-        .sort({ updatedAt: -1 })
+        .sort({ updatedAt: sortOption })
         .lean()
         .populate("user")
         .exec()
@@ -62,6 +67,7 @@ const getPublicStories = async (req, res, next) =>{
         retrievedStories[i].likes = likesArray[i]
     }
     req.retrievedStories=retrievedStories
+    req.sortby = sortby
     next()
 }
 
@@ -76,10 +82,10 @@ router.get("/", ensureAuth, getPublicStories, async (req, res) => {
         if (req.query.view ==="list"){
             showfile = "indexlist.ejs"
         }
-        console.log(showfile)
         res.render(showfile, {
             retrievedStories: req.retrievedStories,
-            user: req.user
+            user: req.user,
+            sortby: req.sortby
         })
     } catch (error) {
         console.log(error)
