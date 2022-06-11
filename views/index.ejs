@@ -14,7 +14,7 @@
                     <div class="top-panel">
                         <form action="/stories" method="GET" id="sortOptions">
                             <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
-                                <option value="Likes" <%= sortby === "Likes" ? "selected" : "" %> >Likes</option>
+                                <option value="Most Likes" <%= sortby === "Most Likes" ? "selected" : "" %> >Most Likes</option>
                                 <option value="Oldest"  <%= sortby === "Oldest" ? "selected" : "" %> >Oldest</option>
                                 <option value="Recent"  <%= sortby === "Recent" ? "selected" : "" %> >Recent</option>
                             </select>

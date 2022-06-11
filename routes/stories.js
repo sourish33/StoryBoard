@@ -66,11 +66,9 @@ const getPublicStories = async (req, res, next) =>{
     for (let i =0; i<retrievedStories.length; i++){
         retrievedStories[i].likes = likesArray[i]
     }
-    if (sortby==="Likes"){
-        console.log("Trying to sort...")
-        console.log(retrievedStories[0].likes, retrievedStories[2].likes)
+    if (sortby==="Most Likes"){
         retrievedStories.sort((a,b)=>{
-            return a.likes>b.likes ? 1 : -1
+            return a.likes>b.likes ? -1 : 1
         })
     }
     req.retrievedStories=retrievedStories
