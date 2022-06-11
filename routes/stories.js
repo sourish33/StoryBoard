@@ -71,6 +71,11 @@ const getPublicStories = async (req, res, next) =>{
             return a.likes>b.likes ? -1 : 1
         })
     }
+    if (sortby==="Least Likes"){
+        retrievedStories.sort((a,b)=>{
+            return a.likes>b.likes ? 1 : -1
+        })
+    }
     req.retrievedStories=retrievedStories
     req.sortby = sortby
     next()
