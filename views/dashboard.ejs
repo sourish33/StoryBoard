@@ -59,7 +59,7 @@
                 <form method="POST" action="/users/removeAllLikes?_method=PATCH"><button type="button" class="submit-button" onclick="handleClickDeleteAll()"><i class="fa-solid fa-trash-can delete-icon"></i></button></form>
             </div>
             <div>
-                <table class="likedStoriesTable">
+                <table class="highlight likedStoriesTable">
                     <% for (let likedStory of likedStories ) { %>
                         <% if (likedStory.status==="public") { %>
                             <tr>

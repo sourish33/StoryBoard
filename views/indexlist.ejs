@@ -25,36 +25,15 @@
             </div>
             <a href="/dashboard" class="waves-effect waves-light btn extra-button">Dashboard</a>
         </div>
-            <div class="story-holder">
+            <div class="wrapper">
                 <% for( let story of retrievedStories) { %>
-                    <div class="card">
-                        <div class="card-image center-align">
-                            <a href="stories/edit/<%= story.storyID %>" class="btn-floating halfway-fab blue <%= story.editIcon %>"><i class="fas fa-edit fa-2xl"></i></a>  
-                        </div>
-                        <div class="card-content center-align">
-                            <h5><%= story.title %>  </h5>
-                            <p><%= story.updatedAt %> </p>
-                            <div class="story-body"><%- story.body %> </div>
-                            <div class="chip">
-                                <img src=<%= story.user.image %>  alt="user image" onerror="this.src='/images/generic-user.png';">
-                                <a href="#"><%= story.user.displayName %> </a>
-                            </div>
-                        </div>
-                        <div class="card-action center-align card-footer">
-                            <a href="stories/<%= story.storyID %>" class="btn">Read More</a>
-                        </div>
-                        <div class="public__score">
-                            <div class="public__arrows">
-                                <form method="POST" action="/users/addRemoveLike" >
-                                    <input type="hidden" name="userid" value="<%=user._id%>">
-                                    <input type="hidden" name="storyID" value="<%=story.storyID%>">
-                                    <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: limegreen; cursor: pointer;" onclick="handleClick()"></i>
-                                </form>
-                            </div>
-                            <span id="hello" class="public__votenum"><%= story.likes %>  likes</span>
-                        </div>
+                    <div>
+                        <p><%= story.title %></p>
+                        <p><a href="#"><%= story.user.displayName %> </a></p>
                     </div>
-                    <% } %>
+
+                <% } %>
+
             </div>
         
 
