@@ -53,10 +53,10 @@ table {
   }
 
 
-.story-row:hover{
+/* .story-row:hover{
     transform: scale3d(1.01, 1.1, .8);
     background-color: white;
-}
+} */
 
 .list-title{
     margin: 0;
@@ -73,6 +73,11 @@ table {
     flex-direction: column;
     background-color: #ffd8a8;
 }
+/* 
+.card:hover{
+    background-color: white;
+    transform: scale3d(1.01, 1.1, .8);
+} */
 
 
 
