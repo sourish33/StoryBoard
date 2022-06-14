@@ -51,7 +51,7 @@ const getPublicStories = async (req, res, next) =>{
         .exec()
     retrievedStories.forEach((story) => {
         story.body = processText(story.body, 200)
-        story.title = processText(story.title, 25)
+        story.shortTitle = processText(story.title, 25)
         story.editIcon =
             story.user._id.equals(req.user._id) ? "" : "hidden"
         story.storyID = story._id
