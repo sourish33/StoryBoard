@@ -27,9 +27,23 @@
         </div>
             <div class="wrapper">
                 <% for( let story of retrievedStories) { %>
-                    <div>
-                        <p><%= story.title %></p>
-                        <p><a href="#"><%= story.user.displayName %> </a></p>
+                    <div class="story-row">
+                        <div>
+                            <p class="list-title"><a href="stories/<%= story.storyID %>" ><%= story.title %></a></p>
+                            <p style="display: inline-block;"><a href="#"><%= story.user.displayName %></a>  <%= story.updatedAt %> </p>
+                        </div>
+                        <div>
+                            <div class="public__score">
+                                <div class="public__arrows">
+                                    <form method="POST" action="/users/addRemoveLike" >
+                                        <input type="hidden" name="userid" value="<%=user._id%>">
+                                        <input type="hidden" name="storyID" value="<%=story.storyID%>">
+                                        <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: limegreen; cursor: pointer;" onclick="handleClick()"></i>
+                                    </form>
+                                </div>
+                                <span id="hello" class="public__votenum"><%= story.likes %>  likes</span>
+                            </div>
+                        </div>
                     </div>
 
                 <% } %>
