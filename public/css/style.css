@@ -56,7 +56,8 @@ td, th{
 .story-row {
     border: none;
     border-radius: 5px;
-    background-color: #FAA391;
+    /* background-color: #FAA391; */
+    background-color: #FFD5CC;
     padding: 1em;
     /* color: #d9480f; */
   }
@@ -80,8 +81,10 @@ td, th{
     padding:10px;
     display: flex;
     flex-direction: column;
-    background-color: #FAA391;
-    color: white;
+    /* background-color: #FAA391; */
+    background-color: #FFD5CC;
+    /* color: white; */
+    color: #61286F;
 }
 /* 
 .card:hover{
