@@ -22,7 +22,9 @@
                                 <option value="MostLikes" <%= sortby === "MostLikes" ? "selected" : "" %> >Most Likes</option>
                                 <option value="Oldest"  <%= sortby === "Oldest" ? "selected" : "" %> >Oldest</option>
                                 <option value="Recent"  <%= sortby === "Recent" ? "selected" : "" %> >Recent</option>
-                                <option value="YouLiked"  <%= sortby === "YouLiked" ? "selected" : "" %> >You Liked</option>
+                                <% if (user.liked.length) { %>
+                                    <option value="YouLiked"  <%= sortby === "YouLiked" ? "selected" : "" %> >You Liked</option>
+                                <% } %>
                             </select>
                         </form>
                     </div>
