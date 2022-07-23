@@ -1,6 +1,6 @@
 const express = require("express")
 const { route } = require(".")
-const { processText, formatTime, formatTimeDateOnly } = require("../helpers")
+const { processText, formatTime, formatTimeDateOnly, countLikesForAllStories } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
@@ -63,15 +63,11 @@ const getPublicStories = async (req, res, next) => {
         story.storyID = story._id
         story.updatedAt = formatTime(story.updatedAt)
     })
-    //creating an array of promises to get the number of likes for each story
-    const likePromises = retrievedStories.map((el) => {
-        return User.find({ liked: el._id }).countDocuments()
-    })
+    // creating an array of promises to get the number of likes for each story
+    //and adding "likes" to each story
+    retrievedStories = await countLikesForAllStories(retrievedStories)
 
-    const likesArray = await Promise.all(likePromises)
-    for (let i = 0; i < retrievedStories.length; i++) {
-        retrievedStories[i].likes = likesArray[i]
-    }
+
     if (sortby === "MostLikes") {
         retrievedStories.sort((a, b) => {
             return a.likes > b.likes ? -1 : 1
