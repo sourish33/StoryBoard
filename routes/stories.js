@@ -43,7 +43,7 @@ const getPublicStories = async (req, res, next) => {
     sortOption = sortby === "Oldest" ? 1 : -1
     const ids = req.user.liked
     let retrievedStories = []
-    if (sortby === "You Liked") {
+    if (sortby === "YouLiked") {
         retrievedStories = await Story.find({ status: "public",  '_id': {$in: ids}  })
         .sort({ updatedAt: sortOption })
         .lean()
@@ -72,12 +72,12 @@ const getPublicStories = async (req, res, next) => {
     for (let i = 0; i < retrievedStories.length; i++) {
         retrievedStories[i].likes = likesArray[i]
     }
-    if (sortby === "Most Likes") {
+    if (sortby === "MostLikes") {
         retrievedStories.sort((a, b) => {
             return a.likes > b.likes ? -1 : 1
         })
     }
-    if (sortby === "Least Likes") {
+    if (sortby === "LeastLikes") {
         retrievedStories.sort((a, b) => {
             return a.likes > b.likes ? 1 : -1
         })

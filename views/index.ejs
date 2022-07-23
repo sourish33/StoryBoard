@@ -9,16 +9,21 @@
         <div class="header-box">
             <div class="indexpage-header">
                 <h3>Public Stories</h3>
-                <a href="/stories?view=list"> View as List</a>
+                <form action="/stories" method="get" id="switchView">
+                    <input type="hidden" name="view" value="list">
+                    <input type="hidden" name="sortby" value=<%= sortby %> >
+                    <a style="cursor: pointer;" onclick="handleSwitchView()" > View as List</a>
+                </form>
+                
                 
                     <div class="top-panel">
                         <form action="/stories" method="GET" id="sortOptions">
                             <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
-                                <option value="Least Likes" <%= sortby === "Least Likes" ? "selected" : "" %> >Least Likes</option>
-                                <option value="Most Likes" <%= sortby === "Most Likes" ? "selected" : "" %> >Most Likes</option>
+                                <option value="LeastLikes" <%= sortby === "LeastLikes" ? "selected" : "" %> >Least Likes</option>
+                                <option value="MostLikes" <%= sortby === "MostLikes" ? "selected" : "" %> >Most Likes</option>
                                 <option value="Oldest"  <%= sortby === "Oldest" ? "selected" : "" %> >Oldest</option>
                                 <option value="Recent"  <%= sortby === "Recent" ? "selected" : "" %> >Recent</option>
-                                <option value="You Liked"  <%= sortby === "You Liked" ? "selected" : "" %> >You Liked</option>
+                                <option value="YouLiked"  <%= sortby === "YouLiked" ? "selected" : "" %> >You Liked</option>
                             </select>
                         </form>
                     </div>

@@ -34,3 +34,8 @@ const handleSort = () =>{
     const formElement = document.getElementById("sortOptions")
     formElement.submit()
 }
+
+const handleSwitchView = () =>{
+    const formElement = document.getElementById("switchView")
+    formElement.submit()
+}
