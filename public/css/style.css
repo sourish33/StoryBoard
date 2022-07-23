@@ -10,7 +10,7 @@ nav{
 
 table {
     border: none;
-    background-color: #FAA391;
+    background-color: #FFD5CC;
 
 }
 
@@ -104,8 +104,19 @@ td, th{
 }
 
 .submit-button {
-    background-color: DodgerBlue; /* Blue background */
+    background-color: dodgerblue; /* Blue background */
     border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    margin:5px;
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+.addstory-button {
+    background-color: dodgerblue; /* Blue background */
+    border: none; /* Remove borders */
+    border-radius: 50%;
     color: white; /* White text */
     padding: 12px 16px; /* Some padding */
     margin:5px;
