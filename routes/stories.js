@@ -63,8 +63,7 @@ const getPublicStories = async (req, res, next) => {
         story.storyID = story._id
         story.updatedAt = formatTime(story.updatedAt)
     })
-    // creating an array of promises to get the number of likes for each story
-    //and adding "likes" to each story
+    // counting likes and adding a "likes" field to each story with the totla number of likes
     retrievedStories = await countLikesForAllStories(retrievedStories)
 
 

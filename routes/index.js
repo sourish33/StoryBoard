@@ -1,5 +1,5 @@
 const express = require('express')
-const { formatTime, formatTimeShort } = require('../helpers')
+const { formatTime, formatTimeShort, countLikesForAllStories } = require('../helpers')
 const router = express.Router()
 const {ensureAuth, ensureGuest} = require('../middleware/auth')
 const Story= require('../models/Story')
@@ -20,8 +20,11 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
         let stories = await Story.find({user: req.user._id}).sort({ createdAt: -1 }).lean() || []
+        // counting likes and adding a "likes" field to each story with the totla number of likes
+        stories = await countLikesForAllStories(stories)
         let thisUser  = await User.findOne({_id:req.user._id}).populate('liked').lean()
         likedStories = thisUser.liked
+        likedStories = await countLikesForAllStories(likedStories)
         res.render('dashboard.ejs', {firstName: req.user.firstName, stories: stories, likedStories: likedStories, formatTimeShort: formatTimeShort})
     } catch (error) {
         console.log(error)

@@ -28,6 +28,8 @@ const processText = (str, chars=200) =>{
     return str
 }
 
+// creating an array of promises to get the number of likes for each story
+// and adding "likes" to each story
 const countLikesForAllStories = async (retrievedStories) =>{
     const likePromises = retrievedStories.map((el) => {
         return User.find({ liked: el._id }).countDocuments()

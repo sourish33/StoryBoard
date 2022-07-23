@@ -29,7 +29,12 @@
                 <tbody>
                     <% stories.forEach(el => { %>
                         <tr>
-                            <td><a href="stories/<%= el._id %>" ><%= el.title%></a></td>
+                            <td><a href="stories/<%= el._id %>"  ><%= el.title%> </a> 
+                                <% if (el.likes) { %>
+                                    <span id="hello" class="public__votenum"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
+                                <% } %>
+                                
+                            </td>
                             <td><%= formatTimeShort(el.createdAt) %> </td>
                             <td><%= formatTimeShort(el.updatedAt) %> </td>
                             <td>
@@ -71,6 +76,10 @@
                             <tr>
                                 <td>
                                     <a href="stories/<%= likedStory._id %>" target="_blank"><%= likedStory.title %></a>
+                                <% if (likedStory.likes) { %>
+                                    <span id="hello" class="public__votenum"><%= likedStory.likes %> <%= likedStory.likes===1 ? "like" : "likes" %> </span>
+                                <% } %>
+                                
                                 </td>
                                 <td>
                                     <form method="POST" action="/users/removeLike?_method=PATCH">
