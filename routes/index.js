@@ -18,15 +18,24 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 // GET ALL stories belonging to user
 //@route  GET /auth/google/callback
 router.get('/dashboard', ensureAuth, async (req, res) => {
+    let showAllWrote = null
+    let showAllLiked = null
     try {
-        let query = {user: req.user._id}
-        const numStories = await Story.countDocuments(query)
-        let stories = await Story.find(query).sort({ createdAt: -1 }).lean() || []
+        const numStories = await Story.countDocuments({user: req.user._id})
+        let dbquery = Story.find({user: req.user._id})
+        if (numStories>5 && !showAllWrote) {
+            dbquery.limit(5)
+        }
+        let stories = await dbquery.sort({ createdAt: -1 }).lean() || []
         // counting likes and adding a "likes" field to each story with the totla number of likes
         stories = await countLikesForAllStories(stories)
         let thisUser  = await User.findOne({_id:req.user._id}).populate('liked').lean()
         likedStories = thisUser.liked
         numLikedStories = likedStories.length
+        if (numLikedStories>5 && !showAllLiked){
+            likedStories = likedStories.slice(0,5)
+        }
+    
         likedStories = await countLikesForAllStories(likedStories)
         res.render('dashboard.ejs', {firstName: req.user.firstName, stories, likedStories, numStories, numLikedStories, formatTimeShort: formatTimeShort})
     } catch (error) {
