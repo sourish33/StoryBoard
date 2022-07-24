@@ -13,10 +13,18 @@
             <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
         </div>
         <% if (stories.length!==0) { %>
-            <h5>Stories you wrote <%= numStories>stories.length ? `(${stories.length} of ${numStories})`: `${numStories}`  %>: 
+            <h5>Stories you wrote <%= numStories>stories.length ? `(${stories.length} of ${numStories})`: `(${numStories})`  %>: 
                 <a href="/stories/add"><button type="button" class="addstory-button"><i class="fa-solid fa-plus"></i></button></a>
                 <% if (numStories>stories.length) { %>
-                    <a class="waves-effect waves-light btn"><span class="hide-on-small">Show</span> More</a>
+                    <form action="/dashboard" method="GET">
+                        <input type="hidden" name="showAllWrote" value="1">
+                        <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> All</a>
+                    </form>
+                <% } %> 
+                <% if (numStories===stories.length) { %>
+                    <form action="/dashboard" method="GET">
+                        <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
+                    </form>
                 <% } %> 
                 
             </h5>
@@ -66,7 +74,7 @@
         <% if (likedStories.length!==0) { %>
 
             <div class="likedHeaderBaap">
-                <h5>Stories you liked <%= numLikedStories>likedStories.length ? `(${likedStories.length} of ${numLikedStories})`: `${numLikedStories}`  %>:</h5>
+                <h5>Stories you liked <%= numLikedStories>likedStories.length ? `(${likedStories.length} of ${numLikedStories})`: `(${numLikedStories})`  %>:</h5>
                 <form method="GET" action="/stories" id="viewLiked">
                     <input type="hidden" name="sortby" value="YouLiked" >
                     <button type="button" class="submit-button"  onclick="viewLikedStories()"><i class="fas fa-folder-open"></i></button>
@@ -102,7 +110,9 @@
             <% } %>
     </div>
 
-    <%- include('partials/add-btn.ejs') %> 
+    <div class="fixed-action-btn">
+        <a href="/stories/add" class="btn-floating btn-large waves-effect waves-purple red extra-button"><i class="fas fa-plus"></i></a>
+    </div>
     <%- include('partials/footer.ejs') %> 
     <script>
         function handleToggle(){

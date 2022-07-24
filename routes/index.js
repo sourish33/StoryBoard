@@ -18,12 +18,13 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 // GET ALL stories belonging to user
 //@route  GET /auth/google/callback
 router.get('/dashboard', ensureAuth, async (req, res) => {
-    let showAllWrote = null
+    let showAllWrote = req.query.showAllWrote || "0"
     let showAllLiked = null
     try {
         const numStories = await Story.countDocuments({user: req.user._id})
         let dbquery = Story.find({user: req.user._id})
-        if (numStories>5 && !showAllWrote) {
+        if (numStories>5 && !(showAllWrote==="1")) {
+            console.log("trying to limit")
             dbquery.limit(5)
         }
         let stories = await dbquery.sort({ createdAt: -1 }).lean() || []
