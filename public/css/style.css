@@ -1,3 +1,4 @@
+
 body {
     background-color: #BAE484;
     color: #61286F;
@@ -6,6 +7,16 @@ body {
 nav{
     background-color: #61286F;
 }
+
+h1 {
+    font-size: 5.9vw;
+  }
+h3 {
+    font-size: 3.0vh;
+  }
+p {
+    font-size: 2vmin;
+  }
 
 
 table {
