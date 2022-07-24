@@ -238,8 +238,8 @@ td, th{
     /* border-collapse: collapse; */
     /* border: 1px solid black; */
     table-layout: auto;
-    width: 50%; 
-    margin-bottom: 20px;
+    /* width: 50%;  */
+    margin:20px 0;
  }
 
 
@@ -301,5 +301,23 @@ td, th{
 
     .story-holder{
         justify-content: center;
+    }
+
+    .hide-on-small{
+        display: none;
+    }
+
+    .likedHeaderBaap{
+        width: 100%;
+    }
+
+    .wrote-col-1{
+        width:70%;
+    }
+    .wrote-col-4{
+        width:20%;
+    }
+    .wrote-col-5{
+        width:10%;
     }
   }

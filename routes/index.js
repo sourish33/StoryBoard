@@ -19,13 +19,16 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 //@route  GET /auth/google/callback
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
-        let stories = await Story.find({user: req.user._id}).sort({ createdAt: -1 }).lean() || []
+        let query = {user: req.user._id}
+        const numStories = await Story.countDocuments(query)
+        let stories = await Story.find(query).sort({ createdAt: -1 }).lean() || []
         // counting likes and adding a "likes" field to each story with the totla number of likes
         stories = await countLikesForAllStories(stories)
         let thisUser  = await User.findOne({_id:req.user._id}).populate('liked').lean()
         likedStories = thisUser.liked
+        numLikedStories = likedStories.length
         likedStories = await countLikesForAllStories(likedStories)
-        res.render('dashboard.ejs', {firstName: req.user.firstName, stories: stories, likedStories: likedStories, formatTimeShort: formatTimeShort})
+        res.render('dashboard.ejs', {firstName: req.user.firstName, stories, likedStories, numStories, numLikedStories, formatTimeShort: formatTimeShort})
     } catch (error) {
         console.log(error)
         res.render('error/500', {error:error})

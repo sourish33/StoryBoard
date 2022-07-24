@@ -15,15 +15,16 @@
         <% if (stories.length!==0) { %>
             <h5>Stories you wrote: 
                 <a href="/stories/add"><button type="button" class="addstory-button"><i class="fa-solid fa-plus"></i></button></a> 
+                <a class="waves-effect waves-light btn"><span class="hide-on-small">Show</span> More</a>
             </h5>
             <table class="highlight">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Created</th>
-                        <th>Updated</th>
-                        <th>Public</th>
-                        <th></th>
+                        <th class="wrote-col-1">Title</th>
+                        <th class="wrote-col-2 hide-on-small">Created</th>
+                        <th class="wrote-col-3 hide-on-small">Updated</th>
+                        <th class="wrote-col-4">Public</th>
+                        <th class="wrote-col-5"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,12 +32,12 @@
                         <tr>
                             <td><a href="stories/<%= el._id %>"  ><%= el.title%> </a> 
                                 <% if (el.likes) { %>
-                                    <span id="hello" class="public__votenum"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
+                                    <span id="hello" class="public__votenum hide-on-small"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
                                 <% } %>
                                 
                             </td>
-                            <td><%= formatTimeShort(el.createdAt) %> </td>
-                            <td><%= formatTimeShort(el.updatedAt) %> </td>
+                            <td class="hide-on-small"><%= formatTimeShort(el.createdAt) %> </td>
+                            <td class="hide-on-small"><%= formatTimeShort(el.updatedAt) %> </td>
                             <td>
                                 <form method = "POST" action="/stories/<%= el._id %>?_method=PATCH" </form>
                                     <div class="switch">
@@ -68,6 +69,7 @@
                     <button type="button" class="submit-button"  onclick="viewLikedStories()"><i class="fas fa-folder-open"></i></button>
                 </form>
                 <form method="POST" action="/users/removeAllLikes?_method=PATCH"><button type="button" class="submit-button" onclick="handleClickDeleteAll()"><i class="fa-solid fa-trash-can delete-icon"></i></button></form>
+                <a class="waves-effect waves-light btn"><span class="hide-on-small">Show</span> More</a>
             </div>
             <div>
                 <table class="highlight likedStoriesTable">
