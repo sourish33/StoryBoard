@@ -239,6 +239,7 @@ td, th{
     /* border: 1px solid black; */
     table-layout: auto;
     width: 50%; 
+    margin-bottom: 20px;
  }
 
 
