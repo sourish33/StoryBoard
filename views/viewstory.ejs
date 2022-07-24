@@ -12,7 +12,12 @@
     <div class="container viewstory__container">
         <div class="viewstory__storyheader">
             <div>
-                <p class="viewstory__storytitle"><%= story.title %> </p>
+                <p class="viewstory__storytitle">
+                    <%= story.title %>
+                </p>
+                <% if (story.likes) { %>
+                    <span id="hello" class="public__votenum"><%= story.likes %> <%= story.likes===1 ? "like" : "likes" %> </span>
+                <% } %> 
                 <p class="viewstory__storyauthor">- <%= story.user.displayName %>, <%= formatTimeDateOnly(story.createdAt) %> </p>
             </div>
             <div class="table-icons">

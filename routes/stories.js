@@ -116,7 +116,7 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
 })
 //Viewing a story
 router.get("/:id", ensureAuth, async (req, res) => {
-    const story = await Story.findOne({ _id: req.params.id })
+    let story = await Story.findOne({ _id: req.params.id })
         .populate("user")
         .lean()
     if (!story) {
@@ -125,6 +125,8 @@ router.get("/:id", ensureAuth, async (req, res) => {
     if (!story.user._id.equals(req.user._id) && story.status !== "public") {
         return res.redirect("/stories")
     }
+    //putting this story in an array, calling countLikesForAllStories which adds its number of likes and destructuring the result
+    [story] = await countLikesForAllStories([story])
     story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
     res.render("viewstory.ejs", {
         story: story,
