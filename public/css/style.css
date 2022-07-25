@@ -172,6 +172,7 @@ td, th{
 
 .table-icons{
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -285,7 +286,7 @@ td, th{
 
  .top-panel{
     margin-left: 10px;
-    float: left;
+    /* float: left; */
  }
 
 

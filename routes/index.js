@@ -19,7 +19,7 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 //@route  GET /auth/google/callback
 router.get('/dashboard', ensureAuth, async (req, res) => {
     let showAllWrote = req.query.showAllWrote || "0"
-    let showAllLiked = null
+    let showAllLiked = req.query.showAllLiked || "0"
     try {
         const numStories = await Story.countDocuments({user: req.user._id})
         let dbquery = Story.find({user: req.user._id})
@@ -33,7 +33,7 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
         let thisUser  = await User.findOne({_id:req.user._id}).populate('liked').lean()
         likedStories = thisUser.liked
         numLikedStories = likedStories.length
-        if (numLikedStories>5 && !showAllLiked){
+        if (numLikedStories>5 && !(showAllLiked==="1")){
             likedStories = likedStories.slice(0,5)
         }
     

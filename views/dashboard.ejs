@@ -13,21 +13,21 @@
             <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
         </div>
         <% if (stories.length!==0) { %>
-            <h5>Stories you wrote <%= numStories>stories.length ? `(${stories.length} of ${numStories})`: `(${numStories})`  %>: 
+            <div class="likedHeaderBaap">
+                <h5>Stories you wrote <%= numStories>stories.length ? `(${stories.length} of ${numStories})`: `(${numStories})`  %>: </h5>
                 <a href="/stories/add"><button type="button" class="addstory-button"><i class="fa-solid fa-plus"></i></button></a>
                 <% if (numStories>stories.length) { %>
                     <form action="/dashboard" method="GET">
                         <input type="hidden" name="showAllWrote" value="1">
                         <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> All</a>
                     </form>
-                <% } %> 
-                <% if (numStories===stories.length) { %>
+                <% } %>
+                <% if (numStories===stories.length && stories.length>5) { %>
                     <form action="/dashboard" method="GET">
                         <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
                     </form>
-                <% } %> 
-                
-            </h5>
+                <% } %>
+            </div>
             <table class="highlight">
                 <thead>
                     <tr>
@@ -80,7 +80,17 @@
                     <button type="button" class="submit-button"  onclick="viewLikedStories()"><i class="fas fa-folder-open"></i></button>
                 </form>
                 <form method="POST" action="/users/removeAllLikes?_method=PATCH"><button type="button" class="submit-button" onclick="handleClickDeleteAll()"><i class="fa-solid fa-trash-can delete-icon"></i></button></form>
-                <a class="waves-effect waves-light btn"><span class="hide-on-small">Show</span> More</a>
+                <% if (numLikedStories>likedStories.length) { %>
+                    <form action="/dashboard" method="GET">
+                        <input type="hidden" name="showAllLiked" value="1">
+                        <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> All</a>
+                    </form>
+                <% } %> 
+                <% if (numLikedStories===likedStories.length && likedStories.length>5) { %>
+                    <form action="/dashboard" method="GET">
+                        <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
+                    </form>
+                <% } %> 
             </div>
             <div>
                 <table class="highlight likedStoriesTable">
