@@ -53,7 +53,6 @@ const getPublicStories = async (req, res, next) => {
     const perPage = PER_PAGE
     req.paginationData = paginate(numStories, perPage)
     req.numStories = numStories
-    console.log(req.paginationData)
     req.pageNumber = pageNumber
     const sortby = req.query.sortby || "Recent"
     sortOption = sortby === "Oldest" ? 1 : -1

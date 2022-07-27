@@ -12,6 +12,7 @@
                 <form action="/stories" method="GET" id="switchView">
                     <input type="hidden" name="view" value="list">
                     <input type="hidden" name="sortby" value=<%= sortby %> >
+                    <input type="hidden" name="pageNumber" value=<%= pageNumber %> >
                     <a style="cursor: pointer;" onclick="handleSwitchView()" ><span class="hide-on-small"> View as </span>List</a>
                 </form>
                 
@@ -37,7 +38,7 @@
                                 <% for( let index = 0; index < paginationData.length; index++ ) { %>
                                     <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  ><%= paginationData[index][0] %>-<%= paginationData[index][1]%> of <%= numStories %>   </option>
                                 <% } %>
-                                <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All </option>
+                                <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
                             </select>
                         </form>
                     </div>
