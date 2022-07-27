@@ -1,10 +1,18 @@
 const express = require("express")
 const { route } = require(".")
-const { processText, formatTime, formatTimeDateOnly, countLikesForAllStories } = require("../helpers")
+const {
+    processText,
+    formatTime,
+    formatTimeDateOnly,
+    countLikesForAllStories,
+    paginate,
+} = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
 const User = require("../models/User")
+
+const PER_PAGE = 5
 
 //  @desc Show Add page
 // @route GET /
@@ -39,23 +47,33 @@ router.post("/:id", ensureAuth, async (req, res) => {
 
 //Middleware to retrieve stories and likes
 const getPublicStories = async (req, res, next) => {
+    const numStories = await Story.find({ status: "public" }).countDocuments()
+    const pageNumber = req.query.pageNumber || 1
+    console.log(pageNumber)
+    const perPage = PER_PAGE
+    req.paginationData = paginate(numStories, perPage)
+    console.log(req.paginationData)
+    req.pageNumber = pageNumber
     const sortby = req.query.sortby || "Recent"
     sortOption = sortby === "Oldest" ? 1 : -1
     const ids = req.user.liked
     let retrievedStories = []
+    let dbquery = {}
     if (sortby === "YouLiked") {
-        retrievedStories = await Story.find({ status: "public",  '_id': {$in: ids}  })
+        dbquery = Story.find({ status: "public", _id: { $in: ids } })
+            .skip(pageNumber * perPage - perPage)
+            .limit(perPage)
+    } else {
+        dbquery = Story.find({ status: "public" })
+            .skip(pageNumber * perPage)
+            .limit(perPage)
+    }
+
+    retrievedStories = await dbquery
         .sort({ updatedAt: sortOption })
         .lean()
         .populate("user")
         .exec()
-    } else {
-        retrievedStories = await Story.find({ status: "public" })
-            .sort({ updatedAt: sortOption })
-            .lean()
-            .populate("user")
-            .exec()
-    }
     retrievedStories.forEach((story) => {
         story.body = processText(story.body, 200)
         story.shortTitle = processText(story.title, 25)
@@ -65,7 +83,6 @@ const getPublicStories = async (req, res, next) => {
     })
     // counting likes and adding a "likes" field to each story with the totla number of likes
     retrievedStories = await countLikesForAllStories(retrievedStories)
-
 
     if (sortby === "MostLikes") {
         retrievedStories.sort((a, b) => {
@@ -95,6 +112,8 @@ router.get("/", ensureAuth, getPublicStories, async (req, res) => {
             retrievedStories: req.retrievedStories,
             user: req.user,
             sortby: req.sortby,
+            paginationData: req.paginationData,
+            pageNumber: req.pageNumber,
         })
     } catch (error) {
         console.log(error)
@@ -126,7 +145,7 @@ router.get("/:id", ensureAuth, async (req, res) => {
         return res.redirect("/stories")
     }
     //putting this story in an array, calling countLikesForAllStories which adds its number of likes and destructuring the result
-    [story] = await countLikesForAllStories([story])
+    ;[story] = await countLikesForAllStories([story])
     story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
     res.render("viewstory.ejs", {
         story: story,

@@ -35,6 +35,11 @@ const handleSort = () =>{
     formElement.submit()
 }
 
+const handlePageSelect = () =>{
+    const formElement = document.getElementById("pagination")
+    formElement.submit()
+}
+
 const handleSwitchView = () =>{
     const formElement = document.getElementById("switchView")
     formElement.submit()

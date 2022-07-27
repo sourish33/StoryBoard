@@ -31,9 +31,10 @@
                     </div>
                     <div class="top-panel">
                         <form action="/stories" method="GET" id="pagination">
-                            <select name="pages" id="pages" class="browser-default" onchange="handleSort()">
-                                <option value="1" >Page 1 of 2</option>
-                                <option value="2" >Page 2 of 2</option>
+                            <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
+                                <% for( let index = 0; index < paginationData.length; index++ ) { %>
+                                    <option value="<%= index+1 %>" <%= pageNumber === index+1 ? "selected" : "" %>  >Page <%= index+1 %>  of <%= paginationData.length %> </option>
+                                <% } %>
                             </select>
                         </form>
                     </div>
