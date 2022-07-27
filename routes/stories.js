@@ -40,8 +40,19 @@ router.post("/:id", ensureAuth, async (req, res) => {
 //Middleware to retrieve stories and likes
 const getPublicStories = async (req, res, next) => {
     const sortby = req.query.sortby || "Recent"
-    sortOption = sortby === "Oldest" ? 1 : -1
     const ids = req.user.liked
+    let numStories = 0
+    if (sortby === "YouLiked") {
+        numStories = await Story.find({ status: "public", _id: { $in: ids }  }).countDocuments()
+    } else {
+        numStories = await Story.find({ status: "public" }).countDocuments()
+    }
+    const pageNumber = req.query.pageNumber || 1
+    const perPage = PER_PAGE
+    req.paginationData = paginate(numStories, perPage)
+    req.numStories = numStories
+    req.pageNumber = pageNumber
+    sortOption = sortby === "Oldest" ? 1 : -1
     let retrievedStories = []
     if (sortby === "YouLiked") {
         retrievedStories = await Story.find({ status: "public",  '_id': {$in: ids}  })

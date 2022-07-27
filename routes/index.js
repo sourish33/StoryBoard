@@ -31,7 +31,7 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
         // counting likes and adding a "likes" field to each story with the totla number of likes
         stories = await countLikesForAllStories(stories)
         let thisUser  = await User.findOne({_id:req.user._id}).populate('liked').lean()
-        likedStories = thisUser.liked
+        likedStories = thisUser.liked.filter(el=>el.status === "public")
         numLikedStories = likedStories.length
         if (numLikedStories>5 && !(showAllLiked==="1")){
             likedStories = likedStories.slice(0,5)
