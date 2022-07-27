@@ -52,6 +52,7 @@ const getPublicStories = async (req, res, next) => {
     console.log(pageNumber)
     const perPage = PER_PAGE
     req.paginationData = paginate(numStories, perPage)
+    req.numStories = numStories
     console.log(req.paginationData)
     req.pageNumber = pageNumber
     const sortby = req.query.sortby || "Recent"
@@ -114,6 +115,7 @@ router.get("/", ensureAuth, getPublicStories, async (req, res) => {
             sortby: req.sortby,
             paginationData: req.paginationData,
             pageNumber: req.pageNumber,
+            numStories: req.numStories
         })
     } catch (error) {
         console.log(error)

@@ -35,9 +35,9 @@
                             <input type="hidden" name="sortby" value=<%= sortby %> >
                             <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
                                 <% for( let index = 0; index < paginationData.length; index++ ) { %>
-                                    <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  >Page <%= index+1 %> of <%= paginationData.length %> </option>
+                                    <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  ><%= paginationData[index][0] %>-<%= paginationData[index][1]%> of <%= numStories %>   </option>
                                 <% } %>
-                                <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >Show All </option>
+                                <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All </option>
                             </select>
                         </form>
                     </div>
