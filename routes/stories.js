@@ -1,10 +1,18 @@
 const express = require("express")
 const { route } = require(".")
-const { processText, formatTime, formatTimeDateOnly, countLikesForAllStories } = require("../helpers")
+const {
+    processText,
+    formatTime,
+    formatTimeDateOnly,
+    countLikesForAllStories,
+    paginate,
+} = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
 const User = require("../models/User")
+
+const PER_PAGE = 6
 
 //  @desc Show Add page
 // @route GET /
@@ -92,7 +100,6 @@ const getPublicStories = async (req, res, next) => {
     req.sortby = sortby
     next()
 }
-
 /*
 getting PUBLIC STORIES using middleware getPublicStories
 */
@@ -106,6 +113,9 @@ router.get("/", ensureAuth, getPublicStories, async (req, res) => {
             retrievedStories: req.retrievedStories,
             user: req.user,
             sortby: req.sortby,
+            paginationData: req.paginationData,
+            pageNumber: req.pageNumber,
+            numStories: req.numStories
         })
     } catch (error) {
         console.log(error)
@@ -137,7 +147,7 @@ router.get("/:id", ensureAuth, async (req, res) => {
         return res.redirect("/stories")
     }
     //putting this story in an array, calling countLikesForAllStories which adds its number of likes and destructuring the result
-    [story] = await countLikesForAllStories([story])
+    ;[story] = await countLikesForAllStories([story])
     story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
     res.render("viewstory.ejs", {
         story: story,

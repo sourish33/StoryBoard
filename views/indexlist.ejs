@@ -11,12 +11,14 @@
                 <h3>Public Stories</h3>
                 <form action="/stories" method="get" id="switchView">
                     <input type="hidden" name="sortby" value=<%= sortby %> >
+                    <input type="hidden" name="pageNumber" value=<%= pageNumber %> >
                     <span class="hide-on"><a style="cursor: pointer;" onclick="handleSwitchView()" ><span class="hide-on-small"> View as </span>Cards</a></span>
                 </form>
                 
                     <div class="top-panel">
                         <form action="/stories" method="GET" id="sortOptions">
                             <input type="hidden" name="view" value="list"> <!-- adds ?view=list to the query-->
+                            <input type="hidden" name="pageNumber" value=<%= pageNumber %> >
                             <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
                                 <option value="LeastLikes" <%= sortby === "LeastLikes" ? "selected" : "" %> >Least Likes</option>
                                 <option value="MostLikes" <%= sortby === "MostLikes" ? "selected" : "" %> >Most Likes</option>
@@ -31,9 +33,12 @@
                     <div class="top-panel">
                         <form action="/stories" method="GET" id="pagination">
                             <input type="hidden" name="view" value="list"> <!-- adds ?view=list to the query-->
-                            <select name="pages" id="pages" class="browser-default" onchange="handleSort()">
-                                <option value="1" >Page 1 of 2</option>
-                                <option value="2" >Page 2 of 2</option>
+                            <input type="hidden" name="sortby" value=<%= sortby %> >
+                            <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
+                                <% for( let index = 0; index < paginationData.length; index++ ) { %>
+                                    <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  ><%= paginationData[index][0] %>-<%= paginationData[index][1]%> of <%= numStories %>   </option>
+                                <% } %>
+                                <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
                             </select>
                         </form>
                     </div>
