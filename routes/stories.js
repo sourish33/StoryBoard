@@ -65,10 +65,12 @@ const getPublicStories = async (req, res, next) => {
         dbquery = Story.find({ status: "public" })
     }
 
+    if (pageNumber!=="all"){
+        dbquery.skip(pageNumber * perPage - perPage)
+        .limit(perPage)
+    }
     retrievedStories = await dbquery
         .sort({ updatedAt: sortOption })
-        .skip(pageNumber * perPage - perPage)
-        .limit(perPage)
         .lean()
         .populate("user")
         .exec()
