@@ -12,7 +12,7 @@ const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
 const User = require("../models/User")
 
-const PER_PAGE = 5
+const PER_PAGE = 6
 
 //  @desc Show Add page
 // @route GET /
