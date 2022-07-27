@@ -47,33 +47,34 @@ router.post("/:id", ensureAuth, async (req, res) => {
 
 //Middleware to retrieve stories and likes
 const getPublicStories = async (req, res, next) => {
-    const numStories = await Story.find({ status: "public" }).countDocuments()
+    const sortby = req.query.sortby || "Recent"
+    const ids = req.user.liked
+    let numStories = 0
+    if (sortby === "YouLiked") {
+        numStories = await Story.find({ status: "public", _id: { $in: ids }  }).countDocuments()
+    } else {
+        numStories = await Story.find({ status: "public" }).countDocuments()
+    }
     const pageNumber = req.query.pageNumber || 1
-    console.log(pageNumber)
     const perPage = PER_PAGE
     req.paginationData = paginate(numStories, perPage)
     req.numStories = numStories
     req.pageNumber = pageNumber
-    const sortby = req.query.sortby || "Recent"
     sortOption = sortby === "Oldest" ? 1 : -1
-    const ids = req.user.liked
     let retrievedStories = []
-    let dbquery = {}
     if (sortby === "YouLiked") {
-        dbquery = Story.find({ status: "public", _id: { $in: ids } })
-    } else {
-        dbquery = Story.find({ status: "public" })
-    }
-
-    if (pageNumber!=="all"){
-        dbquery.skip(pageNumber * perPage - perPage)
-        .limit(perPage)
-    }
-    retrievedStories = await dbquery
+        retrievedStories = await Story.find({ status: "public",  '_id': {$in: ids}  })
         .sort({ updatedAt: sortOption })
         .lean()
         .populate("user")
         .exec()
+    } else {
+        retrievedStories = await Story.find({ status: "public" })
+            .sort({ updatedAt: sortOption })
+            .lean()
+            .populate("user")
+            .exec()
+    }
     retrievedStories.forEach((story) => {
         story.body = processText(story.body, 200)
         story.shortTitle = processText(story.title, 25)
@@ -83,6 +84,7 @@ const getPublicStories = async (req, res, next) => {
     })
     // counting likes and adding a "likes" field to each story with the totla number of likes
     retrievedStories = await countLikesForAllStories(retrievedStories)
+
 
     if (sortby === "MostLikes") {
         retrievedStories.sort((a, b) => {
@@ -98,7 +100,6 @@ const getPublicStories = async (req, res, next) => {
     req.sortby = sortby
     next()
 }
-
 /*
 getting PUBLIC STORIES using middleware getPublicStories
 */
