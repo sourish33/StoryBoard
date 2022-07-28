@@ -62,19 +62,22 @@ const getPublicStories = async (req, res, next) => {
     req.pageNumber = pageNumber
     sortOption = sortby === "Oldest" ? 1 : -1
     let retrievedStories = []
+    let dbquery = {}
     if (sortby === "YouLiked") {
-        retrievedStories = await Story.find({ status: "public",  '_id': {$in: ids}  })
+        dbquery = Story.find({ status: "public", _id: { $in: ids } })
+    } else {
+        dbquery = Story.find({ status: "public" })
+    }
+
+    if (pageNumber!=="all"){
+        dbquery.skip(pageNumber * perPage - perPage)
+        .limit(perPage)
+    }
+    retrievedStories = await dbquery
         .sort({ updatedAt: sortOption })
         .lean()
         .populate("user")
         .exec()
-    } else {
-        retrievedStories = await Story.find({ status: "public" })
-            .sort({ updatedAt: sortOption })
-            .lean()
-            .populate("user")
-            .exec()
-    }
     retrievedStories.forEach((story) => {
         story.body = processText(story.body, 200)
         story.shortTitle = processText(story.title, 25)
