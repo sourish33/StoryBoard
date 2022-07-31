@@ -1,5 +1,5 @@
 const express = require('express')
-const { formatTime, formatTimeShort, countLikesForAllStories } = require('../helpers')
+const { formatTime, formatTimeShort, countLikesForAllStories, getPublicStories } = require('../helpers')
 const router = express.Router()
 const {ensureAuth, ensureGuest} = require('../middleware/auth')
 const Story= require('../models/Story')
@@ -17,7 +17,7 @@ router.get(['/', '/login'], ensureGuest,(req,res)=>{
 
 // GET ALL stories belonging to user
 //@route  GET /auth/google/callback
-router.get('/dashboard', ensureAuth, async (req, res) => {
+router.get('/dashboard', ensureAuth, getPublicStories, async (req, res) => {
     let showAllWrote = req.query.showAllWrote || "0"
     let showAllLiked = req.query.showAllLiked || "0"
     try {
@@ -36,9 +36,12 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
         if (numLikedStories>5 && !(showAllLiked==="1")){
             likedStories = likedStories.slice(0,5)
         }
+
+        //getting all trending stories
+        const trendingStories = req.retrievedStories.slice(0, 3)
     
         likedStories = await countLikesForAllStories(likedStories)
-        res.render('dashboard.ejs', {firstName: req.user.firstName, stories, likedStories, numStories, numLikedStories, formatTimeShort: formatTimeShort})
+        res.render('dashboard.ejs', {firstName: req.user.firstName, stories, likedStories, numStories, numLikedStories, trendingStories, formatTimeShort: formatTimeShort})
     } catch (error) {
         console.log(error)
         res.render('error/500', {error:error})

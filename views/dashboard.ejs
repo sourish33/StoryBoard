@@ -12,6 +12,38 @@
             </div>
             <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
         </div>
+        <% if (trendingStories.length!==0) { %>
+            <div class="likedHeaderBaap">
+                <h5>Trending Stories: </h5>
+                <a class="waves-effect waves-light btn btn-space"  onclick="toggleStories()"><span id="showHideTrendingStories" >Hide</span></a>
+            </div>
+            <table class="highlight dashboard-table" id="trendingStoriesTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Likes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% trendingStories.forEach(el => { %>
+                        <tr>
+                            <td><a href="stories/<%= el._id %>"  ><%= el.title%> </a> </td>
+                            <td><%= el.likes %> </td>
+                        </tr>
+                    <% }) %>
+                     <tr>
+                        <td colspan="5" style="text-align: center;"> 
+                            <form action="/dashboard" method="GET">
+                                <input type="hidden" name="showAllWrote" value="1">
+                                <a class="waves-effect waves-light btn" onclick="handleClick()">Show all</a> 
+                            </form> 
+                        </td>            
+                     </tr>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>You have not created any stories. Go ahead and create some!</p>
+        <% } %>
         <% if (stories.length!==0) { %>
             <div class="likedHeaderBaap">
                 <h5>Stories you wrote <%= numStories>stories.length ? ``: `(${numStories})`  %>: </h5>

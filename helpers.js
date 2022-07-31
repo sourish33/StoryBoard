@@ -4,6 +4,7 @@ const timezone = require("dayjs/plugin/timezone") // dependent on utc plugin
 dayjs.extend(utc)
 dayjs.extend(timezone)
 const User = require("./models/User")
+const Story = require("./models/Story")
 
 const formatTime = (time) => {
     return dayjs(time).format("MMM D, YYYY h:mm A")
@@ -60,9 +61,71 @@ function paginate(N, perPage) {
     return results
 }
 
+
+//Middleware to retrieve stories and likes
+
+const getPublicStories = async (req, res, next) => {
+    const sortby = req.query.sortby || "Recent"
+    const ids = req.user.liked
+    let numStories = 0
+    if (sortby === "YouLiked") {
+        numStories = await Story.find({ status: "public", _id: { $in: ids }  }).countDocuments()
+    } else {
+        numStories = await Story.find({ status: "public" }).countDocuments()
+    }
+    const pageNumber = req.query.pageNumber || 1
+    const perPage = 6
+    req.paginationData = paginate(numStories, perPage)
+    req.numStories = numStories
+    req.pageNumber = pageNumber
+    sortOption = sortby === "Oldest" ? 1 : -1
+    let retrievedStories = []
+    let dbquery = {}
+    if (sortby === "YouLiked") {
+        dbquery = Story.find({ status: "public", _id: { $in: ids } })
+    } else {
+        dbquery = Story.find({ status: "public" })
+    }
+
+    if (pageNumber!=="all"){
+        dbquery.skip(pageNumber * perPage - perPage)
+        .limit(perPage)
+    }
+    retrievedStories = await dbquery
+        .sort({ updatedAt: sortOption })
+        .lean()
+        .populate("user")
+        .exec()
+    retrievedStories.forEach((story) => {
+        story.body = processText(story.body, 200)
+        story.shortTitle = processText(story.title, 25)
+        story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
+        story.storyID = story._id
+        story.updatedAt = formatTime(story.updatedAt)
+    })
+    // counting likes and adding a "likes" field to each story with the totla number of likes
+    retrievedStories = await countLikesForAllStories(retrievedStories)
+
+
+    if (sortby === "MostLikes") {
+        retrievedStories.sort((a, b) => {
+            return a.likes > b.likes ? -1 : 1
+        })
+    }
+    if (sortby === "LeastLikes") {
+        retrievedStories.sort((a, b) => {
+            return a.likes > b.likes ? 1 : -1
+        })
+    }
+    req.retrievedStories = retrievedStories
+    req.sortby = sortby
+    next()
+}
+
 module.exports.formatTime = formatTime
 module.exports.formatTimeShort = formatTimeShort
 module.exports.formatTimeDateOnly = formatTimeDateOnly
 module.exports.processText = processText
 module.exports.countLikesForAllStories = countLikesForAllStories
 module.exports.paginate = paginate
+module.exports.getPublicStories = getPublicStories

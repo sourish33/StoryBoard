@@ -6,13 +6,12 @@ const {
     formatTimeDateOnly,
     countLikesForAllStories,
     paginate,
+    getPublicStories,
 } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
-const Story = require("../models/Story")
+// const Story = require("../models/Story")
 const User = require("../models/User")
-
-const PER_PAGE = 6
 
 //  @desc Show Add page
 // @route GET /
@@ -45,64 +44,6 @@ router.post("/:id", ensureAuth, async (req, res) => {
     }
 })
 
-//Middleware to retrieve stories and likes
-const getPublicStories = async (req, res, next) => {
-    const sortby = req.query.sortby || "Recent"
-    const ids = req.user.liked
-    let numStories = 0
-    if (sortby === "YouLiked") {
-        numStories = await Story.find({ status: "public", _id: { $in: ids }  }).countDocuments()
-    } else {
-        numStories = await Story.find({ status: "public" }).countDocuments()
-    }
-    const pageNumber = req.query.pageNumber || 1
-    const perPage = PER_PAGE
-    req.paginationData = paginate(numStories, perPage)
-    req.numStories = numStories
-    req.pageNumber = pageNumber
-    sortOption = sortby === "Oldest" ? 1 : -1
-    let retrievedStories = []
-    let dbquery = {}
-    if (sortby === "YouLiked") {
-        dbquery = Story.find({ status: "public", _id: { $in: ids } })
-    } else {
-        dbquery = Story.find({ status: "public" })
-    }
-
-    if (pageNumber!=="all"){
-        dbquery.skip(pageNumber * perPage - perPage)
-        .limit(perPage)
-    }
-    retrievedStories = await dbquery
-        .sort({ updatedAt: sortOption })
-        .lean()
-        .populate("user")
-        .exec()
-    retrievedStories.forEach((story) => {
-        story.body = processText(story.body, 200)
-        story.shortTitle = processText(story.title, 25)
-        story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
-        story.storyID = story._id
-        story.updatedAt = formatTime(story.updatedAt)
-    })
-    // counting likes and adding a "likes" field to each story with the totla number of likes
-    retrievedStories = await countLikesForAllStories(retrievedStories)
-
-
-    if (sortby === "MostLikes") {
-        retrievedStories.sort((a, b) => {
-            return a.likes > b.likes ? -1 : 1
-        })
-    }
-    if (sortby === "LeastLikes") {
-        retrievedStories.sort((a, b) => {
-            return a.likes > b.likes ? 1 : -1
-        })
-    }
-    req.retrievedStories = retrievedStories
-    req.sortby = sortby
-    next()
-}
 /*
 getting PUBLIC STORIES using middleware getPublicStories
 */
