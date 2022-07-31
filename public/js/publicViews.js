@@ -22,8 +22,13 @@ const handleClick= ()=>{
             const resp = JSON.parse(this.responseText)
             const {likeButtonSize, numLikes} = resp
             likeButtonSize === "big" ? icon.classList.add("fa-2xl") : icon.classList.remove('fa-2xl')
-            numLikesBox.innerHTML = `${numLikes} likes`
-            // alert(`like button: ${resp.likeButtonSize}, number of likes: ${resp.numLikes}`)
+            if (numLikes === 0) { 
+                numLikesBox.classList.add("hidden")
+            } else{
+                numLikesBox.classList.remove("hidden")
+            }
+            const likeorlikes = numLikes>1 ? "likes" : "like"
+            numLikesBox.innerHTML = `${numLikes} ${likeorlikes}`
         }
     }
     xhr.send(`${inputField2.name}=${inputField2.value}&${inputField1.name}=${inputField1.value}`)
