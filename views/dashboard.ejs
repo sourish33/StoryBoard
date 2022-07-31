@@ -14,17 +14,17 @@
         </div>
         <% if (stories.length!==0) { %>
             <div class="likedHeaderBaap">
-                <h5>Stories you wrote <%= numStories>stories.length ? `(${stories.length} of ${numStories})`: `(${numStories})`  %>: </h5>
+                <h5>Stories you wrote <%= numStories>stories.length ? ``: `(${numStories})`  %>: </h5>
                 <a href="/stories/add"><button type="button" class="addstory-button"><i class="fa-solid fa-plus"></i></button></a>
-                <a class="waves-effect waves-light btn"  onclick="toggleStories()"><span id="showHideStories" >Hide</span></a>
+                <a class="waves-effect waves-light btn btn-space"  onclick="toggleStories()"><span id="showHideStories" >Hide</span></a>
 
                 <% if (numStories===stories.length && stories.length>5) { %>
                     <form action="/dashboard" method="GET">
-                        <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
+                        <a class="waves-effect waves-light btn btn-space" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
                     </form>
                 <% } %>
             </div>
-            <table class="highlight" id="storiesTable">
+            <table class="highlight dashboard-table" id="storiesTable">
                 <thead>
                     <tr>
                         <th class="wrote-col-1">Title</th>
@@ -80,22 +80,22 @@
         <% if (likedStories.length!==0) { %>
 
             <div class="likedHeaderBaap">
-                <h5>Stories you liked <%= numLikedStories>likedStories.length ? `(${likedStories.length} of ${numLikedStories})`: `(${numLikedStories})`  %>:</h5>
+                <h5>Stories you liked <%= numLikedStories>likedStories.length ? ``: `(${numLikedStories})`  %>:</h5>
                 <form method="GET" action="/stories" id="viewLiked">
                     <input type="hidden" name="sortby" value="YouLiked" >
                     <button type="button" class="submit-button"  onclick="viewLikedStories()"><i class="fas fa-folder-open"></i></button>
                 </form>
                 <form method="POST" action="/users/removeAllLikes?_method=PATCH"><button type="button" class="submit-button" onclick="handleClickDeleteAll()"><i class="fa-solid fa-trash-can delete-icon"></i></button></form>
                 
-                <a class="waves-effect waves-light btn" onclick="toggleLikes()"><span id="showHideLikes">Hide</span></a>
+                <a class="waves-effect waves-light btn btn-space" onclick="toggleLikes()"><span id="showHideLikes">Hide</span></a>
                 <% if (numLikedStories===likedStories.length && likedStories.length>5) { %>
                     <form action="/dashboard" method="GET">
-                        <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
+                        <a class="waves-effect waves-light btn btn-space" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
                     </form>
                 <% } %> 
             </div>
             <div>
-                <table class="highlight likedStoriesTable" id="likesTable">
+                <table class="highlight dashboard-table" id="likesTable">
                     <% for (let likedStory of likedStories ) { %>
                         <% if (likedStory.status==="public") { %>
                             <tr>

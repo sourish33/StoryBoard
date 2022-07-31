@@ -67,17 +67,12 @@ td, th{
 .story-row {
     border: none;
     border-radius: 5px;
-    /* background-color: #FAA391; */
     background-color: #FFD5CC;
     padding: 1em;
-    /* color: #d9480f; */
   }
 
 
-/* .story-row:hover{
-    transform: scale3d(1.01, 1.1, .8);
-    background-color: white;
-} */
+
 
 .list-title{
     margin: 0;
@@ -92,17 +87,9 @@ td, th{
     padding:10px;
     display: flex;
     flex-direction: column;
-    /* background-color: #FAA391; */
     background-color: #FFD5CC;
-    /* color: white; */
     color: #61286F;
 }
-/* 
-.card:hover{
-    background-color: white;
-    transform: scale3d(1.01, 1.1, .8);
-} */
-
 
 
 .card-content{
@@ -229,30 +216,26 @@ td, th{
     border-radius: 10px;
  }
 
+ .btn-space{
+    margin-left: 10px;
+ }
+
  .likedHeaderBaap{
+    margin-top: 10px;
     display: flex;
     align-items: center;
-     width: 50%;
+    width: 50%;
  }
 
- .likedHeaderBaap h5 {
-    display: inline-block;
- }
 
- .likedHeaderBaap form {
-    display: inline-block;
- }
 
  .dashboard__likedheader{
     cursor: pointer;
    font-size: 1.5em;
  }
 
- .likedStoriesTable{
-    /* border-collapse: collapse; */
-    /* border: 1px solid black; */
+ .dashboard-table{
     table-layout: auto;
-    /* width: 50%;  */
     margin:20px 0;
  }
 
@@ -281,7 +264,6 @@ td, th{
  }
 
  .indexpage-header a{
-    /* display: inline-block; */
     font-size: 1.5em;
     margin-left: 10px;
  }
