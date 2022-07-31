@@ -56,7 +56,7 @@ td, th{
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
-    justify-content: start;
+    justify-content: space-between;
 }
 
 .wrapper{
