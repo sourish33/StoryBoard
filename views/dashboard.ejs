@@ -16,19 +16,15 @@
             <div class="likedHeaderBaap">
                 <h5>Stories you wrote <%= numStories>stories.length ? `(${stories.length} of ${numStories})`: `(${numStories})`  %>: </h5>
                 <a href="/stories/add"><button type="button" class="addstory-button"><i class="fa-solid fa-plus"></i></button></a>
-                <!-- <% if (numStories>stories.length) { %>
-                    <form action="/dashboard" method="GET">
-                        <input type="hidden" name="showAllWrote" value="1">
-                        <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> All</a>
-                    </form>
-                <% } %> -->
+                <a class="waves-effect waves-light btn"  onclick="toggleStories()"><span id="showHideStories" >Hide</span></a>
+
                 <% if (numStories===stories.length && stories.length>5) { %>
                     <form action="/dashboard" method="GET">
                         <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
                     </form>
                 <% } %>
             </div>
-            <table class="highlight">
+            <table class="highlight" id="storiesTable">
                 <thead>
                     <tr>
                         <th class="wrote-col-1">Title</th>
@@ -90,12 +86,8 @@
                     <button type="button" class="submit-button"  onclick="viewLikedStories()"><i class="fas fa-folder-open"></i></button>
                 </form>
                 <form method="POST" action="/users/removeAllLikes?_method=PATCH"><button type="button" class="submit-button" onclick="handleClickDeleteAll()"><i class="fa-solid fa-trash-can delete-icon"></i></button></form>
-                <!-- <% if (numLikedStories>likedStories.length) { %>
-                    <form action="/dashboard" method="GET">
-                        <input type="hidden" name="showAllLiked" value="1">
-                        <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> All</a>
-                    </form>
-                <% } %>  -->
+                
+                <a class="waves-effect waves-light btn" onclick="toggleLikes()"><span id="showHideLikes">Hide</span></a>
                 <% if (numLikedStories===likedStories.length && likedStories.length>5) { %>
                     <form action="/dashboard" method="GET">
                         <a class="waves-effect waves-light btn" onclick="handleClick()"><span class="hide-on-small">Show</span> Fewer</a>
@@ -103,7 +95,7 @@
                 <% } %> 
             </div>
             <div>
-                <table class="highlight likedStoriesTable">
+                <table class="highlight likedStoriesTable" id="likesTable">
                     <% for (let likedStory of likedStories ) { %>
                         <% if (likedStory.status==="public") { %>
                             <tr>
@@ -181,6 +173,26 @@
             button.style.backgroundColor="DodgerBlue"
             return false
         }
+
+        
+        const toggle = (button, table) =>{
+            let btnText = document.getElementById(button)
+            let storyTable = document.getElementById(table)
+            return () =>{
+                    if (btnText.innerHTML === "Hide"){
+                    storyTable.classList.add("hidden")
+                    btnText.innerHTML = "Show"
+                } else{
+                    storyTable.classList.remove("hidden")
+                    btnText.innerHTML = "Hide"
+                } 
+            }
+        }
+
+        const toggleStories = toggle("showHideStories", "storiesTable")
+        const toggleLikes = toggle("showHideLikes", "likesTable")
+
+
         document.addEventListener("DOMContentLoaded", function (event) {//stores current scroll position in session storage
             var scrollpos = sessionStorage.getItem('scrollpos');
             if (scrollpos) {

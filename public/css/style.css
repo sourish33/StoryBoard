@@ -111,7 +111,7 @@ td, th{
 
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 
 .submit-button {
@@ -230,6 +230,8 @@ td, th{
  }
 
  .likedHeaderBaap{
+    display: flex;
+    align-items: center;
      width: 50%;
  }
 
