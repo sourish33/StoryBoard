@@ -66,6 +66,24 @@ router.get('/dashboard', ensureAuth, getPublicStories, async (req, res) => {
 
 // })
 
+//One time route for clearing all likes
+// router.patch('/clearlikes', async (req, res) =>{
+//     try {
+//         const res = await User.updateMany({}, {liked: []} )   
+//         console.log(res.matchedCount)
+//         return res.send({
+//             status: "Updated"
+//         })
+        
+//     } catch (err) {
+//         res.send({
+//             status:"Bad",
+//             error: err
+//         })
+//     }
+
+// })
+
 
 
 module.exports = router
