@@ -24,7 +24,8 @@ const StorySchema = new mongoose.Schema({
         ref: 'User'
     }],
     likes: {
-        type: Number
+        type: Number,
+        default:0
     }
 })
 
