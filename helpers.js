@@ -61,7 +61,6 @@ function paginate(N, perPage) {
     return results
 }
 
-
 //Middleware to retrieve stories and likes
 
 const getPublicStories = async (req, res, next) => {
@@ -69,7 +68,10 @@ const getPublicStories = async (req, res, next) => {
     const ids = req.user.liked
     let numStories = 0
     if (sortby === "YouLiked") {
-        numStories = await Story.find({ status: "public", _id: { $in: ids }  }).countDocuments()
+        numStories = await Story.find({
+            status: "public",
+            _id: { $in: ids },
+        }).countDocuments()
     } else {
         numStories = await Story.find({ status: "public" }).countDocuments()
     }
@@ -87,9 +89,8 @@ const getPublicStories = async (req, res, next) => {
         dbquery = Story.find({ status: "public" })
     }
 
-    if (pageNumber!=="all"){
-        dbquery.skip(pageNumber * perPage - perPage)
-        .limit(perPage)
+    if (pageNumber !== "all") {
+        dbquery.skip(pageNumber * perPage - perPage).limit(perPage)
     }
     retrievedStories = await dbquery
         .sort({ updatedAt: sortOption })
@@ -106,7 +107,6 @@ const getPublicStories = async (req, res, next) => {
     // counting likes and adding a "likes" field to each story with the totla number of likes
     retrievedStories = await countLikesForAllStories(retrievedStories)
 
-
     if (sortby === "MostLikes") {
         retrievedStories.sort((a, b) => {
             return a.likes > b.likes ? -1 : 1
@@ -122,6 +122,35 @@ const getPublicStories = async (req, res, next) => {
     next()
 }
 
+const removeLikes = async (userid, storyID) => {
+    const updatedUser = await User.findOneAndUpdate(
+        { _id: userid },
+        { $pull: { liked: storyID } },
+        { new: true }
+    )
+    const updatedStory = await Story.findOneAndUpdate(
+        { _id: storyID },
+        { $pull: { likedBy: userid }, $inc: { likes: -1 } }, //the update should be contained in one object
+        { new: true }
+    )
+    return { updatedUser, updatedStory }
+}
+
+const addLikes = async (userid, storyID) => {
+    const updatedUser = await User.findOneAndUpdate(
+        //adding a like
+        { _id: userid },
+        { $addToSet: { liked: storyID } },
+        { new: true }
+    )
+    const updatedStory = await Story.findOneAndUpdate(
+        { _id: storyID },
+        { $addToSet: { likedBy: userid }, $inc: { likes: +1 } },
+        { new: true }
+    )
+    return { updatedUser, updatedStory }
+}
+
 module.exports.formatTime = formatTime
 module.exports.formatTimeShort = formatTimeShort
 module.exports.formatTimeDateOnly = formatTimeDateOnly
@@ -129,3 +158,5 @@ module.exports.processText = processText
 module.exports.countLikesForAllStories = countLikesForAllStories
 module.exports.paginate = paginate
 module.exports.getPublicStories = getPublicStories
+module.exports.removeLikes = removeLikes
+module.exports.addLikes = addLikes
