@@ -6,7 +6,7 @@ const User = require("../models/User")
 
 
 //add or remove a like
-router.patch('/addRemoveLike', async (req, res) =>{
+router.patch('/addRemoveLike', ensureAuth, async (req, res) =>{
     const userid = req.body.userid
     const storyID = req.body.storyID
     // console.log(`userid = ${userid}`)
@@ -23,8 +23,7 @@ router.patch('/addRemoveLike', async (req, res) =>{
             )
             const updatedStory = await Story.findOneAndUpdate(
                 {_id: storyID},
-                { $pull: { likedBy: userid } },
-                { $inc: { likes: -1 }}
+                { $pull: { likedBy: userid }, $inc: { likes: -1 } }//the update should be contained in one object
             )
             likeButtonSize="small"
         } else{
@@ -34,8 +33,7 @@ router.patch('/addRemoveLike', async (req, res) =>{
             )
             const updatedStory = await Story.findOneAndUpdate(
                 {_id: storyID},
-                { $addToSet: { likedBy: userid } },
-                { $inc: { likes: 1 }}
+                { $addToSet: { likedBy: userid }, $inc: { likes: +1 } }
             )
             likeButtonSize="big"
         }
