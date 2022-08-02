@@ -5,6 +5,7 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 const User = require("./models/User")
 const Story = require("./models/Story")
+const { Promise } = require("mongoose")
 
 const formatTime = (time) => {
     return dayjs(time).format("MMM D, YYYY h:mm A")
@@ -121,31 +122,36 @@ const getPublicStories = async (req, res, next) => {
 }
 
 const removeLikes = async (userid, storyID) => {
-    const updatedUser = await User.findOneAndUpdate(
-        { _id: userid },
-        { $pull: { liked: storyID } },
-        { new: true }
-    )
-    const updatedStory = await Story.findOneAndUpdate(
-        { _id: storyID },
-        { $pull: { likedBy: userid }, $inc: { likes: -1 } }, //the update should be contained in one object
-        { new: true }
-    )
+    const promises = [
+        User.findOneAndUpdate(
+            { _id: userid },
+            { $pull: { liked: storyID } },
+            { new: true,  timestamps: false  }//all options must be in the same object
+        ),
+        Story.findOneAndUpdate(
+            { _id: storyID },
+            { $pull: { likedBy: userid }, $inc: { likes: -1 } }, //the update should be contained in one object
+            { new: true,  timestamps: false  }
+        ),
+    ]
+    const [updatedUser, updatedStory] = await Promise.all(promises)
     return { updatedUser, updatedStory }
 }
 
 const addLikes = async (userid, storyID) => {
-    const updatedUser = await User.findOneAndUpdate(
-        //adding a like
-        { _id: userid },
-        { $addToSet: { liked: storyID } },
-        { new: true }
-    )
-    const updatedStory = await Story.findOneAndUpdate(
-        { _id: storyID },
-        { $addToSet: { likedBy: userid }, $inc: { likes: +1 } },
-        { new: true }
-    )
+    const promises = [
+        User.findOneAndUpdate(//adding a like
+            { _id: userid },
+            { $addToSet: { liked: storyID } },
+            { new: true,  timestamps: false  }
+        ),
+        Story.findOneAndUpdate(
+            { _id: storyID },
+            { $addToSet: { likedBy: userid }, $inc: { likes: +1 } },
+            { new: true, timestamps: false  }
+        ),
+    ]
+    const [updatedUser, updatedStory] = await Promise.all(promises)
     return { updatedUser, updatedStory }
 }
 

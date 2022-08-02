@@ -1,15 +1,12 @@
 const express = require("express")
 const { route } = require(".")
 const {
-    processText,
-    formatTime,
     formatTimeDateOnly,
-    paginate,
     getPublicStories,
 } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
-// const Story = require("../models/Story")
+const Story = require("../models/Story")
 const User = require("../models/User")
 
 //  @desc Show Add page
