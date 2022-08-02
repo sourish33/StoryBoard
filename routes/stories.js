@@ -4,7 +4,6 @@ const {
     processText,
     formatTime,
     formatTimeDateOnly,
-    countLikesForAllStories,
     paginate,
     getPublicStories,
 } = require("../helpers")
@@ -90,8 +89,6 @@ router.get("/:id", ensureAuth, async (req, res) => {
     if (!story.user._id.equals(req.user._id) && story.status !== "public") {
         return res.redirect("/stories")
     }
-    //putting this story in an array, calling countLikesForAllStories which adds its number of likes and destructuring the result
-    ;[story] = await countLikesForAllStories([story])
     story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
     res.render("viewstory.ejs", {
         story: story,

@@ -1,5 +1,5 @@
 const express = require('express')
-const { formatTime, formatTimeShort, countLikesForAllStories, getPublicStories } = require('../helpers')
+const { formatTime, formatTimeShort, getPublicStories } = require('../helpers')
 const router = express.Router()
 const {ensureAuth, ensureGuest} = require('../middleware/auth')
 const Story= require('../models/Story')
@@ -28,8 +28,6 @@ router.get('/dashboard', ensureAuth, getPublicStories, async (req, res) => {
             dbquery.limit(5)
         }
         let stories = await dbquery.sort({ createdAt: -1 }).lean() || []
-        // counting likes and adding a "likes" field to each story with the totla number of likes
-        stories = await countLikesForAllStories(stories)
         let thisUser  = await User.findOne({_id:req.user._id}).populate('liked').lean()
         likedStories = thisUser.liked.filter(el=>el.status === "public")
         numLikedStories = likedStories.length
@@ -39,8 +37,6 @@ router.get('/dashboard', ensureAuth, getPublicStories, async (req, res) => {
 
         //getting all trending stories
         const trendingStories = req.retrievedStories.slice(0, 3)
-    
-        likedStories = await countLikesForAllStories(likedStories)
         res.render('dashboard.ejs', {firstName: req.user.firstName, stories, likedStories, numStories, numLikedStories, trendingStories, formatTimeShort: formatTimeShort})
     } catch (error) {
         console.log(error)

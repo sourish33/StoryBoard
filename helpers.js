@@ -30,17 +30,17 @@ const processText = (str, chars = 200) => {
 
 // creating an array of promises to get the number of likes for each story
 // and adding "likes" to each story
-const countLikesForAllStories = async (retrievedStories) => {
-    const likePromises = retrievedStories.map((el) => {
-        return User.find({ liked: el._id }).countDocuments()
-    })
+// const countLikesForAllStories = async (retrievedStories) => {
+//     const likePromises = retrievedStories.map((el) => {
+//         return User.find({ liked: el._id }).countDocuments()
+//     })
 
-    const likesArray = await Promise.all(likePromises)
-    for (let i = 0; i < retrievedStories.length; i++) {
-        retrievedStories[i].likes = likesArray[i]
-    }
-    return retrievedStories
-}
+//     const likesArray = await Promise.all(likePromises)
+//     for (let i = 0; i < retrievedStories.length; i++) {
+//         retrievedStories[i].likes = likesArray[i]
+//     }
+//     return retrievedStories
+// }
 
 function paginate(N, perPage) {
     let numPages = Math.floor(N / perPage)
@@ -104,8 +104,6 @@ const getPublicStories = async (req, res, next) => {
         story.storyID = story._id
         story.updatedAt = formatTime(story.updatedAt)
     })
-    // counting likes and adding a "likes" field to each story with the totla number of likes
-    retrievedStories = await countLikesForAllStories(retrievedStories)
 
     if (sortby === "MostLikes") {
         retrievedStories.sort((a, b) => {
@@ -155,7 +153,6 @@ module.exports.formatTime = formatTime
 module.exports.formatTimeShort = formatTimeShort
 module.exports.formatTimeDateOnly = formatTimeDateOnly
 module.exports.processText = processText
-module.exports.countLikesForAllStories = countLikesForAllStories
 module.exports.paginate = paginate
 module.exports.getPublicStories = getPublicStories
 module.exports.removeLikes = removeLikes
