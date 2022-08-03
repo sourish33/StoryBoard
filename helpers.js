@@ -138,6 +138,18 @@ const removeLikes = async (userid, storyID) => {
     return { updatedUser, updatedStory }
 }
 
+const removeAllLikes = async (userid) =>{
+    const storyFilter = {likedBy: {$in: [userid]}}
+    const storyUpdate = { $pull: { likedBy: userid }, $inc: { likes: -1 } }
+    const storyOptions = { new: true,  timestamps: false  }
+    const promises = [
+        User.findByIdAndUpdate(userid, { $set: { liked: [] } }),
+        Story.updateMany(storyFilter, storyUpdate, storyOptions)
+    ]
+    const [updatedUser, updatedStories] = await Promise.all(promises)
+    return { updatedUser, updatedStories }
+}
+
 const addLikes = async (userid, storyID) => {
     const promises = [
         User.findOneAndUpdate(//adding a like
@@ -163,3 +175,4 @@ module.exports.paginate = paginate
 module.exports.getPublicStories = getPublicStories
 module.exports.removeLikes = removeLikes
 module.exports.addLikes = addLikes
+module.exports.removeAllLikes = removeAllLikes

@@ -1,5 +1,5 @@
 const express = require("express")
-const { removeLikes, addLikes } = require("../helpers")
+const { removeLikes, addLikes, removeAllLikes } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
@@ -66,7 +66,7 @@ router.patch("/removeAllLikes", ensureAuth, async (req, res) => {
     // console.log("Hello from removeAllLikes")
     const userid = req.user._id
     try {
-        await User.findByIdAndUpdate(userid, { $set: { liked: [] } })
+        await removeAllLikes(userid)
         res.redirect("/dashboard")
     } catch (err) {
         res.status(404).render("./error/500.ejs", { error: err })
