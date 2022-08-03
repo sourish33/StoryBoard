@@ -15,7 +15,7 @@
         <% if (trendingStories.length!==0) { %>
             <div class="likedHeaderBaap">
                 <h5>Trending Stories: </h5>
-                <a class="waves-effect waves-light btn btn-space"  onclick="toggleStories()"><span id="showHideTrendingStories" >Hide</span></a>
+                <a class="waves-effect waves-light btn btn-space"  onclick="toggleTrending()"><span id="showHideTrendingStories" >Hide</span></a>
             </div>
             <table class="highlight dashboard-table" id="trendingStoriesTable">
                 <thead>
@@ -223,6 +223,7 @@
 
         const toggleStories = toggle("showHideStories", "storiesTable")
         const toggleLikes = toggle("showHideLikes", "likesTable")
+        const toggleTrending = toggle("showHideTrendingStories", "trendingStoriesTable")
 
 
         document.addEventListener("DOMContentLoaded", function (event) {//stores current scroll position in session storage

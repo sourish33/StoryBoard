@@ -54,7 +54,6 @@ function paginate(N, perPage) {
     while (last < numFullPages * perPage) {
         st = i * perPage
         last = st + perPage
-        // console.log(`[${st+1} to ${last}]`)
         results.push([st + 1, last])
         i++
     }
