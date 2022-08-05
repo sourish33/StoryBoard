@@ -22,21 +22,29 @@ router.get('/dashboard', ensureAuth, getPublicStories, async (req, res) => {
     let showAllLiked = req.query.showAllLiked || "0"
     try {
         const numStories = await Story.countDocuments({user: req.user._id})
-        let dbquery = Story.find({user: req.user._id})
+        let storiesQuery = Story.find({user: req.user._id})
         if (numStories>5 && !(showAllWrote==="1")) {
             console.log("trying to limit")
-            dbquery.limit(5)
+            storiesQuery.limit(5)
         }
-        let stories = await dbquery.sort({ createdAt: -1 }).lean() || []
-        let thisUser  = await User.findOne({_id:req.user._id}).populate('liked').lean()
+        let promises = []
+        storiesQuery.sort({ createdAt: -1 }).lean()
+        let thisUserQuery  = User.findOne({_id:req.user._id}).populate('liked').lean()
+        let trendingStoriesQuery = Story.find({ status: "public" })
+        .sort({likes: -1, updatedAt: -1 })
+        .limit(3)
+        const [stories, thisUser, trendingStories] = await Promise.all([storiesQuery, thisUserQuery, trendingStoriesQuery])
+
+        // console.log(stories)
+        // console.log(thisUser)
+        // console.log(trendingStories)
+
         likedStories = thisUser.liked.filter(el=>el.status === "public")
         numLikedStories = likedStories.length
         if (numLikedStories>5 && !(showAllLiked==="1")){
             likedStories = likedStories.slice(0,5)
         }
 
-        //getting all trending stories
-        const trendingStories = req.retrievedStories.slice(0, 3)
         res.render('dashboard.ejs', {firstName: req.user.firstName, stories, likedStories, numStories, numLikedStories, trendingStories, formatTimeShort: formatTimeShort})
     } catch (error) {
         console.log(error)

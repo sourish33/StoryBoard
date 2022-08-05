@@ -12,7 +12,7 @@
             </div>
             <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
         </div>
-        <% if (trendingStories.length!==0) { %>
+        <% if (trendingStories) { %>
             <div class="likedHeaderBaap">
                 <h5>Trending Stories: </h5>
                 <a class="waves-effect waves-light btn btn-space"  onclick="toggleTrending()"><span id="showHideTrendingStories" >Hide</span></a>
@@ -31,19 +31,10 @@
                             <td><%= el.likes %> </td>
                         </tr>
                     <% }) %>
-                     <tr>
-                        <td colspan="5" style="text-align: center;"> 
-                            <form action="/dashboard" method="GET">
-                                <input type="hidden" name="showAllWrote" value="1">
-                                <a class="waves-effect waves-light btn" onclick="handleClick()">Show all</a> 
-                            </form> 
-                        </td>            
-                     </tr>
                 </tbody>
             </table>
-        <% } else { %>
-            <p>You have not created any stories. Go ahead and create some!</p>
         <% } %>
+
         <% if (stories.length!==0) { %>
             <div class="likedHeaderBaap">
                 <h5>Stories you wrote <%= numStories>stories.length ? ``: `(${numStories})`  %>: </h5>
@@ -107,7 +98,10 @@
                 </tbody>
             </table>
         <% } else { %>
-            <p>You have not created any stories. Go ahead and create some!</p>
+            <div class="likedHeaderBaap">
+                <h5>You have not created any stories. Go ahead and create some!</h5>
+                <a href="/stories/add"><button type="button" class="addstory-button"><i class="fa-solid fa-plus"></i></button></a>
+            </div>
         <% } %>
         <% if (likedStories.length!==0) { %>
 
