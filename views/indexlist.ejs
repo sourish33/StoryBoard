@@ -18,7 +18,6 @@
                     <div class="top-panel">
                         <form action="/stories" method="GET" id="sortOptions">
                             <input type="hidden" name="view" value="list"> <!-- adds ?view=list to the query-->
-                            <input type="hidden" name="pageNumber" value=<%= pageNumber %> >
                             <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
                                 <option value="LeastLikes" <%= sortby === "LeastLikes" ? "selected" : "" %> >Least Likes</option>
                                 <option value="MostLikes" <%= sortby === "MostLikes" ? "selected" : "" %> >Most Likes</option>

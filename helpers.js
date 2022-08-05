@@ -112,17 +112,6 @@ const getPublicStories = async (req, res, next) => {
         story.storyID = story._id
         story.updatedAt = formatTime(story.updatedAt)
     })
-
-    // if (sortby === "MostLikes") {
-    //     retrievedStories.sort((a, b) => {
-    //         return a.likes > b.likes ? -1 : 1
-    //     })
-    // }
-    // if (sortby === "LeastLikes") {
-    //     retrievedStories.sort((a, b) => {
-    //         return a.likes > b.likes ? 1 : -1
-    //     })
-    // }
     req.retrievedStories = retrievedStories
     req.sortby = sortby
     next()
