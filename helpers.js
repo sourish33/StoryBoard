@@ -80,7 +80,7 @@ const getPublicStories = async (req, res, next) => {
     req.paginationData = paginate(numStories, perPage)
     req.numStories = numStories
     req.pageNumber = pageNumber
-    sortOption = sortby === "Oldest" ? 1 : -1
+    let sortOptionChrono = sortby === "Oldest" ? 1 : -1
     let retrievedStories = []
     let dbquery = {}
     if (sortby === "YouLiked") {
@@ -89,11 +89,19 @@ const getPublicStories = async (req, res, next) => {
         dbquery = Story.find({ status: "public" })
     }
 
+    if (sortby === "MostLikes"){
+        dbquery.sort({likes: -1, updatedAt: sortOptionChrono })
+    }
+    if (sortby === "LeastLikes"){
+        dbquery.sort({likes: 1, updatedAt: sortOptionChrono })
+    }
+
+    dbquery.sort({ updatedAt: sortOptionChrono })
+
     if (pageNumber !== "all") {
         dbquery.skip(pageNumber * perPage - perPage).limit(perPage)
     }
     retrievedStories = await dbquery
-        .sort({ updatedAt: sortOption })
         .lean()
         .populate("user")
         .exec()
@@ -105,16 +113,16 @@ const getPublicStories = async (req, res, next) => {
         story.updatedAt = formatTime(story.updatedAt)
     })
 
-    if (sortby === "MostLikes") {
-        retrievedStories.sort((a, b) => {
-            return a.likes > b.likes ? -1 : 1
-        })
-    }
-    if (sortby === "LeastLikes") {
-        retrievedStories.sort((a, b) => {
-            return a.likes > b.likes ? 1 : -1
-        })
-    }
+    // if (sortby === "MostLikes") {
+    //     retrievedStories.sort((a, b) => {
+    //         return a.likes > b.likes ? -1 : 1
+    //     })
+    // }
+    // if (sortby === "LeastLikes") {
+    //     retrievedStories.sort((a, b) => {
+    //         return a.likes > b.likes ? 1 : -1
+    //     })
+    // }
     req.retrievedStories = retrievedStories
     req.sortby = sortby
     next()
