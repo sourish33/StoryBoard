@@ -37,7 +37,6 @@ router.get("/dashboard", ensureAuth, getPublicStories, async (req, res) => {
         if (numStories > 5 && !(showAllWrote === "1")) {
             stories = stories.slice(0, 5)
         }
-
         likedStories = thisUser.liked.filter((el) => el.status === "public")
         numLikedStories = likedStories.length
         if (numLikedStories > 5 && !(showAllLiked === "1")) {

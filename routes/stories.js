@@ -44,6 +44,7 @@ router.post("/:id", ensureAuth, async (req, res) => {
 getting PUBLIC STORIES using middleware getPublicStories
 */
 router.get("/", ensureAuth, getPublicStories, async (req, res) => {
+
     try {
         let showfile = "index.ejs"
         if (req.query.view === "list") {
