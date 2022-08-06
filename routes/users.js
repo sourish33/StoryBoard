@@ -29,13 +29,14 @@ router.patch("/addRemoveLike", ensureAuth, async (req, res) => {
             likeButtonSize = "big"
         }
         //get updated number of likes
-        const numLikesOld = await User.find({ liked: storyID }).countDocuments()
+       
         const numLikes = updatedStory.likes
 
         ///DEBUG LINE to check if old way of counting likes agrees
-        if (numLikesOld !== numLikes) {
-            throw new Error(`Number of Likes incorrect for ${updatedStory}`)
-        }
+        // const numLikesOld = await User.find({ liked: storyID }).countDocuments()
+        // if (numLikesOld !== numLikes) {
+        //     throw new Error(`Number of Likes incorrect for ${updatedStory}`)
+        // }
 
         //prepare data to send back
         const data = {
