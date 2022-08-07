@@ -37,7 +37,10 @@
                                 <% for( let index = 0; index < paginationData.length; index++ ) { %>
                                     <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  ><%= paginationData[index][0] %>-<%= paginationData[index][1]%> </option>
                                 <% } %>
-                                <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
+                                <% if (paginationData[paginationData.length-1][1]>6) { %>
+                                    <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
+                                <% } %>
+                                
                             </select>
                         </form>
                     </div>
