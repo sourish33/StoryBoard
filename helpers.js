@@ -5,7 +5,6 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 const User = require("./models/User")
 const Story = require("./models/Story")
-const { Promise } = require("mongoose")
 
 const formatTime = (time) => {
     return dayjs(time).format("MMM D, YYYY h:mm A")

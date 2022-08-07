@@ -17,6 +17,7 @@ const routes = require('./routes/index')
 const authRoutes = require('./routes/auth')
 const storyRoutes = require('./routes/stories')
 const userRoutes = require('./routes/users')
+const adminRoutes = require('./routes/admin')
 
 
 //Load config
@@ -91,6 +92,7 @@ app.use('/', routes)
 app.use('/auth', authRoutes)
 app.use('/stories', storyRoutes)
 app.use('/users', userRoutes)
+app.use('/admin', adminRoutes)
 
 
 const PORT = process.env.PORT || 3000
