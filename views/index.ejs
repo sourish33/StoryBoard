@@ -31,18 +31,17 @@
                         </form>
                     </div>
                     <div class="top-panel">
+                        <% if (paginationData[paginationData.length-1][1]>6) { %>
                         <form action="/stories" method="GET" id="pagination">
                             <input type="hidden" name="sortby" value=<%= sortby %> >
                             <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
                                 <% for( let index = 0; index < paginationData.length; index++ ) { %>
                                     <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  ><%= paginationData[index][0] %>-<%= paginationData[index][1]%> </option>
                                 <% } %>
-                                <% if (paginationData[paginationData.length-1][1]>6) { %>
-                                    <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
-                                <% } %>
-                                
+                                <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>   
                             </select>
                         </form>
+                        <% } %>
                     </div>
             </div>
             <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
