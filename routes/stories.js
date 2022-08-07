@@ -106,8 +106,15 @@ router.put("/:id", ensureAuth, async (req, res) => {
 
 //delete story
 router.delete("/:id", ensureAuth, async (req, res) => {
+
     try {
-        await Story.findByIdAndDelete({ _id: req.params.id })
+        console.log("trying to delete")
+        let storyID =req.params.id
+        let query = { liked: {$in : [storyID]} }
+        let update = { $pull: { liked: storyID } }
+        await User.updateMany(query, update)
+        await Story.findByIdAndDelete({ _id: storyID })
+        // await Promise.all[User.updateMany(query, update), Story.findByIdAndDelete({ _id: storyID })]
         res.redirect("/dashboard")
     } catch (error) {
         console.log(error)
