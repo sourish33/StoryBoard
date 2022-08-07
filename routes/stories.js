@@ -8,6 +8,7 @@ const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
 const User = require("../models/User")
+// const { Promise } = require("mongoose")
 
 //  @desc Show Add page
 // @route GET /
@@ -112,9 +113,7 @@ router.delete("/:id", ensureAuth, async (req, res) => {
         let storyID =req.params.id
         let query = { liked: {$in : [storyID]} }
         let update = { $pull: { liked: storyID } }
-        await User.updateMany(query, update)
-        await Story.findByIdAndDelete({ _id: storyID })
-        // await Promise.all[User.updateMany(query, update), Story.findByIdAndDelete({ _id: storyID })]
+        await Promise.all[User.updateMany(query, update).exec(), Story.findByIdAndDelete({ _id: storyID }).exec()]//using exec() to convert them into promises
         res.redirect("/dashboard")
     } catch (error) {
         console.log(error)
