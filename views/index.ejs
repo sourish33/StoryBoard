@@ -34,7 +34,7 @@
                         <% if (paginationData[paginationData.length-1][1]>6) { %>
                         
                         <form action="/stories" method="GET" id="pagination">
-                            <i class="fa-solid fa-angles-left" style="margin-right:5px; cursor:pointer;" onclick="prevPage()"></i>
+                            <i class="fa-solid fa-angles-left <%= +pageNumber===1 || pageNumber === "all" ? "invisible" : "" %> " style="margin-right:5px; cursor:pointer;" onclick="prevPage()"></i>
                             <input type="hidden" name="sortby" value=<%= sortby %> >
                             <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
                                 <% for( let index = 0; index < paginationData.length; index++ ) { %>
@@ -42,7 +42,7 @@
                                 <% } %>
                                 <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>   
                             </select>
-                            <i class="fa-solid fa-angles-right" style="margin-left:5px;cursor:pointer;" onclick="nextPage()"></i>
+                            <i class="fa-solid fa-angles-right  <%= +pageNumber===paginationData.length || pageNumber === "all" ? "invisible" : "" %> " style="margin-left:5px;cursor:pointer;" onclick="nextPage()"></i>
                         </form>
                        
                         <% } %>

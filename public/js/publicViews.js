@@ -55,6 +55,7 @@ const prevPage = () =>{
     let sel = formElement.children[2]
     sel.value = (+sel.value-1).toString()
     formElement.submit()
+    this.disabled = true
 }
 
 const nextPage = () =>{

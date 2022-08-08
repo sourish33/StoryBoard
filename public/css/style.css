@@ -98,6 +98,10 @@ td, th{
     flex: 1;
 }
 
+.invisible {
+    visibility: hidden;
+}
+
 
 .hidden {
     display: none;
