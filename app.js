@@ -12,7 +12,6 @@ const flash = require('express-flash');
 var methodOverride = require('method-override')
 
 
-
 const routes = require('./routes/index')
 const authRoutes = require('./routes/auth')
 const storyRoutes = require('./routes/stories')
@@ -65,10 +64,10 @@ app.use(flash());
 
 //Sessions
 app.use(session({
-    secret: "hello",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({mongoUrl: process.env.MONGO_URI})
+    store: new MongoStore({mongoUrl: process.env.MONGO_URI}),
 }))
 
 
