@@ -49,3 +49,17 @@ const handleSwitchView = () =>{
     const formElement = document.getElementById("switchView")
     formElement.submit()
 }
+
+const prevPage = () =>{
+    const formElement = document.getElementById("pagination")
+    let sel = formElement.children[2]
+    sel.value = (+sel.value-1).toString()
+    formElement.submit()
+}
+
+const nextPage = () =>{
+    const formElement = document.getElementById("pagination")
+    let sel = formElement.children[2]
+    sel.value = (+sel.value+1).toString()
+    formElement.submit()
+}

@@ -273,6 +273,13 @@ td, th{
     margin-left: 10px;
  }
 
+ .top-panel form{
+    display: flex;
+    align-items: baseline;
+ }
+
+
+
 
 
  @keyframes spin {
