@@ -27,6 +27,7 @@ router.get("/dashboard", ensureAuth, getPublicStories, async (req, res) => {
             .lean()
         let trendingStoriesQuery = Story.find({ status: "public" })
             .sort({ likes: -1, updatedAt: -1 })
+            .populate("user")
             .limit(3)
         let [stories, thisUser, trendingStories] = await Promise.all([
             storiesQuery,
@@ -58,41 +59,6 @@ router.get("/dashboard", ensureAuth, getPublicStories, async (req, res) => {
     }
 })
 
-// One time route for adding the new field "liked" to all documents that don't have it
-// router.post('/addfield', async (req, res) =>{
-//     try {
-//         // const res = await Story.updateMany( { likedBy: { $exists: false } },{$set : {likedBy: []} })
-//         const res = await Story.updateMany( { likes: { $exists: false } },{$set : {likes:0} })
-//         console.log(res.matchedCount)
-//         return res.send({
-//             status: "Done"
-//         })
 
-//     } catch (err) {
-//         res.send({
-//             status:"Done",
-//             error: err
-//         })
-//     }
-
-// })
-
-//One time route for clearing all likes of all users
-// router.patch('/clearlikes', async (req, res) =>{
-//     try {
-//         const res = await User.updateMany({}, {liked: []} )
-//         console.log(res.matchedCount)
-//         return res.send({
-//             status: "Updated"
-//         })
-
-//     } catch (err) {
-//         res.send({
-//             status:"Bad",
-//             error: err
-//         })
-//     }
-
-// })
 
 module.exports = router

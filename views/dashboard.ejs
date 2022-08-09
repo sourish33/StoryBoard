@@ -21,14 +21,19 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Likes</th>
+                        <th>Author</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% trendingStories.forEach(el => { %>
                         <tr>
-                            <td><a href="stories/<%= el._id %>"  ><%= el.title%> </a> </td>
-                            <td><%= el.likes %> </td>
+                            <td>
+                                <a href="stories/<%= el._id %>"  ><%= el.title%> </a> 
+                                <% if (el.likes) { %>
+                                    <span id="hello" class="public__votenum hide-on-small"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
+                                <% } %>
+                            </td>
+                            <td><%= el.user.firstName+" "+el.user.lastName %> </td>
                         </tr>
                     <% }) %>
                 </tbody>
