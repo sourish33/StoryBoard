@@ -52,7 +52,8 @@ const handleSwitchView = () =>{
 
 const prevPage = () =>{
     const formElement = document.getElementById("pagination")
-    let sel = formElement.children[2]
+    // let sel = formElement.children[2]
+    let sel = document.getElementById("pageNumber")
     sel.value = (+sel.value-1).toString()
     formElement.submit()
     this.disabled = true
@@ -60,7 +61,8 @@ const prevPage = () =>{
 
 const nextPage = () =>{
     const formElement = document.getElementById("pagination")
-    let sel = formElement.children[2]
+    // let sel = formElement.children[2]
+    let sel = document.getElementById("pageNumber")
     sel.value = (+sel.value+1).toString()
     formElement.submit()
 }
