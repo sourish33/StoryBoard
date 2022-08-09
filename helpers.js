@@ -5,6 +5,7 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 const User = require("./models/User")
 const Story = require("./models/Story")
+const SEARCH_OPTIONS = ["Recent", "YouLiked", "MostLikes", "LeastLikes"]
 
 const formatTime = (time) => {
     return dayjs(time).format("MMM D, YYYY h:mm A")
@@ -64,6 +65,10 @@ function paginate(N, perPage) {
 
 const getPublicStories = async (req, res, next) => {
     const sortby = req.query.sortby || "Recent"
+    if (!SEARCH_OPTIONS.includes(sortby)) {
+        return res.render("error/500", { error: `Invalid search option ${sortby}` })
+    }
+
     const ids = req.user.liked
     let numStories = 0
     if (sortby === "YouLiked") {
@@ -75,8 +80,17 @@ const getPublicStories = async (req, res, next) => {
         numStories = await Story.find({ status: "public" }).countDocuments()
     }
     const pageNumber = req.query.pageNumber || 1
+    if (!Number.isInteger(+pageNumber) || +pageNumber <1){
+        return res.render("error/500", { error: `Invalid page number ${pageNumber}: must be an integer greater than 1` })
+    }
+
+
     const perPage = 6
-    req.paginationData = paginate(numStories, perPage)
+    let paginationData = paginate(numStories, perPage)
+    if (paginationData && paginationData.length<pageNumber){
+        return res.render("error/500", { error: `Invalid page number ${pageNumber}: cannot be greater than the number of pages ${paginationData.length}` })
+    }
+    req.paginationData = paginationData
     req.numStories = numStories
     req.pageNumber = pageNumber
     let sortOptionChrono = sortby === "Oldest" ? 1 : -1
