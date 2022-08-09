@@ -40,6 +40,29 @@
             </table>
         <% } %>
 
+        <div class="likedHeaderBaap">
+            <h5>Popular Authors: </h5>
+            <a class="waves-effect waves-light btn btn-space"  onclick="toggleTrending()"><span id="showHideTrendingAuthors" >Hide</span></a>
+        </div>
+        <table class="highlight dashboard-table" id="trendingAuthorsTable">
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Total Likes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% trendingStories.forEach(el => { %>
+                    <tr>
+                        <td>
+                            <%= el.user.firstName+" "+el.user.lastName %>
+                        </td>
+                        <td> 5 </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
         <% if (stories.length!==0) { %>
             <div class="likedHeaderBaap">
                 <h5>Stories you wrote <%= numStories>stories.length ? ``: `(${numStories})`  %>: </h5>
