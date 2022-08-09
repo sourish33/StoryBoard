@@ -6,6 +6,7 @@ dayjs.extend(timezone)
 const User = require("./models/User")
 const Story = require("./models/Story")
 const SEARCH_OPTIONS = ["Recent", "YouLiked", "MostLikes", "LeastLikes"]
+const perPage = 6
 
 const formatTime = (time) => {
     return dayjs(time).format("MMM D, YYYY h:mm A")
@@ -29,19 +30,6 @@ const processText = (str, chars = 200) => {
     return str
 }
 
-// creating an array of promises to get the number of likes for each story
-// and adding "likes" to each story
-// const countLikesForAllStories = async (retrievedStories) => {
-//     const likePromises = retrievedStories.map((el) => {
-//         return User.find({ liked: el._id }).countDocuments()
-//     })
-
-//     const likesArray = await Promise.all(likePromises)
-//     for (let i = 0; i < retrievedStories.length; i++) {
-//         retrievedStories[i].likes = likesArray[i]
-//     }
-//     return retrievedStories
-// }
 
 function paginate(N, perPage) {
     let numPages = Math.floor(N / perPage)
@@ -61,7 +49,7 @@ function paginate(N, perPage) {
     return results
 }
 
-//Middleware to retrieve stories and likes
+//Middleware to retrieve public stories and likes
 
 const getPublicStories = async (req, res, next) => {
     const sortby = req.query.sortby || "Recent"
@@ -85,7 +73,6 @@ const getPublicStories = async (req, res, next) => {
     }
 
 
-    const perPage = 6
     let paginationData = paginate(numStories, perPage)
     if (paginationData && paginationData.length<pageNumber){
         return res.render("error/500", { error: `Invalid page number ${pageNumber}: cannot be greater than the number of pages ${paginationData.length}` })
