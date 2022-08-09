@@ -16,7 +16,8 @@
                 </form>
                 
                     <div class="top-panel">
-                        <form action="/stories" method="GET" id="sortOptions">
+                        
+                        <form action="/stories" method="GET" id="sortOptions">                          
                             <input type="hidden" name="view" value="list"> <!-- adds ?view=list to the query-->
                             <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
                                 <option value="LeastLikes" <%= sortby === "LeastLikes" ? "selected" : "" %> >Least Likes</option>
@@ -28,10 +29,16 @@
                                 <% } %>
                             </select>
                         </form>
+    
                     </div>
                     <div class="top-panel">
                         <% if (paginationData[paginationData.length-1][1]>6) { %>
                             <form action="/stories" method="GET" id="pagination">
+                                <% if (!(+pageNumber===1 ||  pageNumber === "all" )) { %>
+                                    <button style="margin-right:5px;" onclick="prevPage()"><i class="fa-solid fa-angles-left" ></i></button>
+                                <% } else {%>
+                                    <button disabled style="margin-right:5px;" ><i class="fa-solid fa-angles-left" ></i></button>
+                                <% } %>
                                 <input type="hidden" name="view" value="list"> <!-- adds ?view=list to the query-->
                                 <input type="hidden" name="sortby" value=<%= sortby %> >
                                 <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
@@ -40,6 +47,11 @@
                                     <% } %>
                                     <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
                                 </select>
+                                <% if (!(+pageNumber ===paginationData.length || pageNumber === "all" )) { %>
+                                    <button style="margin-left:5px;" onclick="nextPage()"><i class="fa-solid fa-angles-right" ></i></button>
+                                <% } else {%>
+                                    <button style="margin-left:5px;" disabled><i class="fa-solid fa-angles-right" ></i></button>
+                                <% } %>
                             </form>
                         <% } %>
                     </div>
