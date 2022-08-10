@@ -42,9 +42,9 @@
 
         <div class="likedHeaderBaap">
             <h5>Popular Authors: </h5>
-            <a class="waves-effect waves-light btn btn-space"  onclick="toggleTrending()"><span id="showHideTrendingAuthors" >Hide</span></a>
+            <a class="waves-effect waves-light btn btn-space"  onclick="togglePopularAuthors()"><span id="showHidePopularAuthors" >Hide</span></a>
         </div>
-        <table class="highlight dashboard-table" id="trendingAuthorsTable">
+        <table class="highlight dashboard-table" id="popularAuthorsTable">
             <thead>
                 <tr>
                     <th>Author</th>
@@ -250,6 +250,7 @@
         const toggleStories = toggle("showHideStories", "storiesTable")
         const toggleLikes = toggle("showHideLikes", "likesTable")
         const toggleTrending = toggle("showHideTrendingStories", "trendingStoriesTable")
+        const togglePopularAuthors = toggle("showHidePopularAuthors", "popularAuthorsTable")
 
 
         document.addEventListener("DOMContentLoaded", function (event) {//stores current scroll position in session storage
