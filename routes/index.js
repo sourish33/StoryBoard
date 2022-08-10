@@ -1,3 +1,4 @@
+const e = require("express")
 const express = require("express")
 const {formatTimeShort, getPublicStories } = require("../helpers")
 const router = express.Router()
@@ -13,9 +14,46 @@ router.get(["/", "/login"], ensureGuest, (req, res) => {
     res.render("login.ejs")
 })
 
+// const getPopularAuthors = async (req, res, next) =>{
+//     let authors = await User.find({})
+//     let storyQueries = authors.map(el=>Story.find({user: authors._id}).exec())
+//     let stories = await Promise.all(storyQueries)
+//     for (let i=0;i<authors.length; i++){
+//         authors[i].wrote = stories[i]
+//     }
+//     return res.status(200).json(authors)
+// }
+// router.get('/getpopular', async(req, res)=>{
+//     let authors = await User.find({}).lean().exec()
+//     let storyQueries = authors.map(el=>Story.find({user: el._id}).lean().exec())
+//     let stories = await Promise.all(storyQueries)
+
+//     for (let i=0;i<authors.length; i++){
+//         authors[i].totalLikes = stories[i].map(el=>el.likes).reduce((acc,cur)=>acc+cur)
+//     }
+//     let popularAuthors = authors.sort((x,y)=>y.totalLikes-x.totalLikes).slice(0, 5)
+//     req.popularAuthors = popularAuthors
+// })
+
+const getPopularAuthors = async (req, res, next) => {
+    let authors = await User.find({}).lean().exec()
+    let storyQueries = authors.map(el=>Story.find({user: el._id}).lean().exec())
+    let stories = await Promise.all(storyQueries)
+
+    for (let i=0;i<authors.length; i++){
+        authors[i].totalStories = stories[i].length
+        authors[i].totalLikes = stories[i].map(el=>el.likes).reduce((acc,cur)=>acc+cur)
+    }
+    let popularAuthors = authors.sort((x,y)=>y.totalLikes-x.totalLikes).slice(0, 3)
+    req.popularAuthors = popularAuthors
+    next()
+}
+
+
+
 // GET ALL stories belonging to user
 //@route  GET /auth/google/callback
-router.get("/dashboard", ensureAuth, getPublicStories, async (req, res) => {
+router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async (req, res) => {
     let showAllWrote = req.query.showAllWrote || "0"
     let showAllLiked = req.query.showAllLiked || "0"
     try {
@@ -43,6 +81,7 @@ router.get("/dashboard", ensureAuth, getPublicStories, async (req, res) => {
         if (numLikedStories > 5 && !(showAllLiked === "1")) {
             likedStories = likedStories.slice(0, 5)
         }
+        console.log(req.popularAuthors)
 
         res.render("dashboard.ejs", {
             firstName: req.user.firstName,
@@ -51,6 +90,8 @@ router.get("/dashboard", ensureAuth, getPublicStories, async (req, res) => {
             numStories,
             numLikedStories,
             trendingStories,
+            popularAuthors: req.popularAuthors,
+            totalStories: req.totalStories,
             formatTimeShort: formatTimeShort,
         })
     } catch (error) {

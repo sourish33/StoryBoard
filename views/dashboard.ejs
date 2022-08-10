@@ -48,16 +48,20 @@
             <thead>
                 <tr>
                     <th>Author</th>
+                    <th>Total Stories</th>
                     <th>Total Likes</th>
                 </tr>
             </thead>
             <tbody>
-                <% trendingStories.forEach(el => { %>
+                <% popularAuthors.forEach(el => { %>
                     <tr>
                         <td>
-                            <%= el.user.firstName+" "+el.user.lastName %>
+                            <%= el.firstName+" "+el.lastName %>
                         </td>
-                        <td> 5 </td>
+                        <td>
+                            <%= el.totalStories %> 
+                        </td>
+                        <td> <%= el.totalLikes %>  </td>
                     </tr>
                 <% }) %>
             </tbody>
