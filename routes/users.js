@@ -70,18 +70,23 @@ router.patch("/removeAllLikes", ensureAuth, async (req, res) => {
         await removeAllLikes(userid)
         res.redirect("/dashboard")
     } catch (err) {
-        res.status(404).render("./error/500.ejs", { error: err })
+        res.status(500).render("./error/500.ejs", { error: err })
     }
 })
-//doesn't do anythng useful
-router.post("/test", async (req, res) => {
-    console.log("Hello from test")
-    // const keys = Object.keys(req)
-    console.log(req.body)
-    res.status(200).json({
-        status: "OK",
-        data: "everything good",
-    })
+
+
+router.get("/profile/:id", async (req, res) =>{
+    const authorId = req.params.id
+    try {
+        const authorq = User.findOne({_id : authorId}).lean().exec()
+        const thierStoriesq = Story.find({user: authorId, status: "public"}).lean().exec()
+        const [author, thierStories] = await Promise.all([authorq, thierStoriesq])
+        author.stories = thierStories
+        console.log(author)
+        res.render('./user/userpage-view.ejs', {author})
+    } catch (error) {
+        res.status(500).render("./error/500.ejs", { error })
+    }
 })
 
 router.get("*", (req, res) => {

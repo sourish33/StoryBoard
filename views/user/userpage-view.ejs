@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/header'); %>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed&family=Roboto+Slab:wght@300;400;600&display=swap" rel="stylesheet"> 
+    <%- include('../partials/header'); %>
 
     <title>Author</title>
 </head>
 <body class="viewstory__body">
-    <%- include('partials/nav.ejs') %> 
-    <div class="container viewstory__container">
-        <div class="viewstory__storyheader">
-            <div>
-                <p class="viewstory__storytitle">
-                    <%= story.title %>
-                </p>
-                <% if (story.likes) { %>
-                    <span id="hello" class="public__votenum"><%= story.likes %> <%= story.likes===1 ? "like" : "likes" %> </span>
-                <% } %> 
-                <p class="viewstory__storyauthor">- <%= story.user.displayName %>, <%= formatTimeDateOnly(story.createdAt) %> </p>
+    <%- include('../partials/nav.ejs') %> 
+    <div class="container">
+        <div class="userpage__top-panel">
+            <div class="userpage__image">
             </div>
-            <div class="table-icons">
-                    <div class="edit-btns <%= story.editIcon %> ">
-                        <a href="/stories/edit/<%= story._id %>" ><button type="button" class="submit-button <%= story.editIcon %>"><i class="fas fa-edit"></i></button></a>
-                        <form id="myform" method="POST" action="/stories/<%= story._id %>?_method=DELETE"><button type="button" class="submit-button <%= story.editIcon %>" onclick="handleDelete()"><i class="fa-solid fa-trash-can delete-icon"></i></button>
-                        <a href="/dashboard"><button type="button" class="submit-button" onclick="handleDelete()">Dashboard</button></a>
-                        </div>
-                    <a href="/stories"><button type="button" class="submit-button">Public Stories</button></a>
-    
-            </div>
+            <h1>
+                <%= author.firstName%> <%= author.lastName %>
+            </h1>
         </div>
-        <div class="viewstory__storybody"><%- story.body %> </div>
+        <div class="stories">
+            <div class="row">
+                <div class="col s12">
+                    <% for( let index = 0; index < author.stories.length; index++ ) { %>
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                              <span class="card-title"> <%= author.stories[index].title %> </span>
+                              <p>I am a very simple card. I am good at containing small bits of information.
+                              I am convenient because I require little markup to use effectively.</p>
+                            </div>
+                          </div>
+                    
+                    <% } %>
+                </div>
+              </div>
+
+        </div>
+
     </div>
-    <%- include('partials/footer.ejs') %> 
+    <%- include('../partials/footer.ejs') %> 
 </body>
 </html>
