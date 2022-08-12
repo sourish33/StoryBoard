@@ -10,30 +10,9 @@ const User = require("../models/User")
 // @route GET / res.render('index', { messages: req.flash('info') });
 
 router.get(["/", "/login"], ensureGuest, (req, res) => {
-    // console.log("the message is"+ req.flash('message'))
     res.render("login.ejs")
 })
 
-// const getPopularAuthors = async (req, res, next) =>{
-//     let authors = await User.find({})
-//     let storyQueries = authors.map(el=>Story.find({user: authors._id}).exec())
-//     let stories = await Promise.all(storyQueries)
-//     for (let i=0;i<authors.length; i++){
-//         authors[i].wrote = stories[i]
-//     }
-//     return res.status(200).json(authors)
-// }
-// router.get('/getpopular', async(req, res)=>{
-//     let authors = await User.find({}).lean().exec()
-//     let storyQueries = authors.map(el=>Story.find({user: el._id}).lean().exec())
-//     let stories = await Promise.all(storyQueries)
-
-//     for (let i=0;i<authors.length; i++){
-//         authors[i].totalLikes = stories[i].map(el=>el.likes).reduce((acc,cur)=>acc+cur)
-//     }
-//     let popularAuthors = authors.sort((x,y)=>y.totalLikes-x.totalLikes).slice(0, 5)
-//     req.popularAuthors = popularAuthors
-// })
 
 const getPopularAuthors = async (req, res, next) => {
     let authors = await User.find({}).lean().exec()
@@ -92,7 +71,7 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
             trendingStories,
             popularAuthors: req.popularAuthors,
             totalStories: req.totalStories,
-            formatTimeShort: formatTimeShort,
+            formatTimeShort
         })
     } catch (error) {
         console.log(error)

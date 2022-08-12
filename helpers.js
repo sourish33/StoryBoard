@@ -68,8 +68,8 @@ const getPublicStories = async (req, res, next) => {
         numStories = await Story.find({ status: "public" }).countDocuments()
     }
     const pageNumber = req.query.pageNumber || 1
-    if (!Number.isInteger(+pageNumber) || +pageNumber <1){
-        return res.render("error/500", { error: `Invalid page number ${pageNumber}: must be an integer greater than 1` })
+    if (pageNumber !== "all" && (!Number.isInteger(+pageNumber) || +pageNumber <1) ){
+        return res.render("error/500", { error: `Invalid page number ${pageNumber}: must be "all" or an integer greater than 1` })
     }
 
 
