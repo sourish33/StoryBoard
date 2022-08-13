@@ -1,6 +1,6 @@
 const e = require("express")
 const express = require("express")
-const {formatTimeShort, getPublicStories } = require("../helpers")
+const {formatTimeShort, getPublicStories, getPopularAuthors } = require("../helpers")
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 const Story = require("../models/Story")
@@ -12,21 +12,6 @@ const User = require("../models/User")
 router.get(["/", "/login"], ensureGuest, (req, res) => {
     res.render("login.ejs")
 })
-
-
-const getPopularAuthors = async (req, res, next) => {
-    let authors = await User.find({}).lean().exec()
-    let storyQueries = authors.map(el=>Story.find({user: el._id}).lean().exec())
-    let stories = await Promise.all(storyQueries)
-
-    for (let i=0;i<authors.length; i++){
-        authors[i].totalStories = stories[i].length
-        authors[i].totalLikes = stories[i].map(el=>el.likes).reduce((acc,cur)=>acc+cur)
-    }
-    let popularAuthors = authors.sort((x,y)=>y.totalLikes-x.totalLikes).slice(0, 3)
-    req.popularAuthors = popularAuthors
-    next()
-}
 
 
 

@@ -49,8 +49,22 @@ function paginate(N, perPage) {
     return results
 }
 
-//Middleware to retrieve public stories and likes
+//Middleware to get all authors, add up their likes and find the three most popular authors
+const getPopularAuthors = async (req, res, next) => {
+    let authors = await User.find({}).lean().exec()
+    let storyQueries = authors.map(el=>Story.find({user: el._id}).lean().exec())
+    let stories = await Promise.all(storyQueries)
 
+    for (let i=0;i<authors.length; i++){
+        authors[i].totalStories = stories[i].length
+        authors[i].totalLikes = stories[i].map(el=>el.likes).reduce((acc,cur)=>acc+cur)
+    }
+    let popularAuthors = authors.sort((x,y)=>y.totalLikes-x.totalLikes).slice(0, 3)
+    req.popularAuthors = popularAuthors
+    next()
+}
+
+//Middleware to retrieve public stories and likes
 const getPublicStories = async (req, res, next) => {
     const sortby = req.query.sortby || "Recent"
     if (!SEARCH_OPTIONS.includes(sortby)) {
@@ -172,3 +186,4 @@ module.exports.getPublicStories = getPublicStories
 module.exports.removeLikes = removeLikes
 module.exports.addLikes = addLikes
 module.exports.removeAllLikes = removeAllLikes
+module.exports.getPopularAuthors = getPopularAuthors
