@@ -63,7 +63,7 @@
                     <div class="story-row">
                         <div>
                             <p class="list-title"><a href="stories/<%= story.storyID %>" ><%= story.title %></a></p>
-                            <p style="display: inline-block;"><a href="#"><%= story.user.displayName %></a>  <%= story.updatedAt %> </p>
+                            <p style="display: inline-block;"><a href="/users/profile/<%= story.user._id %> "><%= story.user.displayName %></a>  <%= story.updatedAt %> </p>
                         </div>
                         <div>
                             <div class="public__score">

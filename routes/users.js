@@ -69,7 +69,7 @@ router.patch("/removeAllLikes", ensureAuth, async (req, res) => {
 })
 
 
-router.get("/profile/:id", async (req, res) =>{
+router.get("/profile/:id", ensureAuth, async (req, res) =>{
     const authorId = req.params.id
     try {
         const authorq = User.findOne({_id : authorId}).lean().exec()

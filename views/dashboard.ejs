@@ -33,7 +33,7 @@
                                     <span id="hello" class="public__votenum hide-on-small"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
                                 <% } %>
                             </td>
-                            <td><%= el.user.firstName+" "+el.user.lastName %> </td>
+                            <td><a href="/users/profile/<%= el.user._id %> "><%= el.user.firstName+" "+el.user.lastName %></a> </td>
                         </tr>
                     <% }) %>
                 </tbody>
@@ -56,7 +56,7 @@
                 <% popularAuthors.forEach(el => { %>
                     <tr>
                         <td>
-                            <%= el.firstName+" "+el.lastName %>
+                            <a href="/users/profile/<%= el._id %> "><%= el.firstName+" "+el.lastName %></a>
                         </td>
                         <td>
                             <%= el.totalStories %> 
