@@ -64,6 +64,18 @@ const getPopularAuthors = async (req, res, next) => {
     next()
 }
 
+const processStories = (req, retrievedStories) =>{
+    retrievedStories.forEach((story) => {
+        story.body = processText(story.body, 200)
+        story.shortTitle = processText(story.title, 25)
+        story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
+        story.storyID = story._id
+        story.updatedAt = formatTime(story.updatedAt)
+        story.createdAt = formatTime(story.createdAt)
+    })
+    return retrievedStories
+}
+
 //Middleware to retrieve public stories and likes
 const getPublicStories = async (req, res, next) => {
     const sortby = req.query.sortby || "Recent"
@@ -119,14 +131,7 @@ const getPublicStories = async (req, res, next) => {
         .lean()
         .populate("user")
         .exec()
-    retrievedStories.forEach((story) => {
-        story.body = processText(story.body, 200)
-        story.shortTitle = processText(story.title, 25)
-        story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
-        story.storyID = story._id
-        story.updatedAt = formatTime(story.updatedAt)
-    })
-    req.retrievedStories = retrievedStories
+    req.retrievedStories = processStories(req, retrievedStories)
     req.sortby = sortby
     next()
 }
@@ -187,3 +192,4 @@ module.exports.removeLikes = removeLikes
 module.exports.addLikes = addLikes
 module.exports.removeAllLikes = removeAllLikes
 module.exports.getPopularAuthors = getPopularAuthors
+module.exports.processStories = processStories

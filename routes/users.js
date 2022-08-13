@@ -1,5 +1,5 @@
 const express = require("express")
-const { removeLikes, addLikes, removeAllLikes } = require("../helpers")
+const { removeLikes, addLikes, removeAllLikes, processStories } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
@@ -75,7 +75,7 @@ router.get("/profile/:id", ensureAuth, async (req, res) =>{
         const authorq = User.findOne({_id : authorId}).lean().exec()
         const thierStoriesq = Story.find({user: authorId, status: "public"}).lean().exec()
         const [author, thierStories] = await Promise.all([authorq, thierStoriesq])
-        author.stories = thierStories
+        author.stories = processStories(req, thierStories)
         console.log(author)
         res.render('./user/userpage-view.ejs', {author})
     } catch (error) {
