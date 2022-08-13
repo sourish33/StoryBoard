@@ -8,11 +8,21 @@
     <%- include('../partials/nav.ejs') %> 
     <div class="container">
         <div class="userpage__top-panel">
-            <div class="userpage__image">
+            <% if (author.image) { %>
+                <div class="userpage__image">
+                    <img src="<%= author.image %> " alt="<%= author.displaName %> ">
+                </div>
+            <% } %>
+
+            <div class="header-box">
+                <div>
+                    <h3><%= author.firstName%> <%= author.lastName %></h3>
+                </div>
+                <div class="navbtns">
+                    <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
+                    <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
+                </div>
             </div>
-            <h1>
-                <%= author.firstName%> <%= author.lastName %>
-            </h1>
         </div>
         <div class="stories">
             <div class="row">

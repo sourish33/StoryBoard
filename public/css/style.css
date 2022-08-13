@@ -38,7 +38,13 @@ td, th{
     padding: 20px;
 }
 
+.userpage__top-panel{
+    display: flex;
+    align-items: center;
+}
+
 .header-box{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
