@@ -48,6 +48,7 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
         console.log(req.popularAuthors)
 
         res.render("dashboard.ejs", {
+            _id: req.user._id,
             firstName: req.user.firstName,
             stories,
             likedStories,

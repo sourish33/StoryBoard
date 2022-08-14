@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
+const bcrypt = require('bcrypt')
 const Story = require("../models/Story")
 const User = require("../models/User")
 
@@ -26,8 +27,8 @@ router.post('/addfield', async (req, res) =>{
 //One time route for clearing all likes of all users
 router.patch('/clearlikes', async (req, res) =>{
     try {
-        const res = await User.updateMany({}, {liked: []} )
-        console.log(res.matchedCount)
+        const result = await User.updateMany({}, {liked: []} )
+        console.log(result.matchedCount)
         return res.send({
             status: "Updated"
         })
@@ -39,6 +40,24 @@ router.patch('/clearlikes', async (req, res) =>{
         })
     }
 
+})
+
+router.patch('/resetpasswords', async (req, res)=>{
+    try {
+        const hashedPassword = await bcrypt.hash("pwd", 10)
+        const updated = await User.updateMany({}, {password: hashedPassword})
+        return res.send({
+            status: "Updated",
+            count: updated.matchedCount
+        })
+    } catch (error) {
+        res.send({
+            status:"Bad",
+            error: error
+        })
+    }
+
+    
 })
 
 //grabs all the stories and checks if likedby number mateches likes
