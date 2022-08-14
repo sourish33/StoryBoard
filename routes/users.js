@@ -79,10 +79,5 @@ router.get("/profile/:id", ensureAuth, async (req, res) =>{
     }
 })
 
-router.get("*", (req, res) => {
-    // Here user can also design an
-    // error page and render it
-    res.send("You are in users but this page doesn't exist")
-})
 
 module.exports = router

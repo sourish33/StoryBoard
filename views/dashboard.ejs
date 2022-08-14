@@ -47,6 +47,7 @@
         <table class="highlight dashboard-table" id="popularAuthorsTable">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Author</th>
                     <th>Total Stories</th>
                     <th>Total Likes</th>
@@ -55,6 +56,9 @@
             <tbody>
                 <% popularAuthors.forEach(el => { %>
                     <tr>
+                        <td>
+                            <div class="userpage__image"><img src=<%= el.image %>  alt="user image" onerror="this.src='/images/generic-user.png';"></div>
+                        </td>
                         <td>
                             <a href="/users/profile/<%= el._id %> "><%= el.firstName+" "+el.lastName %></a>
                         </td>

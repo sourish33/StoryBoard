@@ -1,5 +1,5 @@
 const express = require("express")
-const bcrypt= require('bcrypt')
+const bcrypt = require("bcrypt")
 const router = express.Router()
 const passport = require("passport")
 const { ensureGuest } = require("../middleware/auth")
@@ -20,22 +20,26 @@ router.get(
     }
 )
 
-router.get('/logout', (req, res) => {
+router.get("/logout", (req, res) => {
     req.logout()
-    res.redirect('/')
+    res.redirect("/")
 })
 
-router.post('/login', ensureGuest, passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect:'/login',
-    failureFlash: true
-}))
+router.post(
+    "/login",
+    ensureGuest,
+    passport.authenticate("local", {
+        successRedirect: "/dashboard",
+        failureRedirect: "/login",
+        failureFlash: true,
+    })
+)
 
-router.post("/register", ensureGuest, async (req, res)=>{
+router.post("/register", ensureGuest, async (req, res) => {
     try {
-        const existingUser = await User.findOne({email: req.body.email})
+        const existingUser = await User.findOne({ email: req.body.email })
         if (existingUser) {
-            req.flash('error', 'Email already exists')
+            req.flash("error", "Email already exists")
             return res.redirect("/login")
         }
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -44,21 +48,18 @@ router.post("/register", ensureGuest, async (req, res)=>{
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password:hashedPassword
+            password: hashedPassword,
         }
         await User.create(user)
-        req.flash('error', 'Account Successfully Created!!');
+        req.flash("error", "Account Successfully Created!!")
         res.redirect("/login")
     } catch (err) {
-        res.render("./error/500.ejs", {error: err})
+        res.render("./error/500.ejs", { error: err })
     }
-
 })
 
-router.get("*", (req, res) => {
-    res.send("You are in auth but this page doesn't exist")
-})
-
-
+// router.get("*", (req, res) => {
+//     res.send("You are in auth but this page doesn't exist")
+// })
 
 module.exports = router
