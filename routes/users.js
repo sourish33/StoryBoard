@@ -9,8 +9,6 @@ const User = require("../models/User")
 router.patch("/addRemoveLike", ensureAuth, async (req, res) => {
     const userid = req.body.userid
     const storyID = req.body.storyID
-    // console.log(`userid = ${userid}`)
-    // console.log(`storyid = ${storyID}`)
     let likeButtonSize = "small"
     let updatedUser = null
     let updatedStory = null
@@ -58,7 +56,6 @@ router.patch("/removeLike", ensureAuth, async (req, res) => {
 
 //Remove all likes
 router.patch("/removeAllLikes", ensureAuth, async (req, res) => {
-    // console.log("Hello from removeAllLikes")
     const userid = req.user._id
     try {
         await removeAllLikes(userid)
@@ -76,7 +73,6 @@ router.get("/profile/:id", ensureAuth, async (req, res) =>{
         const thierStoriesq = Story.find({user: authorId, status: "public"}).lean().exec()
         const [author, thierStories] = await Promise.all([authorq, thierStoriesq])
         author.stories = processStories(req, thierStories)
-        console.log(author)
         res.render('./user/userpage-view.ejs', {author})
     } catch (error) {
         res.status(500).render("./error/500.ejs", { error })

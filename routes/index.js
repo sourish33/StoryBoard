@@ -65,6 +65,10 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
     }
 })
 
+router.get("*", (req, res) => {
+    res.send("You are in index but this page doesn't exist")
+})
+
 
 
 module.exports = router

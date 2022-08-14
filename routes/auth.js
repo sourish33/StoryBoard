@@ -55,6 +55,10 @@ router.post("/register", ensureGuest, async (req, res)=>{
 
 })
 
+router.get("*", (req, res) => {
+    res.send("You are in auth but this page doesn't exist")
+})
+
 
 
 module.exports = router
