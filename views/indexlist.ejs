@@ -10,12 +10,13 @@
             <div class="indexpage-header">
                 <div class="public-heading">
                     <h5>Public Stories</h5>
+                    <a class="hide-on-large" style="cursor: pointer;" onclick="handleSwitchView()" >Cards</a>
                 </div>
                 <div class="public-heading-rest">
                     <form action="/stories" method="get" id="switchView">
                         <input type="hidden" name="sortby" value=<%= sortby %> >
                         <input type="hidden" name="pageNumber" value=<%= pageNumber %> >
-                        <a style="cursor: pointer;" onclick="handleSwitchView()" ><span class="hide-on-small"> View as </span>Cards</a>
+                        <a class="hide-on-small" style="cursor: pointer;" onclick="handleSwitchView()" > View as List</a>
                     </form>
                     
                         <div class="top-panel">
