@@ -109,7 +109,7 @@ th {
 }
 
 .public-heading-rest{
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     justify-content: center;
 }
@@ -398,6 +398,7 @@ th {
     }
     .indexpage-header{
         flex-direction: column;
+        width: 100%;
     }
     .public-heading{
         width: 100%;
