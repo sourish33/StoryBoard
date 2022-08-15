@@ -49,8 +49,21 @@ td, th{
     align-items: center;
 }
 
+.footer-top {
+    padding-bottom: 10px;
+}
 
-.img_profile, .img_popular {
+.footer-top a{
+    color: #039be5 !important;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.img_profile {
     float: left;
     width:  150px;
     height: 150px;
@@ -59,8 +72,9 @@ td, th{
 }
 
 .img_popular{
-    width:  175px;
-    height: 175px;
+    max-width:  200px;
+    max-height: 200px;
+    object-fit: cover;
 }
 
 .header-box{

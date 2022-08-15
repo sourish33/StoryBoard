@@ -44,32 +44,24 @@
             <h5>Popular Authors: </h5>
             <a class="waves-effect waves-light btn btn-space"  onclick="togglePopularAuthors()"><span id="showHidePopularAuthors" >Hide</span></a>
         </div>
-        <table class="highlight dashboard-table" id="popularAuthorsTable">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Author</th>
-                    <th>Total Stories</th>
-                    <th>Total Likes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% popularAuthors.forEach(el => { %>
-                    <tr>
-                        <td>
-                            <img class="img_popular" src=<%= el.image %>  alt="user image" onerror="this.src='/images/generic-user.png';">
-                        </td>
-                        <td>
-                            <a href="/users/profile/<%= el._id %> "><%= el.firstName+" "+el.lastName %></a>
-                        </td>
-                        <td>
-                            <%= el.totalStories %> 
-                        </td>
-                        <td> <%= el.totalLikes %>  </td>
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
+          <div class="story-holder" id="popularAuthors">
+            <% popularAuthors.forEach(el => { %>
+            <div class="card">
+                <div class="card-content center-align">
+                    <img class="img_popular" src=<%= el.image %>  alt="user image" onerror="this.src='/images/generic-user.png';">
+                </div>
+                <div class="card-action center-align card-footer">
+                    <div class="footer-top">
+                        <a href="/users/profile/<%= el._id %> "><%= el.firstName+" "+el.lastName %></a>
+                    </div>
+                <div class="footer-bottom"> 
+                        <span id="hello" class="public__votenum hide-on-small"><%= el.totalStories %>  stories</span>
+                        <span id="hello" class="public__votenum hide-on-small"> <%= el.totalLikes %> total likes</span>
+                </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
 
         <% if (stories.length!==0) { %>
             <div class="likedHeaderBaap">
@@ -254,7 +246,7 @@
         const toggleStories = toggle("showHideStories", "storiesTable")
         const toggleLikes = toggle("showHideLikes", "likesTable")
         const toggleTrending = toggle("showHideTrendingStories", "trendingStoriesTable")
-        const togglePopularAuthors = toggle("showHidePopularAuthors", "popularAuthorsTable")
+        const togglePopularAuthors = toggle("showHidePopularAuthors", "popularAuthors")
 
 
         document.addEventListener("DOMContentLoaded", function (event) {//stores current scroll position in session storage

@@ -45,7 +45,6 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
         if (numLikedStories > 5 && !(showAllLiked === "1")) {
             likedStories = likedStories.slice(0, 5)
         }
-        console.log(req.popularAuthors)
 
         res.render("dashboard.ejs", {
             _id: req.user._id,
