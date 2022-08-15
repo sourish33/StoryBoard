@@ -9,6 +9,7 @@
 body {
     background-color: var(--bodybgd);
     color: var(--bodytextcolor);
+    overscroll-behavior-y: none;
 }
 
 nav {

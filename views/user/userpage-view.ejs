@@ -30,7 +30,9 @@
                             <div>
                               <div class="space-between">
                                   <span class="list-title-bold"> <a href="/stories/<%= author.stories[index].storyID %>" ><%= author.stories[index].title %> </a></span>
-                                  <span id="hello" class="public__votenum"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                  <% if (author.stories[index].likes) { %>
+                                    <span id="hello" class="public__votenum"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                  <% } %>
                               </div>
                               <p><%= author.stories[index].createdAt %></p>
                             </div>
