@@ -57,7 +57,7 @@
                 <% popularAuthors.forEach(el => { %>
                     <tr>
                         <td>
-                            <div class="userpage__image"><img src=<%= el.image %>  alt="user image" onerror="this.src='/images/generic-user.png';"></div>
+                            <img class="img_popular" src=<%= el.image %>  alt="user image" onerror="this.src='/images/generic-user.png';">
                         </td>
                         <td>
                             <a href="/users/profile/<%= el._id %> "><%= el.firstName+" "+el.lastName %></a>
