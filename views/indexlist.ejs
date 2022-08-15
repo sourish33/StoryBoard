@@ -35,9 +35,9 @@
                         <% if (paginationData[paginationData.length-1][1]>6) { %>
                             <form action="/stories" method="GET" id="pagination">
                                 <% if (!(+pageNumber===1 ||  pageNumber === "all" )) { %>
-                                    <button style="margin-right:5px;" onclick="prevPage()"><i class="fa-solid fa-angles-left" ></i></button>
+                                    <button class="nav-button"  onclick="prevPage()"><i class="fa-solid fa-angles-left double-font-size" ></i></button>
                                 <% } else {%>
-                                    <button disabled style="margin-right:5px;" ><i class="fa-solid fa-angles-left" ></i></button>
+                                    <button disabled class="nav-button"  ><i class="fa-solid fa-angles-left double-font-size" ></i></button>
                                 <% } %>
                                 <input type="hidden" name="view" value="list"> <!-- adds ?view=list to the query-->
                                 <input type="hidden" name="sortby" value=<%= sortby %> >
@@ -48,9 +48,9 @@
                                     <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
                                 </select>
                                 <% if (!(+pageNumber ===paginationData.length || pageNumber === "all" )) { %>
-                                    <button style="margin-left:5px;" onclick="nextPage()"><i class="fa-solid fa-angles-right" ></i></button>
+                                    <button class="nav-button"  onclick="nextPage()"><i class="fa-solid fa-angles-right double-font-size" ></i></button>
                                 <% } else {%>
-                                    <button style="margin-left:5px;" disabled><i class="fa-solid fa-angles-right" ></i></button>
+                                    <button class="nav-button"  disabled><i class="fa-solid fa-angles-right double-font-size" ></i></button>
                                 <% } %>
                             </form>
                         <% } %>

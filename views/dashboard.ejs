@@ -8,7 +8,7 @@
     <div class="container">
         <div class="header-box">
             <div>
-                <h3>Welcome, <a href="/users/profile/<%=_id %> "><%= firstName %></a> </h3>
+                <h5>Welcome, <a href="/users/profile/<%=_id %> "><%= firstName %></a> </h5>
             </div>
             <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
         </div>
@@ -75,7 +75,7 @@
                         <th class="wrote-col-1">Title</th>
                         <th class="wrote-col-2 hide-on-small">Created</th>
                         <th class="wrote-col-3 hide-on-small">Updated</th>
-                        <th class="wrote-col-4">Public</th>
+                        <th class="wrote-col-4 hide-on-small">Public</th>
                         <th class="wrote-col-5"></th>
                     </tr>
                 </thead>
@@ -90,7 +90,7 @@
                             </td>
                             <td class="hide-on-small"><%= formatTimeShort(el.createdAt) %> </td>
                             <td class="hide-on-small"><%= formatTimeShort(el.updatedAt) %> </td>
-                            <td>
+                            <td class="hide-on-small">
                                 <form method = "POST" action="/stories/<%= el._id %>?_method=PATCH" </form>
                                     <div class="switch">
                                         <label>
@@ -150,7 +150,7 @@
                                 <td>
                                     <a href="stories/<%= likedStory._id %>" target="_blank"><%= likedStory.title %></a>
                                 <% if (likedStory.likes) { %>
-                                    <span id="hello" class="public__votenum"><%= likedStory.likes %> <%= likedStory.likes===1 ? "like" : "likes" %> </span>
+                                    <span id="hello" class="public__votenum hide-on-small"><%= likedStory.likes %> <%= likedStory.likes===1 ? "like" : "likes" %> </span>
                                 <% } %>
                                 
                                 </td>

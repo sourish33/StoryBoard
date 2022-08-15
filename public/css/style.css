@@ -53,6 +53,11 @@ th {
     color: #039be5 !important;
 }
 
+.nav-button {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .space-between {
     display: flex;
     justify-content: space-between;
@@ -88,6 +93,10 @@ th {
     width: 400px;
     margin-top: 50px;
     text-align: center;
+}
+
+.double-font-size{
+    font-size: 2em;
 }
 
 .divider {
@@ -327,6 +336,11 @@ th {
 .top-panel form {
     display: flex;
     align-items: baseline;
+}
+
+#pageNumber{
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 @keyframes spin {
