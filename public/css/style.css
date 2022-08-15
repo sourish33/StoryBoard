@@ -108,6 +108,12 @@ th {
     z-index: 10;
 }
 
+.public-heading-rest{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .story-holder {
     display: grid;
     grid-gap: 20px;
@@ -389,5 +395,15 @@ th {
     }
     .wrote-col-5 {
         width: 10%;
+    }
+    .indexpage-header{
+        flex-direction: column;
+    }
+    .public-heading{
+        width: 100%;
+        text-align: center;
+    }
+    .public-heading-rest{
+        width: 100%;
     }
 }
