@@ -1,5 +1,5 @@
 {
-  "name": "Storyboard",
+  "name": "StoryBoard",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,6 +7,10 @@
     "start": "cross-env NODE_ENV=production node app",
     "dev": "cross-env NODE_ENV=development nodemon -e js,ejs app"
   },
+  "engines": {
+    "node": "16.x"
+  },
+
   "author": "Sourish Dutta",
   "license": "ISC",
   "dependencies": {
