@@ -58,6 +58,11 @@ th {
     justify-content: space-between;
 }
 
+.justify-left{
+    display: flex;
+    justify-content: left;
+}
+
 .img_profile {
     float: left;
     width: 150px;
@@ -258,6 +263,8 @@ th {
     font-size: small;
     padding: 5px;
     border-radius: 10px;
+    display: inline-block;
+
 }
 
 .dashboard__likedStories {
