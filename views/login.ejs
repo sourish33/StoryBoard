@@ -21,6 +21,14 @@
                     <i class="fa fa-sign-in left" aria-hidden="true"></i> Log in with email
                 </a>
                 <div class="divider"></div>
+                <form action="/auth/login" method="POST" id="guestLoginForm">
+                    <input type="email" name="email" value="anon@anon.com"  class="validate" style="display:none;">
+                    <input type="password" name="password" value="pwd" type="email" class="validate" style="display:none;">
+                    <a class="btn blue darken-1" onclick="guestLoginSubmit()">
+                        <i class="fa fa-sign-in left" aria-hidden="true"></i> Log in as guest
+                    </a>
+                </form>
+                <div class="divider"></div>
                 <a class="btn blue darken-1" onclick="onlyRegister()">
                     Register
                 </a>
@@ -67,7 +75,7 @@
                         <a href="/login" >Home</a>
                         <a class="login__fauxlink" onclick="onlyLogin()">Login with email</a>
                     </div>
-                  </form>
+                </form>
             </div>
         </div>
         <div class="card" id="login">
@@ -128,6 +136,10 @@
         const formSubmit = () =>{
             const form = event.currentTarget.parentNode.parentNode
             form.submit()
+        }
+
+        const guestLoginSubmit = () =>{
+            document.getElementById("guestLoginForm").submit()
         }
         window.onload = onlyHome
     </script>

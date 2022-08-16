@@ -57,7 +57,7 @@ const getPopularAuthors = async (req, res, next) => {
 
     for (let i=0;i<authors.length; i++){
         authors[i].totalStories = stories[i].length
-        authors[i].totalLikes = stories[i].map(el=>el.likes).reduce((acc,cur)=>acc+cur)
+        authors[i].totalLikes = stories[i].map(el=>el.likes).reduce((acc,cur)=>acc+cur, 0)
     }
     let popularAuthors = authors.sort((x,y)=>y.totalLikes-x.totalLikes).slice(0, 3)
     req.popularAuthors = popularAuthors
