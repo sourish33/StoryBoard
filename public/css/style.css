@@ -12,6 +12,18 @@ body {
     overscroll-behavior-y: none;
 }
 
+.main-icon-holder {
+}
+
+.main-icon {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.main-icon-image {
+    width:200px;
+}
+
 nav {
     background-color: var(--navbgd);
 }
