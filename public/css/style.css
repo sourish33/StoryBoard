@@ -211,8 +211,7 @@ th {
 
 .viewstory__storyheader {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 }
 
 .viewstory__storybody {
@@ -230,7 +229,6 @@ th {
 
 .table-icons {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
