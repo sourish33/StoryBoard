@@ -12,7 +12,8 @@ body {
     overscroll-behavior-y: none;
 }
 
-.main-icon-holder {
+.lead {
+    font-size: 20px;
 }
 
 .main-icon {
