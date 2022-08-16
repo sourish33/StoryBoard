@@ -17,7 +17,7 @@
                     <form id="myform" method="POST" action="/stories/<%= story._id %>?_method=DELETE"><button type="button" class="submit-button <%= story.editIcon %>" onclick="handleDelete()"><i class="fa-solid fa-trash-can delete-icon"></i></button>
                 </div>
                 <a href="/dashboard"><button type="button" class="submit-button" onclick="handleDelete()">Dashboard</button></a>
-                <a href="/stories"><button type="button" class="submit-button">Public Stories</button></a>
+                <a href="/stories"><button type="button" class="submit-button">Public<span class="hide-on-small"> Stories</span></button></a>
 
         </div>
             <div>

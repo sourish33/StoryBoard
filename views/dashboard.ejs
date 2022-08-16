@@ -59,7 +59,8 @@
 
         <% if (stories.length!==0) { %>
             <div class="likedHeaderBaap">
-                <h5>Stories you wrote <%= numStories>stories.length ? ``: `(${numStories})`  %>: </h5>
+                <h5 class="hide-on-small">Stories you wrote <%= numStories>stories.length ? ``: `(${numStories})`  %></h5>
+                <h5 class="hide-on-large">Creations<%= numStories>stories.length ? ``: `(${numStories})`  %></h5>
                 <a href="/stories/add"><button type="button" class="addstory-button"><i class="fa-solid fa-plus"></i></button></a>
                 <a class="waves-effect waves-light btn btn-space"  onclick="toggleStories()"><span id="showHideStories" >Hide</span></a>
 
@@ -128,7 +129,9 @@
         <% if (likedStories.length!==0) { %>
 
             <div class="likedHeaderBaap">
-                <h5>Stories you liked <%= numLikedStories>likedStories.length ? ``: `(${numLikedStories})`  %>:</h5>
+                <h5 class="hide-on-small">Stories you liked <%= numLikedStories>likedStories.length ? ``: `(${numLikedStories})`  %></h5>
+                <h5 class="hide-on-large">Likes <%= numLikedStories>likedStories.length ? ``: `(${numLikedStories})`  %></h5>
+                
                 <form method="GET" action="/stories" id="viewLiked">
                     <input type="hidden" name="sortby" value="YouLiked" >
                     <button type="button" class="submit-button"  onclick="viewLikedStories()"><i class="fas fa-folder-open"></i></button>
