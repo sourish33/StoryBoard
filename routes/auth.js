@@ -4,6 +4,7 @@ const router = express.Router()
 const passport = require("passport")
 const { ensureGuest } = require("../middleware/auth")
 const User = require("../models/User")
+const { removeAllLikes } = require("../helpers")
 
 //  @desc Auth with google
 // @route GET /auth/google
@@ -20,7 +21,10 @@ router.get(
     }
 )
 
-router.get("/logout", (req, res) => {
+router.get("/logout", async (req, res) => {
+    if (req.user.email === 'anon@anon.com'){
+        await removeAllLikes(req.user._id)
+    }
     req.logout()
     res.redirect("/")
 })
