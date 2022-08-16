@@ -31,10 +31,15 @@
                               <div class="space-between">
                                   <span class="list-title-bold"> <a href="/stories/<%= author.stories[index].storyID %>" ><%= author.stories[index].title %> </a></span>
                                   <% if (author.stories[index].likes) { %>
-                                    <span id="hello" class="public__votenum"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                    <span id="hello" class="public__votenum hide-on-small"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
                                   <% } %>
                               </div>
-                              <p><%= author.stories[index].createdAt %></p>
+                              <p>
+                                <%= author.stories[index].createdAt %>
+                                <% if (author.stories[index].likes) { %>
+                                    <span id="hello" class="public__votenum hide-on-large"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                  <% } %>
+                            </p>
                             </div>
                           </div>
                     

@@ -391,7 +391,7 @@ th {
         display: none;
     }
     .hide-on-large{
-        display:block
+        display:inline-block;
     }
 
     .likedHeaderBaap {
