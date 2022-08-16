@@ -5,14 +5,16 @@ const bcrypt = require('bcrypt')
 const Story = require("../models/Story")
 const User = require("../models/User")
 
-// One time route for adding the new field "liked" to all documents that don't have it
-router.post('/addfield', async (req, res) =>{
+// One time route for adding new fields
+router.patch('/addfield', async (req, res) =>{
     try {
         // const res = await Story.updateMany( { likedBy: { $exists: false } },{$set : {likedBy: []} })
-        const res = await Story.updateMany( { likes: { $exists: false } },{$set : {likes:0} })
-        console.log(res.matchedCount)
+        // const res = await Story.updateMany( { likes: { $exists: false } },{$set : {likes:0} })
+        const result = await User.updateMany( { role: { $exists: false } },{$set : {role: "user"} })
+        console.log(result.matchedCount)
         return res.send({
-            status: "Done"
+            status: "Done",
+            count: result.matchedCount
         })
 
     } catch (err) {

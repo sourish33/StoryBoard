@@ -31,7 +31,12 @@ const UserSchema = new mongoose.Schema({
     liked: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Story' 
-    }]
+    }],
+    role: {
+        type: String,
+        enum : ['guest', 'user','admin'],
+        default: 'user'
+    },
 })
 
 UserSchema.set('timestamps', true)

@@ -39,15 +39,6 @@ router.post(
     })
 )
 
-router.post(
-    "/guestlogin",
-    ensureGuest,
-    passport.authenticate("local", {
-        successRedirect: "/dashboard",
-        failureRedirect: "/login",
-        failureFlash: true,
-    })
-)
 
 router.post("/register", ensureGuest, async (req, res) => {
     try {
