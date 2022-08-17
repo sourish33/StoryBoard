@@ -110,4 +110,19 @@ router.post("/test", async (req, res) => {
     })
 })
 
+//delete all stories
+router.delete("/delete-all-stories/:id",  async (req, res) =>{
+    try {
+        console.log("trying to delete all stories")
+        let userid = req.params.id
+        deleteAllStories(userid)
+        return res.send({
+            status: "Done",
+        })
+        
+    } catch (error) {
+        return console.log(error)
+    }
+})
+
 module.exports = router

@@ -188,6 +188,17 @@ const promisesToDeleteOneStory = (storyID) =>{
     return [User.updateMany(query, update).exec(), Story.findByIdAndDelete({ _id: storyID }).exec()]//using exec() to convert them into promises
 } 
 
+const deleteAllStories =  async (id) => {
+    let theirStories = await Story.find({user : id})
+    if (theirStories){
+        let allPromises = []
+        for (let story of theirStories){
+            allPromises = [...allPromises, ...promisesToDeleteOneStory(story._id)]
+        }
+        await Promise.all(allPromises)
+    }
+}
+
 module.exports.formatTime = formatTime
 module.exports.formatTimeShort = formatTimeShort
 module.exports.formatTimeDateOnly = formatTimeDateOnly
@@ -200,3 +211,4 @@ module.exports.removeAllLikes = removeAllLikes
 module.exports.getPopularAuthors = getPopularAuthors
 module.exports.processStories = processStories
 module.exports.promisesToDeleteOneStory = promisesToDeleteOneStory
+module.exports.deleteAllStories = deleteAllStories

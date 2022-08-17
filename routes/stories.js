@@ -121,17 +121,7 @@ router.delete("/:id", ensureAuth, async (req, res) => {
     }
 })
 
-//delete all stories
-// router.delete("/delete-all-stories/:id", ensureAuth, async (req, res) =>{
-//     try {
-//         console.log("trying to delete all stories")
-//         let userid = req.params.id
-//         let theirStories = await Story.find()
-        
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })
+
 
 //Update status of story
 router.patch("/:id", ensureAuth, async (req, res) => {
