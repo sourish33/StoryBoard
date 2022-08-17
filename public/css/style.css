@@ -185,7 +185,7 @@ th {
 }
 
 .hidden {
-    display: none;
+    display: none !important; 
 }
 
 .submit-button {

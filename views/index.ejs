@@ -92,7 +92,7 @@
                                     <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: #6E9A34; cursor: pointer;" onclick="handleClick()"></i>
                                 </form>
                             </div>
-                            <span id="hello" class="public__votenum <%= story.likes ===0? "hidden": ""%>"><%= story.likes %>  <%= story.likes>1?"likes":"like" %></span>
+                            <span id="hello" class="public__votenum <%= story.likes === 0 ? "hidden": ""%>"><%= story.likes %>  <%= story.likes>1?"likes":"like" %></span>
                         </div>
                     </div>
                     <% } %>
