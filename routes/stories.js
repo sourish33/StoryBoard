@@ -3,6 +3,7 @@ const { route } = require(".")
 const {
     formatTimeDateOnly,
     getPublicStories,
+    promisesToDeleteOneStory,
 } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
@@ -105,20 +106,32 @@ router.put("/:id", ensureAuth, async (req, res) => {
     }
 })
 
+
+
 //delete story
 router.delete("/:id", ensureAuth, async (req, res) => {
-
     try {
         console.log("trying to delete")
         let storyID =req.params.id
-        let query = { liked: {$in : [storyID]} }
-        let update = { $pull: { liked: storyID } }
-        await Promise.all[User.updateMany(query, update).exec(), Story.findByIdAndDelete({ _id: storyID }).exec()]//using exec() to convert them into promises
+        let promisesToDeleteOne = promisesToDeleteOneStory(storyID)
+        await Promise.all(promisesToDeleteOne)
         res.redirect("/dashboard")
     } catch (error) {
         console.log(error)
     }
 })
+
+//delete all stories
+// router.delete("/delete-all-stories/:id", ensureAuth, async (req, res) =>{
+//     try {
+//         console.log("trying to delete all stories")
+//         let userid = req.params.id
+//         let theirStories = await Story.find()
+        
+//     } catch (error) {
+//         console.log(error)
+//     }
+// })
 
 //Update status of story
 router.patch("/:id", ensureAuth, async (req, res) => {

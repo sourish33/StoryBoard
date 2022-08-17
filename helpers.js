@@ -182,6 +182,12 @@ const addLikes = async (userid, storyID) => {
     return { updatedUser, updatedStory }
 }
 
+const promisesToDeleteOneStory = (storyID) =>{
+    let query = { liked: {$in : [storyID]} }
+    let update = { $pull: { liked: storyID } }
+    return [User.updateMany(query, update).exec(), Story.findByIdAndDelete({ _id: storyID }).exec()]//using exec() to convert them into promises
+} 
+
 module.exports.formatTime = formatTime
 module.exports.formatTimeShort = formatTimeShort
 module.exports.formatTimeDateOnly = formatTimeDateOnly
@@ -193,3 +199,4 @@ module.exports.addLikes = addLikes
 module.exports.removeAllLikes = removeAllLikes
 module.exports.getPopularAuthors = getPopularAuthors
 module.exports.processStories = processStories
+module.exports.promisesToDeleteOneStory = promisesToDeleteOneStory
