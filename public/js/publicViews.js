@@ -1,6 +1,6 @@
-const handleClick= ()=>{
+const handleClick= (e)=>{
     // event.preventDefault()
-    const icon = event.currentTarget
+    const icon = e.currentTarget
     icon.classList.add("spin")
     const formElement = icon.parentNode
     const inputField1 = icon.previousElementSibling.previousElementSibling
