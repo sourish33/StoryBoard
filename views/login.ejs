@@ -139,7 +139,9 @@
         }
 
         const guestLoginSubmit = () =>{
-            document.getElementById("guestLoginForm").submit()
+            if (confirm("Guest data will be deleted upon logout. Register or login to save your data")){
+                document.getElementById("guestLoginForm").submit()
+            }
         }
         window.onload = onlyHome
     </script>

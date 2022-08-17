@@ -187,7 +187,11 @@
         <a href="/stories/add" class="btn-floating btn-large waves-effect waves-purple red extra-button"><i class="fas fa-plus"></i></a>
     </div>
     <%- include('partials/footer.ejs') %> 
-    <script>
+
+    <script type="text/javascript">
+
+        const userRole = "<%= role %>"
+        
         function handleToggle(){
             let checkbox = event.currentTarget
             let form =checkbox.parentNode.parentNode.parentNode
@@ -247,16 +251,28 @@
 
 
         document.addEventListener("DOMContentLoaded", function (event) {//stores current scroll position in session storage
-            var scrollpos = sessionStorage.getItem('scrollpos');
+            const scrollpos = sessionStorage.getItem('scrollpos');
+
             if (scrollpos) {
                 window.scrollTo(0, scrollpos);
                 sessionStorage.removeItem('scrollpos');
-        }
+            }
+            
         })
 
         window.addEventListener("beforeunload", function (e) {
             sessionStorage.setItem('scrollpos', window.scrollY);
         })
+
+        const logout = () =>{
+            if (userRole === "guest") {
+                if (confirm("Stories written and liked by guests will be deleted upon logout.")){
+                    window.location.href = "/auth/logout"
+                }
+            }
+            window.location.href = "/auth/logout"
+        }
+
 
     </script>
 </body>

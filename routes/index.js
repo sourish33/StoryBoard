@@ -46,6 +46,8 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
             likedStories = likedStories.slice(0, 5)
         }
 
+        console.log(req.user.role)
+
         res.render("dashboard.ejs", {
             _id: req.user._id,
             firstName: req.user.firstName,
@@ -56,6 +58,7 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
             trendingStories,
             popularAuthors: req.popularAuthors,
             totalStories: req.totalStories,
+            role: req.user.role,
             formatTimeShort
         })
     } catch (error) {

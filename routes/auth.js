@@ -22,7 +22,7 @@ router.get(
 )
 
 router.get("/logout", async (req, res) => {
-    if (req.user.email === 'anon@anon.com'){
+    if (req.user.role === 'guest'){
         await removeAllLikes(req.user._id)
     }
     req.logout()
