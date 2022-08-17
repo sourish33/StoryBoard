@@ -2,6 +2,8 @@
 <html lang="en">
     <%- include('partials/header'); %>
     <title>Login</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
 </head>
 <body>
     <%- include('partials/nav-login.ejs') %> 
@@ -139,11 +141,19 @@
         }
 
         const guestLoginSubmit = () =>{
-            if (confirm("Guest data will be deleted upon logout. Register or login to save your data")){
-                document.getElementById("guestLoginForm").submit()
-            }
+            Swal.fire({
+                    title: 'Guest data will be deleted upon logout. Register or login to save your data.',
+                    showDenyButton: true,
+                    confirmButtonText: 'Login as Guest',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("guestLoginForm").submit()
+                    } 
+            })
         }
         window.onload = onlyHome
+        
     </script>
 
 </body>

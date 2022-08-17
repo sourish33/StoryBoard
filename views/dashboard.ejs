@@ -2,6 +2,8 @@
 <html lang="en">
     <%- include('partials/header'); %>
     <title>Dashboard</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
 </head>
 <body>
     <%- include('partials/nav.ejs') %> 
@@ -266,11 +268,21 @@
 
         const logout = () =>{
             if (userRole === "guest") {
-                if (confirm("Stories written and liked by guests will be deleted upon logout.")){
-                    window.location.href = "/auth/logout"
-                }
+                // if (confirm("Stories written and liked by guests will be deleted upon logout.")){
+                //     window.location.href = "/auth/logout"
+                // }
+                Swal.fire({
+                    title: 'All guest stories and likes will be deleted upon logout. Register or login to save your data.',
+                    showDenyButton: true,
+                    confirmButtonText: 'Logout',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/auth/logout"
+                    } 
+            })
             }
-            window.location.href = "/auth/logout"
+            
         }
 
 
