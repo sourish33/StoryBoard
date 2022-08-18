@@ -33,7 +33,7 @@
                                   <% if (author.stories[index].likes) { %>
                                     <div class="viewStory_buttons">
                                         <span class="public__votenum hide-on-small"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
-                                        <a class="waves-effect waves-light btn-small hide-on-small modal-trigger" href="#modal<%= index %>">#modal<%= index %></a>
+                                        <a class="waves-effect waves-light btn-small hide-on-small modal-trigger" href="#modal<%= index %>">Liked By</a>
                                     </div>
                                   <% } %>
                               </div>
@@ -55,42 +55,18 @@
 
 
                 <!-- Modal Structure -->
-                <div id="modal0" class="modal">
-                    <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text 0</p>
+                <% for( let index = 0; index < author.stories.length; index++ ) { %>
+                    <div id="modal<%= index %>" class="modal">
+                        <div class="modal-content">
+                        <h4>Modal Header</h4>
+                        <p>A bunch of text <%= author.stories %> </p>
+                        </div>
+                        <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                    </div>
-                </div>
-                <div id="modal1" class="modal">
-                    <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text 1</p>
-                    </div>
-                    <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                    </div>
-                </div>
-                <div id="modal2" class="modal">
-                    <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text 2</p>
-                    </div>
-                    <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                    </div>
-                </div>
-                <div id="modal3" class="modal">
-                    <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text 3</p>
-                    </div>
-                    <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                    </div>
-                </div>
+                <% } %>
+
         </div>
 
     </div>
