@@ -43,10 +43,7 @@ const handleClickViewStory = (e)=>{
     const inputField1 = document.getElementById("userid")
     const inputField2 = document.getElementById("storyID")
     const numLikesBox = document.getElementById("votenum")
-    const sendstring = `${inputField2.name}=${inputField2.value}&${inputField1.name}=${inputField1.value}`
-    console.log(sendstring)
-    
-
+   
 
     
     //////WORKING XMLHTTP code
