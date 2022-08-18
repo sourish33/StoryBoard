@@ -192,7 +192,7 @@
 
     <script type="text/javascript">
 
-        const userRole = "<%= role %>"
+        
         
         function handleToggle(){
             let checkbox = event.currentTarget
@@ -267,7 +267,7 @@
         })
 
         const logout = () =>{
-            if (userRole === "guest") {
+            if ("<%= role %>" === "guest") {
                 // if (confirm("Stories written and liked by guests will be deleted upon logout.")){
                 //     window.location.href = "/auth/logout"
                 // }
@@ -281,6 +281,8 @@
                         window.location.href = "/auth/logout"
                     } 
             })
+            } else{
+                window.location.href = "/auth/logout"
             }
             
         }
