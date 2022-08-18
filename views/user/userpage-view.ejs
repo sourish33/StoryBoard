@@ -31,13 +31,19 @@
                               <div class="space-between">
                                   <span class="list-title-bold"> <a href="/stories/<%= author.stories[index].storyID %>" ><%= author.stories[index].title %> </a></span>
                                   <% if (author.stories[index].likes) { %>
-                                    <span id="hello" class="public__votenum hide-on-small"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                    <div class="viewStory_buttons">
+                                        <span class="public__votenum hide-on-small"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                        <a class="waves-effect waves-light btn-small hide-on-small" >Liked By</a>
+                                    </div>
                                   <% } %>
                               </div>
                               <p>
                                 <%= author.stories[index].createdAt %>
                                 <% if (author.stories[index].likes) { %>
-                                    <span id="hello" class="public__votenum hide-on-large"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                    <div class="viewStory_buttons">
+                                        <span class="public__votenum hide-on-large"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                        <a class="waves-effect waves-light btn-small hide-on-large">Liked By</a>
+                                    </div>
                                   <% } %>
                             </p>
                             </div>
@@ -46,10 +52,37 @@
                     <% } %>
                 </div>
               </div>
+                <!-- Modal Trigger -->
+                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                    <h4>Modal Header</h4>
+                    <p>A bunch of text</p>
+                    </div>
+                    <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    </div>
+                </div>
         </div>
 
     </div>
+
     <%- include('../partials/footer.ejs') %> 
 </body>
 </html>
+
+
+        <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
+
+        <!-- Modal Structure -->
+        <!-- <div id="modal1" class="modal">
+            <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+            </div>
+            <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div> -->

@@ -59,6 +59,8 @@
             <% }) %>
         </div>
 
+
+
         <% if (stories.length!==0) { %>
             <div class="likedHeaderBaap">
                 <h5 class="hide-on-small">Stories you wrote</h5>
@@ -87,7 +89,7 @@
                         <tr>
                             <td><a href="stories/<%= el._id %>"  ><%= el.title%> </a> 
                                 <% if (el.likes) { %>
-                                    <span id="hello" class="public__votenum hide-on-small"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
+                                    <span id="hello" class="public__votenum"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
                                 <% } %>
                                 
                             </td>

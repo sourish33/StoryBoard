@@ -7,4 +7,8 @@
     CKEDITOR.replace('body', {
         plugins: 'wysiwygarea, toolbar, basicstyles, link' 
     })
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, {});
+  });
 </script>
