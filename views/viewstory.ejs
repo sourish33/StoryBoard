@@ -25,16 +25,23 @@
                     <%= story.title %>
                 </p>
 
-                <p class="viewstory__storyauthor">
-                    - <%= story.user.displayName %>, <%= formatTimeDateOnly(story.createdAt) %> 
-                    <% if (story.likes) { %>
-                        <span id="hello" class="public__votenum"><%= story.likes %> <%= story.likes===1 ? "like" : "likes" %> </span>
-                    <% } %> 
-                </p>
+                <div>
+                    <div><p class="viewstory__storyauthor">- <%= story.user.displayName %>, <%= formatTimeDateOnly(story.createdAt) %></p> </div>
+                    <div>
+                        <form id="addRemoveLike" method="POST" action="/users/addRemoveLike" >
+                            <input id="userid" type="hidden" name="userid" value="<%=user._id%>">
+                            <input id="storyID" type="hidden" name="storyID" value="<%=story._id%>">
+                            <i class="fas fa-thumbs-up"  style="color: #6E9A34; cursor: pointer;" onclick="handleClickViewStory(event)"></i>
+                        </form>
+                    </div>
+                    <span id="votenum" class="public__votenum <%= story.likes ===0? "hidden": ""%>"><%= story.likes %>  <%= story.likes>1?"likes":"like" %></span>
+                    
+                </div>
             </div>
         </div>
         <div class="viewstory__storybody"><%- story.body %> </div>
     </div>
     <%- include('partials/footer.ejs') %> 
+    <script src="/js/publicViews.js"></script>
 </body>
 </html>

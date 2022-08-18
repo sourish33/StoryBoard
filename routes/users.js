@@ -9,6 +9,7 @@ const User = require("../models/User")
 router.patch("/addRemoveLike", ensureAuth, async (req, res) => {
     const userid = req.body.userid
     const storyID = req.body.storyID
+    console.log(`userid=${userid}/nstoryid=${storyID}`)
     let likeButtonSize = "small"
     let updatedUser = null
     let updatedStory = null
@@ -35,7 +36,7 @@ router.patch("/addRemoveLike", ensureAuth, async (req, res) => {
             likeButtonSize,
             numLikes,
         }
-        // console.log(data)
+        console.log(data)
         res.status(200).json(data)
     } catch (err) {
         res.status(404).render("./error/500.ejs", { error: err })

@@ -91,8 +91,9 @@ router.get("/:id", ensureAuth, async (req, res) => {
     }
     story.editIcon = story.user._id.equals(req.user._id) ? "" : "hidden"
     res.render("viewstory.ejs", {
+        user: req.user,
         story: story,
-        formatTimeDateOnly: formatTimeDateOnly,
+        formatTimeDateOnly,
     })
 })
 //update story
