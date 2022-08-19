@@ -232,6 +232,10 @@ th {
     font-size: 1.2em;
 }
 
+.viewstory__likes {
+    display: flex;
+}
+
 .viewstory__container {
     background-color: white;
     color: black;
