@@ -383,10 +383,10 @@ th {
 
 @media only screen and (max-width: 600px) {
     h3 {
-        font-size: 2.2vh;
+        font-size: 20px;
     }
     p {
-        font-size: 3vmin;
+        font-size: 16px;
     }
     .extra-button {
         display: none;

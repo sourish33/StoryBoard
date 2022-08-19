@@ -64,7 +64,7 @@
                 <% for( let index = 0; index < author.stories.length; index++ ) { %>
                     <div id="modal<%= index %>" class="modal">
                         <div class="modal-content">
-                        <h4>This story was liked by:</h4>
+                        <h3>This story was liked by:</h3>
                         <p><%= author.stories[index].likedBy.map(el=>el.displayName).reduce((acc, cur)=>{
                             return acc+", "+cur
                         }, "").slice(2) %> </p>
@@ -103,16 +103,3 @@
 </body>
 </html>
 
-
-        <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
-
-        <!-- Modal Structure -->
-        <!-- <div id="modal1" class="modal">
-            <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-            </div>
-            <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-        </div> -->
