@@ -71,10 +71,9 @@ router.get("/profile/:id", ensureAuth, async (req, res) =>{
     const authorId = req.params.id
     try {
         const authorq = User.findOne({_id : authorId}).lean().exec()
-        const thierStoriesq = Story.find({user: authorId, status: "public"}).populate("likedBy").lean().exec()
+        const thierStoriesq = Story.find({user: authorId, status: "public"}).populate("likedBy").sort({createdAt: -1}).lean().exec()
         const [author, thierStories] = await Promise.all([authorq, thierStoriesq])
         author.stories = processStories(req, thierStories)
-        console.log(author.stories[0])
         res.render('./user/userpage-view.ejs', {author, user: req.user})
     } catch (error) {
         res.status(500).render("./error/500.ejs", { error })
