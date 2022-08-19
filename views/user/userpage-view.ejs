@@ -3,6 +3,8 @@
     <%- include('../partials/header'); %>
 
     <title>Author</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
 </head>
 <body class="viewstory__body">
     <%- include('../partials/nav.ejs') %> 
@@ -58,11 +60,13 @@
                 <% for( let index = 0; index < author.stories.length; index++ ) { %>
                     <div id="modal<%= index %>" class="modal">
                         <div class="modal-content">
-                        <h4>Modal Header</h4>
-                        <p><%= author.stories[index].likedBy %> </p>
+                        <h4>This story was liked by:</h4>
+                        <p><%= author.stories[index].likedBy.map(el=>el.displayName).reduce((acc, cur)=>{
+                            return acc+", "+cur
+                        }, "").slice(2) %> </p>
                         </div>
                         <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
                         </div>
                     </div>
                 <% } %>
@@ -72,6 +76,26 @@
     </div>
 
     <%- include('../partials/footer.ejs') %> 
+    <script>
+        const logout = () =>{
+        if ("<%= user.role %>" === "guest") {
+            Swal.fire({
+                title: 'All guest stories and likes will be deleted upon logout. Register or login to save your data.',
+                showDenyButton: true,
+                confirmButtonText: 'Logout',
+                denyButtonText: `Cancel`,
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/auth/logout"
+                    return
+                } 
+        })
+        } else{
+            window.location.href = "/auth/logout"
+        }
+        
+    }
+    </script>
 </body>
 </html>
 
