@@ -26,7 +26,7 @@
                 </p>
 
                 <div>
-                    <div><p class="viewstory__storyauthor">- <%= story.user.displayName %>, <%= formatTimeDateOnly(story.createdAt) %></p> </div>
+                    <div><p class="viewstory__storyauthor">- <a href="/users/profile/<%= story.user._id %> "><%= story.user.displayName %></a>, <%= formatTimeDateOnly(story.createdAt) %></p> </div>
                     <div class="viewstory__likes">
                         <div>
                             <form id="addRemoveLike" method="POST" action="/users/addRemoveLike" >
