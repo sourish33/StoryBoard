@@ -199,6 +199,21 @@ const deleteAllStories =  async (id) => {
     }
 }
 
+const processLikedBy = (likers, currentUser) =>{
+    if (likers.length==1 && likers[0]._id.equals(currentUser._id)){
+        return "You only"
+    }
+    const otherLikers = likers.filter(liker => !liker._id.equals(currentUser._id))
+    const processedLikers = otherLikers.map(el=>{
+        return `<a href="/users/profile/${el._id.toString()}" target="_blank">${el.displayName}</a>, `
+    })
+    let likerString = processedLikers.reduce((acc,cur)=>acc+cur, "")
+    if (processedLikers.length < likers.length){
+        likerString += "and yourself"
+    }
+    return likerString
+}
+
 module.exports.formatTime = formatTime
 module.exports.formatTimeShort = formatTimeShort
 module.exports.formatTimeDateOnly = formatTimeDateOnly
@@ -212,3 +227,4 @@ module.exports.getPopularAuthors = getPopularAuthors
 module.exports.processStories = processStories
 module.exports.promisesToDeleteOneStory = promisesToDeleteOneStory
 module.exports.deleteAllStories = deleteAllStories
+module.exports.processLikedBy = processLikedBy

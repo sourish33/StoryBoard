@@ -1,5 +1,5 @@
 const express = require("express")
-const { removeLikes, addLikes, removeAllLikes, processStories } = require("../helpers")
+const { removeLikes, addLikes, removeAllLikes, processStories, processLikedBy } = require("../helpers")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
@@ -74,7 +74,12 @@ router.get("/profile/:id", ensureAuth, async (req, res) =>{
         const thierStoriesq = Story.find({user: authorId, status: "public"}).populate("likedBy").sort({createdAt: -1}).lean().exec()
         const [author, thierStories] = await Promise.all([authorq, thierStoriesq])
         author.stories = processStories(req, thierStories)
-        res.render('./user/userpage-view.ejs', {author, user: req.user, loggedIn: author._id.equals(req.user._id)})
+        res.render('./user/userpage-view.ejs', {
+            author, 
+            user: req.user, 
+            loggedIn: author._id.equals(req.user._id),
+            processLikedBy,
+        })
     } catch (error) {
         res.status(500).render("./error/500.ejs", { error })
     }
