@@ -211,6 +211,7 @@ const processLikedBy = (likers, currentUser) =>{
     if (processedLikers.length < likers.length){
         likerString += "and yourself"
     }
+    if (likerString.slice(-2) === ", ") likerString = likerString.slice(0, -2) //remove training ", " if exists
     return likerString
 }
 
