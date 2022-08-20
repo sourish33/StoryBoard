@@ -24,7 +24,7 @@
                     <% trendingStories.forEach(el => { %>
                         <tr>
                             <td>
-                                <a href="stories/<%= el._id %>"  ><%= el.title%> </a> 
+                                <a href="stories/<%= el._id %>"  ><%= processText(el.title, 25)%> </a> 
                                 <% if (el.likes) { %>
                                     <span id="hello" class="public__votenum hide-on-small"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
                                 <% } %>
@@ -87,7 +87,7 @@
                 <tbody>
                     <% stories.forEach(el => { %>
                         <tr>
-                            <td><a href="stories/<%= el._id %>"  ><%= el.title%> </a> 
+                            <td><a href="stories/<%= el._id %>"  ><%= processText(el.title, 25)%> </a> 
                                 <% if (el.likes) { %>
                                     <span id="hello" class="public__votenum"><%= el.likes %> <%= el.likes===1 ? "like" : "likes" %> </span>
                                 <% } %>
@@ -155,7 +155,7 @@
                         <% if (likedStory.status==="public") { %>
                             <tr>
                                 <td>
-                                    <a href="stories/<%= likedStory._id %>" target="_blank"><%= likedStory.title %></a>
+                                    <a href="stories/<%= likedStory._id %>" target="_blank"><%= processText(likedStory.title, 25) %></a>
                                 <% if (likedStory.likes) { %>
                                     <span id="hello" class="public__votenum hide-on-small"><%= likedStory.likes %> <%= likedStory.likes===1 ? "like" : "likes" %> </span>
                                 <% } %>

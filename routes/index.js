@@ -1,6 +1,6 @@
 const e = require("express")
 const express = require("express")
-const {formatTimeShort, getPublicStories, getPopularAuthors } = require("../helpers")
+const {formatTimeShort, getPublicStories, getPopularAuthors, processText } = require("../helpers")
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 const Story = require("../models/Story")
@@ -59,7 +59,8 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
             popularAuthors: req.popularAuthors,
             totalStories: req.totalStories,
             role: req.user.role,
-            formatTimeShort
+            formatTimeShort,
+            processText,
         })
     } catch (error) {
         console.log(error)
