@@ -75,6 +75,11 @@ const handleSort = () =>{
     formElement.submit()
 }
 
+const handleFilterByAuthor = () =>{
+    const formElement = document.getElementById("filterByAuthor")
+    formElement.submit()
+}
+
 const handlePageSelect = () =>{
     const formElement = document.getElementById("pagination")
     formElement.submit()

@@ -79,6 +79,8 @@ const processStories = (req, retrievedStories) =>{
 //Middleware to retrieve public stories and likes
 const getPublicStories = async (req, res, next) => {
     const sortby = req.query.sortby || "Recent"
+    const sortByAuthor = req.query.sortByAuthor || ""
+    console.log(sortByAuthor)
     if (!SEARCH_OPTIONS.includes(sortby)) {
         return res.render("error/500", { error: `Invalid search option ${sortby}` })
     }
@@ -108,6 +110,9 @@ const getPublicStories = async (req, res, next) => {
     req.pageNumber = pageNumber
     let sortOptionChrono = sortby === "Oldest" ? 1 : -1
     let dbquery = {}
+    if (sortByAuthor) {
+
+    }
     if (sortby === "YouLiked") {
         dbquery = Story.find({ status: "public", _id: { $in: ids } })
     } else {
@@ -127,7 +132,7 @@ const getPublicStories = async (req, res, next) => {
         dbquery.skip(pageNumber * perPage - perPage).limit(perPage)
     }
 
-    const authorQuery = User.find({})
+    const authorQuery = User.find({}).sort({ lastName: 1 }).collation({ locale: "en", caseLevel: true }) 
     const [authors, retrievedStories] = await Promise.all([authorQuery, dbquery
         .lean()
         .populate("user")

@@ -35,11 +35,11 @@
                                     <% } %>
                                 </select>
                             </form>
-                            <form action="#">
-                                <select name="author" id="author" class="browser-default" style="margin-left:10px;"> 
-                                    <option value="all" selected disabled>Filter by author... </option>
+                            <form action= "/stories" method="GET" id="filterByAuthor">
+                                <select name="sortByAuthor" id="author" class="browser-default" style="margin-left:10px;" onchange="handleFilterByAuthor()"> 
+                                    <option value="" selected>All authors</option>
                                     <% for( let author of authors ) { %>
-                                        <option value="<%=author._id %>" ><%= author.displayName  %> </option>
+                                        <option value="<%=author._id %>" ><%= author.lastName%>, <%= author.firstName%> </option>
                                     <% } %>
                                 </select>
                           </form>
