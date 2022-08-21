@@ -35,6 +35,14 @@
                                     <% } %>
                                 </select>
                             </form>
+                            <form action="#">
+                                <select name="author" id="author" class="browser-default" style="margin-left:10px;"> 
+                                    <option value="all" selected disabled>Filter by author... </option>
+                                    <% for( let author of authors ) { %>
+                                        <option value="<%=author._id %>" ><%= author.displayName  %> </option>
+                                    <% } %>
+                                </select>
+                          </form>
                         </div>
                         <div class="top-panel">
                             <% if (paginationData[paginationData.length-1][1]>6) { %>

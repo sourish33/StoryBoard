@@ -37,10 +37,10 @@
                             </form>
                             <form action="#">
                                 <select name="author" id="author" class="browser-default" style="margin-left:10px;"> 
-                                  <option value="" selected>Filter By Author...</option>
-                                  <option value="php">Gurubhakta Rajbangshi</option>
-                                  <option value="java">Maia D</option>
-                                  <option value="all">All <%= authors.length  %> authors </option>
+                                    <option value="all" selected disabled>Filter by author... </option>
+                                    <% for( let author of authors ) { %>
+                                        <option value="<%=author._id %>" ><%= author.displayName  %> </option>
+                                    <% } %>
                                 </select>
                           </form>
                           
