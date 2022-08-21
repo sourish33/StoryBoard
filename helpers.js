@@ -107,7 +107,6 @@ const getPublicStories = async (req, res, next) => {
     req.numStories = numStories
     req.pageNumber = pageNumber
     let sortOptionChrono = sortby === "Oldest" ? 1 : -1
-    let retrievedStories = []
     let dbquery = {}
     if (sortby === "YouLiked") {
         dbquery = Story.find({ status: "public", _id: { $in: ids } })
@@ -127,11 +126,15 @@ const getPublicStories = async (req, res, next) => {
     if (pageNumber !== "all") {
         dbquery.skip(pageNumber * perPage - perPage).limit(perPage)
     }
-    retrievedStories = await dbquery
+
+    const authorQuery = User.find({})
+    const [authors, retrievedStories] = await Promise.all([authorQuery, dbquery
         .lean()
         .populate("user")
         .exec()
+    ])
     req.retrievedStories = processStories(req, retrievedStories)
+    req.authors = authors
     req.sortby = sortby
     next()
 }

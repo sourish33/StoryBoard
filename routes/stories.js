@@ -58,7 +58,8 @@ router.get("/", ensureAuth, getPublicStories, async (req, res) => {
             sortby: req.sortby,
             paginationData: req.paginationData,
             pageNumber: req.pageNumber,
-            numStories: req.numStories
+            numStories: req.numStories,
+            authors: req.authors
         })
     } catch (error) {
         console.log(error)
