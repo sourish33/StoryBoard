@@ -357,6 +357,7 @@ th {
 }
 
 .top-panel {
+    display: flex;
     margin-left: 10px;
 }
 
