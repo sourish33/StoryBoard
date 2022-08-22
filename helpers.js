@@ -152,6 +152,7 @@ const getPublicStories = async (req, res, next) => {
     req.retrievedStories = processStories(req, retrievedStories)
     req.authors = authors
     req.sortby = sortby
+    req.sortByAuthor = sortByAuthor
     next()
 }
 

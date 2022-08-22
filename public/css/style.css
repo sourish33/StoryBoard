@@ -22,7 +22,7 @@ body {
 }
 
 .main-icon-image {
-    width:200px;
+    width: 200px;
 }
 
 nav {
@@ -76,7 +76,7 @@ th {
     justify-content: space-between;
 }
 
-.justify-left{
+.justify-left {
     display: flex;
     justify-content: left;
 }
@@ -108,7 +108,7 @@ th {
     text-align: center;
 }
 
-.double-font-size{
+.double-font-size {
     font-size: 2em;
 }
 
@@ -121,13 +121,13 @@ th {
     z-index: 10;
 }
 
-.public-heading{
+.public-heading {
     display: flex;
     justify-content: center;
     align-items: baseline;
 }
 
-.public-heading-rest{
+.public-heading-rest {
     /* width: 100%; */
     display: flex;
     justify-content: center;
@@ -185,7 +185,7 @@ th {
 }
 
 .hidden {
-    display: none !important; 
+    display: none !important;
 }
 
 .submit-button {
@@ -300,7 +300,6 @@ th {
     padding: 5px;
     border-radius: 10px;
     display: inline-block;
-
 }
 
 .dashboard__likedStories {
@@ -366,7 +365,7 @@ th {
     align-items: baseline;
 }
 
-.hide-on-large{
+.hide-on-large {
     display: none;
 }
 
@@ -374,7 +373,7 @@ th {
     display: inline-block;
 }
 
-#pageNumber{
+#pageNumber {
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -412,8 +411,8 @@ th {
     .hide-on-small {
         display: none;
     }
-    .hide-on-large{
-        display:inline-block;
+    .hide-on-large {
+        display: inline-block;
     }
 
     .likedHeaderBaap {
@@ -429,22 +428,21 @@ th {
     .wrote-col-5 {
         width: 10%;
     }
-    .indexpage-header{
+    .indexpage-header {
         flex-direction: column;
         width: 100%;
     }
-    .public-heading{
+    .public-heading {
         width: 100%;
         text-align: center;
     }
-    .public-heading-rest{
+    .public-heading-rest {
         width: 100%;
     }
     .viewstory__storytitle {
         font-size: 20px;
     }
-    
-    
+
     .viewstory__storybody p {
         font-size: 16px;
     }

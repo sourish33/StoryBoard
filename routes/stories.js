@@ -56,6 +56,7 @@ router.get("/", ensureAuth, getPublicStories, async (req, res) => {
             retrievedStories: req.retrievedStories,
             user: req.user,
             sortby: req.sortby,
+            sortByAuthor: req.sortByAuthor,
             paginationData: req.paginationData,
             pageNumber: req.pageNumber,
             numStories: req.numStories,
