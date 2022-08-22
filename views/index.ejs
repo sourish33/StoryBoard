@@ -16,6 +16,7 @@
                 </div>
                 <div class="public-heading-rest">
                     <form action="/stories" method="GET" id="switchView">
+                        <input type="hidden" name="sortByAuthor" value=<%= sortByAuthor %> >
                         <input type="hidden" name="view" value="list">
                         <input type="hidden" name="sortby" value=<%= sortby %> >
                         <input type="hidden" name="pageNumber" value=<%= pageNumber %> >
@@ -25,6 +26,7 @@
                     
                         <div class="top-panel">
                             <form action="/stories" method="GET" id="sortOptions">
+                                <input type="hidden" name="sortByAuthor" value=<%= sortByAuthor %> >
                                 <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
                                     <option value="LeastLikes" <%= sortby === "LeastLikes" ? "selected" : "" %> >Least Likes</option>
                                     <option value="MostLikes" <%= sortby === "MostLikes" ? "selected" : "" %> >Most Likes</option>
@@ -55,6 +57,7 @@
                                 <% } %>
                     
                                 <input type="hidden" name="sortby" value=<%= sortby %> >
+                                <input type="hidden" name="sortByAuthor" value=<%= sortByAuthor %> >
                                 <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
                                     <% for( let index = 0; index < paginationData.length; index++ ) { %>
                                         <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  ><%= paginationData[index][0] %>-<%= paginationData[index][1]%> </option>
