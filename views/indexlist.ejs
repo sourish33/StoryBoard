@@ -8,71 +8,77 @@
 <body>
     <%- include('partials/nav.ejs') %> 
     <div class="container">
-        <div class="header-box">
-            <div class="indexpage-header">
-                <div class="public-heading">
+        <div>
+            <div class="header-box">
+                <div class="indexpage-header">
                     <h5>Public Stories</h5>
-                    <a class="hide-on-large" style="cursor: pointer;" onclick="handleSwitchView()" >Cards</a>
-                </div>
-                <div class="public-heading-rest">
-                    <form action="/stories" method="get" id="switchView">
+                    <form action="/stories" method="GET" id="switchView">
+                        <input type="hidden" name="sortByAuthor" value=<%= sortByAuthor %> >
+                        <input type="hidden" name="view" value="cards">
                         <input type="hidden" name="sortby" value=<%= sortby %> >
                         <input type="hidden" name="pageNumber" value=<%= pageNumber %> >
-                        <a class="hide-on-small" style="cursor: pointer;" onclick="handleSwitchView()" > View as Cards</a>
+                        <a style="cursor: pointer;" onclick="handleSwitchView()" >View as Cards</a>
                     </form>
-                    
-                        <div class="top-panel">
-                    
-                            <form action="/stories" method="GET" id="sortOptions">
-                                <input type="hidden" name="view" value="list"> <!-- adds ?view=list to the query-->
-                                <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
-                                    <option value="LeastLikes" <%= sortby === "LeastLikes" ? "selected" : "" %> >Least Likes</option>
-                                    <option value="MostLikes" <%= sortby === "MostLikes" ? "selected" : "" %> >Most Likes</option>
-                                    <option value="Oldest"  <%= sortby === "Oldest" ? "selected" : "" %> >Oldest</option>
-                                    <option value="Recent"  <%= sortby === "Recent" ? "selected" : "" %> >Recent</option>
-                                    <% if (user.liked.length) { %>
-                                        <option value="YouLiked"  <%= sortby === "YouLiked" ? "selected" : "" %> >You Liked</option>
-                                    <% } %>
-                                </select>
-                            </form>
-                            <form action="#">
-                                <select name="author" id="author" class="browser-default" style="margin-left:10px;"> 
-                                    <option value="all" selected disabled>Filter by author... </option>
-                                    <% for( let author of authors ) { %>
-                                        <option value="<%=author._id %>" ><%= author.displayName  %> </option>
-                                    <% } %>
-                                </select>
-                          </form>
-                        </div>
-                        <div class="top-panel">
-                            <% if (paginationData[paginationData.length-1][1]>6) { %>
-                                <form action="/stories" method="GET" id="pagination">
-                                    <% if (!(+pageNumber===1 ||  pageNumber === "all" )) { %>
-                                        <button class="nav-button"  onclick="prevPage()"><i class="fa-solid fa-angles-left double-font-size" ></i></button>
-                                    <% } else {%>
-                                        <button disabled class="nav-button"  ><i class="fa-solid fa-angles-left double-font-size" ></i></button>
-                                    <% } %>
-                                    <input type="hidden" name="view" value="list"> <!-- adds ?view=list to the query-->
-                                    <input type="hidden" name="sortby" value=<%= sortby %> >
-                                    <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
-                                        <% for( let index = 0; index < paginationData.length; index++ ) { %>
-                                            <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  ><%= paginationData[index][0] %>-<%= paginationData[index][1]%></option>
-                                        <% } %>
-                                        <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
-                                    </select>
-                                    <% if (!(+pageNumber ===paginationData.length || pageNumber === "all" )) { %>
-                                        <button class="nav-button"  onclick="nextPage()"><i class="fa-solid fa-angles-right double-font-size" ></i></button>
-                                    <% } else {%>
-                                        <button class="nav-button"  disabled><i class="fa-solid fa-angles-right double-font-size" ></i></button>
-                                    <% } %>
-                                </form>
+                </div>
+                <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
+            </div>
+                
+                
+            <div class="row">
+                <div class="col s6 m4">
+                    <form action="/stories" method="GET" id="sortOptions">
+                        <input type="hidden" name="sortByAuthor" value=<%= sortByAuthor %> >
+                        <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
+                            <option value="LeastLikes" <%= sortby === "LeastLikes" ? "selected" : "" %> >Least Likes</option>
+                            <option value="MostLikes" <%= sortby === "MostLikes" ? "selected" : "" %> >Most Likes</option>
+                            <option value="Oldest"  <%= sortby === "Oldest" ? "selected" : "" %> >Oldest</option>
+                            <option value="Recent"  <%= sortby === "Recent" ? "selected" : "" %> >Recent</option>
+                            <% if (user.liked.length) { %>
+                                <option value="YouLiked"  <%= sortby === "YouLiked" ? "selected" : "" %> >You Liked</option>
                             <% } %>
-                        </div>
+                        </select>
+                    </form>
+                </div>
+                <div class="col s6 m4 ">
+                    <form action= "/stories" method="GET" id="filterByAuthor">
+                        <select name="sortByAuthor" id="author" class="browser-default"  onchange="handleFilterByAuthor()">
+                            <option value="" <%=  sortByAuthor.toString() === "" ? "selected" : "" %> >All authors</option>
+                            <% for (let author of authors ) { %>
+                                <option value="<%=author._id %>" <%=  sortByAuthor.toString() === author._id.toString() ? "selected" : "" %> ><%= author.lastName%>, <%= author.firstName%> </option>
+                            <% } %>
+                        </select>
+                    </form>
+                </div>
+                <div class="top-panel col s6 push-s6 m4">
+                    <% if (paginationData[paginationData.length-1][1]>6) { %>
+            
+                    <form action="/stories" method="GET" id="pagination">
+                        <% if (!(+pageNumber===1 ||  pageNumber === "all" )) { %>
+                            <button class="nav-button" onclick="prevPage()"><i class="fa-solid fa-angles-left double-font-size" ></i></button>
+                        <% } else {%>
+                            <button disabled class="nav-button"  ><i class="fa-solid fa-angles-left double-font-size" ></i></button>
+                        <% } %>
+            
+                        <input type="hidden" name="sortby" value=<%= sortby %> >
+                        <input type="hidden" name="sortByAuthor" value=<%= sortByAuthor %> >
+                        <select name="pageNumber" id="pageNumber" class="browser-default" onchange="handlePageSelect()">
+                            <% for( let index = 0; index < paginationData.length; index++ ) { %>
+                                <option value="<%= index+1 %>" <%= +pageNumber === index+1 ? "selected" : "" %>  ><%= paginationData[index][0] %>-<%= paginationData[index][1]%> </option>
+                            <% } %>
+                            <option value="all" <%= pageNumber === "all" ? "selected" : "" %>  >All <%= numStories %></option>
+                        </select>
+                        <% if (!(+pageNumber ===paginationData.length || pageNumber === "all" )) { %>
+                            <button class="nav-button" onclick="nextPage()"><i class="fa-solid fa-angles-right double-font-size" ></i></button>
+                        <% } else {%>
+                            <button class="nav-button" disabled><i class="fa-solid fa-angles-right double-font-size" ></i></button>
+                        <% } %>
+                    </form>
+                    <% } %>
                 </div>
             </div>
-            <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
-        </div>
-            <div class="wrapper">
+
+            
+    </div>     <div class="wrapper">
                 <% for( let story of retrievedStories) { %>
                     <div class="story-row">
                         <div>
