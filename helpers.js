@@ -132,7 +132,7 @@ const getPublicStories = async (req, res, next) => {
         dbquery.skip(pageNumber * perPage - perPage).limit(perPage)
     }
 
-    const authorQuery = User.find({}).sort({ lastName: 1 }).collation({ locale: "en", caseLevel: true }) 
+    const authorQuery = User.find({}).sort({ lastName: 1 }).collation({ locale: "en", caseLevel: true }) //sorts alphabetically without regard to case
     const [authors, retrievedStories] = await Promise.all([authorQuery, dbquery
         .lean()
         .populate("user")
@@ -219,7 +219,7 @@ const processLikedBy = (likers, currentUser) =>{
     if (processedLikers.length < likers.length){
         likerString += "and yourself"
     }
-    if (likerString.slice(-2) === ", ") likerString = likerString.slice(0, -2) //remove training ", " if exists
+    if (likerString.slice(-2) === ", ") likerString = likerString.slice(0, -2) //remove trailing ", " if exists
     return likerString
 }
 
