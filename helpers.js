@@ -32,7 +32,6 @@ const processText = (str, chars = 200) => {
 
 
 function paginate(N, perPage) {
-    let numPages = Math.floor(N / perPage)
     let st = 0
     let last = 0
     let i = 0
@@ -113,11 +112,22 @@ const getPublicStories = async (req, res, next) => {
     if (sortByAuthor) {
 
     }
-    if (sortby === "YouLiked") {
-        dbquery = Story.find({ status: "public", _id: { $in: ids } })
-    } else {
-        dbquery = Story.find({ status: "public" })
+    // if (sortby === "YouLiked") {
+    //     dbquery = Story.find({ status: "public", _id: { $in: ids } })
+    // } else {
+    //     dbquery = Story.find({ status: "public" })
+    // }
+
+    let queryFilter = {status: "public"}
+    if (sortby === "YouLiked"){
+        queryFilter._id = { $in: ids } 
     }
+    if (sortByAuthor) {
+        const ObjectId = require('mongoose').Types.ObjectId; 
+        queryFilter.user = new ObjectId(sortByAuthor)
+    }
+
+    dbquery = Story.find(queryFilter)
 
     if (sortby === "MostLikes"){
         dbquery.sort({likes: -1, updatedAt: sortOptionChrono })
@@ -125,6 +135,7 @@ const getPublicStories = async (req, res, next) => {
     if (sortby === "LeastLikes"){
         dbquery.sort({likes: 1, updatedAt: sortOptionChrono })
     }
+    
 
     dbquery.sort({ updatedAt: sortOptionChrono })
 
