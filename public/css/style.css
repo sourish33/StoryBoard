@@ -39,10 +39,6 @@ p {
     font-size: 2vmin;
 }
 
-.row .col {
-    padding: 0;
-}
-
 table {
     border: none;
     background-color: var(--tablebgd);
@@ -121,17 +117,7 @@ th {
     z-index: 10;
 }
 
-.public-heading {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-}
 
-.public-heading-rest {
-    /* width: 100%; */
-    display: flex;
-    justify-content: center;
-}
 
 .story-holder {
     display: grid;
@@ -355,9 +341,13 @@ th {
     margin-left: 10px;
 }
 
+.align-right{
+    display: flex;
+    justify-content: right;
+}
+
 .top-panel {
     display: flex;
-    margin-left: 10px;
 }
 
 .top-panel form {
@@ -427,10 +417,6 @@ th {
     }
     .wrote-col-5 {
         width: 10%;
-    }
-    .indexpage-header {
-        flex-direction: column;
-        width: 100%;
     }
     .public-heading {
         width: 100%;
