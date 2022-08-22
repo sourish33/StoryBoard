@@ -370,7 +370,7 @@ th {
 }
 
 .hide-on-small {
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 #pageNumber {
@@ -412,7 +412,7 @@ th {
         display: none;
     }
     .hide-on-large {
-        display: inline-block;
+        display: block;
     }
 
     .likedHeaderBaap {
