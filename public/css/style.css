@@ -433,4 +433,8 @@ th {
     .viewstory__storybody p {
         font-size: 16px;
     }
+
+    .push-down-on-small{
+        margin-top: 5px;
+    }
 }
