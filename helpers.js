@@ -5,7 +5,7 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 const User = require("./models/User")
 const Story = require("./models/Story")
-const SEARCH_OPTIONS = ["Recent", "YouLiked", "MostLikes", "LeastLikes"]
+const SEARCH_OPTIONS = ["Recent", "YouLiked", "MostLikes", "LeastLikes", "Oldest"]
 const perPage = 6
 
 const formatTime = (time) => {
@@ -85,15 +85,6 @@ const getPublicStories = async (req, res, next) => {
     }
 
     const ids = req.user.liked
-    // let numStories = 0
-    // if (sortby === "YouLiked") {
-    //     numStories = await Story.find({
-    //         status: "public",
-    //         _id: { $in: ids },
-    //     }).countDocuments()
-    // } else {
-    //     numStories = await Story.find({ status: "public" }).countDocuments()
-    // }
     const pageNumber = req.query.pageNumber || 1
     if (pageNumber !== "all" && (!Number.isInteger(+pageNumber) || +pageNumber <1) ){
         return res.render("error/500", { error: `Invalid page number ${pageNumber}: must be "all" or an integer greater than 1` })
