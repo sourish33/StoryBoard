@@ -45,9 +45,9 @@
                                 <%= author.stories[index].createdAt %>
                                 <% if (author.stories[index].likes) { %>
                                     <div class="viewStory_buttons">
-                                        <span class="public__votenum hide-on-large"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
+                                        <span class="public__votenum hide-on-large-inline-block"> <%= author.stories[index].likes %> <%= author.stories[index].likes===1 ? "like" : "likes" %> </span>
                                         <% if (loggedIn) { %>
-                                            <a class="waves-effect waves-light btn-small hide-on-large modal-trigger" href="#modal<%= index %>">Liked By</a>
+                                            <a class="waves-effect waves-light btn-small hide-on-large-inline-block modal-trigger" href="#modal<%= index %>">Liked By</a>
                                         <% } %>  
                                     </div>
                                   <% } %>

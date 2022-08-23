@@ -360,9 +360,10 @@ th {
     display: none;
 }
 
-.hide-on-small {
-    /* display: inline-block; */
+.hide-on-large-inline-block {
+    display: none;
 }
+
 
 #pageNumber {
     margin-left: 5px;
@@ -404,6 +405,9 @@ th {
     }
     .hide-on-large {
         display: block;
+    }
+    .hide-on-large-inline-block {
+        display: inline-block;
     }
 
     .likedHeaderBaap {
