@@ -28,6 +28,7 @@
                 <div class="col s6 m4">
                     <form action="/stories" method="GET" id="sortOptions">
                         <input type="hidden" name="sortByAuthor" value=<%= sortByAuthor %> >
+                        <input type="hidden" name="view" value="list" >
                         <select name="sortby" id="sortby" class="browser-default" onchange="handleSort()">
                             <option value="LeastLikes" <%= sortby === "LeastLikes" ? "selected" : "" %> >Least Likes</option>
                             <option value="MostLikes" <%= sortby === "MostLikes" ? "selected" : "" %> >Most Likes</option>
@@ -41,6 +42,7 @@
                 </div>
                 <div class="col s6 m4 ">
                     <form action= "/stories" method="GET" id="filterByAuthor">
+                        <input type="hidden" name="view" value="list" >
                         <select name="sortByAuthor" id="author" class="browser-default"  onchange="handleFilterByAuthor()">
                             <option value="" <%=  sortByAuthor.toString() === "" ? "selected" : "" %> >All authors</option>
                             <% for (let author of authors ) { %>
