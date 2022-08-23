@@ -369,9 +369,6 @@ th {
     display: none;
 }
 
-.hide-on-small {
-    /* display: inline-block; */
-}
 
 #pageNumber {
     margin-left: 5px;
