@@ -39,9 +39,6 @@ p {
     font-size: 2vmin;
 }
 
-.row .col {
-    padding: 0;
-}
 
 table {
     border: none;
@@ -121,17 +118,7 @@ th {
     z-index: 10;
 }
 
-.public-heading {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-}
 
-.public-heading-rest {
-    /* width: 100%; */
-    display: flex;
-    justify-content: center;
-}
 
 .story-holder {
     display: grid;
@@ -355,9 +342,13 @@ th {
     margin-left: 10px;
 }
 
+.align-right{
+    display: flex;
+    justify-content: right;
+}
+
 .top-panel {
     display: flex;
-    margin-left: 10px;
 }
 
 .top-panel form {
@@ -366,6 +357,10 @@ th {
 }
 
 .hide-on-large {
+    display: none;
+}
+
+.hide-on-large-inline-block {
     display: none;
 }
 
@@ -411,6 +406,9 @@ th {
     .hide-on-large {
         display: block;
     }
+    .hide-on-large-inline-block {
+        display: inline-block;
+    }
 
     .likedHeaderBaap {
         width: 100%;
@@ -425,10 +423,6 @@ th {
     .wrote-col-5 {
         width: 10%;
     }
-    .indexpage-header {
-        flex-direction: column;
-        width: 100%;
-    }
     .public-heading {
         width: 100%;
         text-align: center;
@@ -442,5 +436,9 @@ th {
 
     .viewstory__storybody p {
         font-size: 16px;
+    }
+
+    .push-down-on-small{
+        margin-top: 5px;
     }
 }
