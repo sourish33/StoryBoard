@@ -5,6 +5,7 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 const User = require("./models/User")
 const Story = require("./models/Story")
+const ObjectId = require('mongoose').Types.ObjectId; 
 const SEARCH_OPTIONS = ["Recent", "YouLiked", "MostLikes", "LeastLikes", "Oldest"]
 const perPage = 6
 
@@ -93,21 +94,11 @@ const getPublicStories = async (req, res, next) => {
 
     let sortOptionChrono = sortby === "Oldest" ? 1 : -1
     let dbquery = {}
-    if (sortByAuthor) {
-
-    }
-    // if (sortby === "YouLiked") {
-    //     dbquery = Story.find({ status: "public", _id: { $in: ids } })
-    // } else {
-    //     dbquery = Story.find({ status: "public" })
-    // }
-
     let queryFilter = {status: "public"}
     if (sortby === "YouLiked"){
         queryFilter._id = { $in: ids } 
     }
     if (sortByAuthor) {
-        const ObjectId = require('mongoose').Types.ObjectId; 
         queryFilter.user = new ObjectId(sortByAuthor)
     }
 
@@ -130,7 +121,7 @@ const getPublicStories = async (req, res, next) => {
         dbquery.skip(pageNumber * perPage - perPage).limit(perPage)
     }
 
-    const authorQuery = User.find({}).sort({ lastName: 1 }).collation({ locale: "en", caseLevel: true }) //sorts alphabetically without regard to case
+    const authorQuery = User.find({role : {$ne : "guest"}}).sort({ lastName: 1 }).collation({ locale: "en", caseLevel: true }) //sorts alphabetically without regard to case
     const [authors, retrievedStories, numStories] = await Promise.all([authorQuery, dbquery
         .lean()
         .populate("user")
