@@ -50,7 +50,7 @@
                         </form>
                     </div>
                     <div class="top-panel col s12  m4 align-right push-down-on-small" >
-                        <% if (paginationData[paginationData.length-1][1]>6) { %>
+                        <% if (paginationData.length>0 && paginationData[paginationData.length-1][1]>6) { %>
                 
                         <form action="/stories" method="GET" id="pagination">
                             <% if (!(+pageNumber===1 ||  pageNumber === "all" )) { %>
@@ -80,35 +80,41 @@
                 
         </div>
             <div class="story-holder">
-                <% for( let story of retrievedStories) { %>
-                    <div class="card">
-                        <div class="card-image center-align">
-                            <a href="stories/edit/<%= story.storyID %>" class="btn-floating halfway-fab blue <%= story.editIcon %>"><i class="fas fa-edit fa-2xl"></i></a>  
-                        </div>
-                        <div class="card-content center-align">
-                            <h5><%= story.shortTitle %>  </h5>
-                            <p><%= story.updatedAt %> </p>
-                            <div class="story-body"><%- story.body %> </div>
-                            <div class="chip">
-                                <img src=<%= story.user.image %>  alt="user image" onerror="this.src='/images/generic-user.png';">
-                                <a href="/users/profile/<%= story.user._id %> "><%= story.user.displayName %> </a>
+                <% if (paginationData.length>0) { %>
+                    <% for( let story of retrievedStories) { %>
+                        <div class="card">
+                            <div class="card-image center-align">
+                                <a href="stories/edit/<%= story.storyID %>" class="btn-floating halfway-fab blue <%= story.editIcon %>"><i class="fas fa-edit fa-2xl"></i></a>  
+                            </div>
+                            <div class="card-content center-align">
+                                <h5><%= story.shortTitle %>  </h5>
+                                <p><%= story.updatedAt %> </p>
+                                <div class="story-body"><%- story.body %> </div>
+                                <div class="chip">
+                                    <img src=<%= story.user.image %>  alt="user image" onerror="this.src='/images/generic-user.png';">
+                                    <a href="/users/profile/<%= story.user._id %> "><%= story.user.displayName %> </a>
+                                </div>
+                            </div>
+                            <div class="card-action center-align card-footer">
+                                <a href="stories/<%= story.storyID %>" class="btn">Read More</a>
+                            </div>
+                            <div class="public__score">
+                                <div class="public__arrows">
+                                    <form method="POST" action="/users/addRemoveLike" >
+                                        <input type="hidden" name="userid" value="<%=user._id%>">
+                                        <input type="hidden" name="storyID" value="<%=story.storyID%>">
+                                        <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: #6E9A34; cursor: pointer;" onclick="handleClick(event)"></i>
+                                    </form>
+                                </div>
+                                <span id="hello" class="public__votenum <%= story.likes === 0 ? "hidden": ""%>"><%= story.likes %>  <%= story.likes>1?"likes":"like" %></span>
                             </div>
                         </div>
-                        <div class="card-action center-align card-footer">
-                            <a href="stories/<%= story.storyID %>" class="btn">Read More</a>
-                        </div>
-                        <div class="public__score">
-                            <div class="public__arrows">
-                                <form method="POST" action="/users/addRemoveLike" >
-                                    <input type="hidden" name="userid" value="<%=user._id%>">
-                                    <input type="hidden" name="storyID" value="<%=story.storyID%>">
-                                    <i class="fas fa-thumbs-up <%= user.liked.map(el=>el.toString()).includes(story.storyID.toString())  ? 'fa-2xl': '' %>" style="color: #6E9A34; cursor: pointer;" onclick="handleClick(event)"></i>
-                                </form>
-                            </div>
-                            <span id="hello" class="public__votenum <%= story.likes === 0 ? "hidden": ""%>"><%= story.likes %>  <%= story.likes>1?"likes":"like" %></span>
-                        </div>
-                    </div>
-                    <% } %>
+                        <% } %>
+
+                <% } else { %>
+                     <div class="story-row">This user has not written any stories</div>
+                <% } %>
+                
             </div>
         
 

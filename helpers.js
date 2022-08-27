@@ -121,7 +121,7 @@ const getPublicStories = async (req, res, next) => {
         dbquery.skip(pageNumber * perPage - perPage).limit(perPage)
     }
 
-    const authorQuery = User.find({role : {$ne : "guest"}}).sort({ lastName: 1 }).collation({ locale: "en", caseLevel: true }) //sorts alphabetically without regard to case
+    const authorQuery = User.find().sort({ lastName: 1 }).collation({ locale: "en", caseLevel: true }) //sorts alphabetically without regard to case
     const [authors, retrievedStories, numStories] = await Promise.all([authorQuery, dbquery
         .lean()
         .populate("user")
@@ -130,7 +130,7 @@ const getPublicStories = async (req, res, next) => {
     ])
 
     let paginationData = paginate(numStories, perPage)
-    if (paginationData && paginationData.length<pageNumber){
+    if (paginationData.length>0 && paginationData.length<pageNumber){
         return res.render("error/500", { error: `Invalid page number ${pageNumber}: cannot be greater than the number of pages ${paginationData.length}` })
     }
     req.paginationData = paginationData
