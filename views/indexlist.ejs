@@ -52,7 +52,7 @@
                     </form>
                 </div>
                 <div class="top-panel col s12  m4 align-right push-down-on-small" >
-                    <% if (paginationData[paginationData.length-1][1]>6) { %>
+                    <% if (paginationData.length>0 && paginationData[paginationData.length-1][1]>6) { %>
             
                     <form action="/stories" method="GET" id="pagination">
                         <% if (!(+pageNumber===1 ||  pageNumber === "all" )) { %>
@@ -82,6 +82,7 @@
             
     </div>     
     <div class="wrapper">
+        <% if (paginationData.length>0) { %>
                 <% for( let story of retrievedStories) { %>
                     <div class="story-row">
                         <div>
@@ -102,6 +103,10 @@
                         </div>
                     </div>
 
+                    <% } %>
+
+                <% } else { %>
+                        <div class="story-row">This user has not written any stories</div>
                 <% } %>
 
             </div>
