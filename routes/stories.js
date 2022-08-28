@@ -1,5 +1,4 @@
 const express = require("express")
-const { route } = require(".")
 const {
     formatTimeDateOnly,
     getPublicStories,
@@ -9,7 +8,7 @@ const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
 const User = require("../models/User")
-// const { Promise } = require("mongoose")
+
 
 //  @desc Show Add page
 // @route GET /

@@ -10,9 +10,12 @@
     <div class="container">
         <div class="header-box">
             <div>
-                <h5>Welcome, <a href="/users/profile/<%=_id %> "><%= firstName %></a> </h5>
+                <h5>Welcome, <a href="/users/profile/<%=_id %>"><%= firstName %></a> </h5>
             </div>
-            <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
+            <div class="top-right-btns">
+                <a href="/users/profile/<%=_id %>" class="waves-effect waves-purple btn extra-button">Your Profile</a>
+                <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
+            </div>
         </div>
         <% if (trendingStories) { %>
             <div class="likedHeaderBaap">
