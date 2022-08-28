@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header'); %>
+
+    <title>Author</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+</head>
+<body class="viewstory__body">
+    <%- include('../partials/nav.ejs') %> 
+    <div class="container">
+        <div class="userpage__top-panel">
+            <% if (author.image) { %>
+                    <img class="img_profile" src="<%= author.image %> " alt="<%= author.displayName %> ">
+            <% } %>
+
+            <div class="header-box">
+                <div>
+                    <h3>Edit Your Profile</h3>
+                </div>
+                <div class="navbtns">
+                    <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
+                    <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                  <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="last_name" type="text" class="validate">
+                  <label for="last_name">Last Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input disabled value="I am not editable" id="disabled" type="text" class="validate">
+                  <label for="disabled">Disabled</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="password" type="password" class="validate">
+                  <label for="password">Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate">
+                  <label for="email">Email</label>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+    </div>
+
+    <%- include('../partials/footer.ejs') %> 
+    <script>
+        const logout = () =>{
+        if ("<%= user.role %>" === "guest") {
+            Swal.fire({
+                title: 'All guest stories and likes will be deleted upon logout. Register or login to save your data.',
+                showDenyButton: true,
+                confirmButtonText: 'Logout',
+                denyButtonText: `Cancel`,
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/auth/logout"
+                    return
+                } 
+        })
+        } else{
+            window.location.href = "/auth/logout"
+        }
+        
+    }
+    </script>
+</body>
+</html>
+
+
+    

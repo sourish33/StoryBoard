@@ -66,7 +66,7 @@ router.patch("/removeAllLikes", ensureAuth, async (req, res) => {
     }
 })
 
-
+//show profile of user with _id: id
 router.get("/profile/:id", ensureAuth, async (req, res) =>{
     const authorId = req.params.id
     try {
@@ -83,6 +83,30 @@ router.get("/profile/:id", ensureAuth, async (req, res) =>{
     } catch (error) {
         res.status(500).render("./error/500.ejs", { error })
     }
+})
+
+//show edit page
+router.get("/edit/:id", ensureAuth, async (req, res) =>{
+
+    try {
+        const authorId = req.params.id
+        const author = await User.findOne({_id: authorId}).lean().exec()
+        if (!author){
+            return res.render('./error/noaccess.ejs') 
+        }
+        const loggedIn =  author._id.equals(req.user._id)
+        if (loggedIn){
+            return res.render('./user/userpage-edit.ejs', {
+                author, 
+                user: req.user, 
+            }) 
+        }
+        return res.render('./error/noaccess.ejs') 
+    } catch (error) {
+        res.status(500).render("./error/500.ejs", { error })
+    }
+
+
 })
 
 
