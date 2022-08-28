@@ -44,7 +44,7 @@
                             <select name="sortByAuthor" id="author" class="browser-default"  onchange="handleFilterByAuthor()">
                                 <option value="" <%=  sortByAuthor.toString() === "" ? "selected" : "" %> >All authors</option>
                                 <% for (let author of authors ) { %>
-                                    <option value="<%=author._id %>" <%=  sortByAuthor.toString() === author._id.toString() ? "selected" : "" %> > <%=`${author.lastName}, ${author.firstName}` %> </option>
+                                    <option value="<%=author._id %>" <%=  sortByAuthor.toString() === author._id.toString() ? "selected" : "" %> > <%=author.role==="guest" ?  `Guest` : `${author.lastName}, ${author.firstName}` %> </option>
                                 <% } %>
                             </select>
                         </form>
