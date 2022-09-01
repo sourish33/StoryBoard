@@ -41,7 +41,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="password" type="text" >
+                  <input id="password" type="text" value="<%=author.image %>">
                   <label for="image">Image Link</label>
                 </div>
               </div>
@@ -51,7 +51,7 @@
             
             </form>
           </div>
-          <a class="waves-effect waves-light btn" id="toggle-btn">Change Password</a>
+          <a class="waves-effect waves-light btn" id="toggle-btn" onclick="togglePwdForm()">Change Password</a>
           <div id="pwd-form" class="hidden">
             <form>
               <div class="row">
@@ -100,7 +100,8 @@
     const togglePwdForm = () =>{
           let pwdForm = document.getElementById("pwd-form")
           let toggler = document.getElementById("toggle-btn")
-          pwdForm.classList.toggle("hidden")
+          pwdForm.classList.remove("hidden")
+          toggler.classList.add("hidden")
         }
     </script>
 </body>
