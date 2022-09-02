@@ -106,6 +106,19 @@ router.get("/edit/:id", ensureAuth, async (req, res) =>{
         res.status(500).render("./error/500.ejs", { error })
     }
 
+})
+
+//edit user details
+router.post("/edit/:id", ensureAuth, async (req, res) =>{
+
+    try {
+        const authorId = req.params.id
+        console.log(authorId)
+        console.log(req.body)
+        return
+    } catch (error) {
+        res.status(500).render("./error/500.ejs", { error })
+    }
 
 })
 
