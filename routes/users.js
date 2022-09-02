@@ -115,7 +115,11 @@ router.post("/edit/:id", ensureAuth, async (req, res) =>{
         const authorId = req.params.id
         console.log(authorId)
         console.log(req.body)
-        return
+        const updatedAuthor = await User.findByIdAndUpdate({_id: authorId},req.body, {new: true})
+        return res.status(200).render('./user/userpage-edit.ejs', {
+            author: updatedAuthor, 
+            user: req.user, 
+        })
     } catch (error) {
         res.status(500).render("./error/500.ejs", { error })
     }
