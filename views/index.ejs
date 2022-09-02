@@ -109,6 +109,7 @@
                                 <span id="hello" class="public__votenum <%= story.likes === 0 ? "hidden": ""%>"><%= story.likes %>  <%= story.likes>1?"likes":"like" %></span>
                             </div>
                         </div>
+
                         <% } %>
 
                 <% } else { %>
@@ -137,7 +138,7 @@
                         return
                     } 
             })
-            } else{
+            } else {
                 window.location.href = "/auth/logout"
             }
             
