@@ -1,6 +1,7 @@
 const express = require("express")
 const { removeLikes, addLikes, removeAllLikes, processStories, processLikedBy } = require("../helpers")
 const router = express.Router()
+const bcrypt = require('bcrypt')
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story")
 const User = require("../models/User")
@@ -114,6 +115,11 @@ router.post("/edit/:id", ensureAuth, async (req, res) =>{
     try {
         const authorId = req.params.id
         console.log(authorId)
+        console.log(req.body)
+        if (req.body.password) {
+            const hashedPassword = await bcrypt.hash(req.body.password, 10)
+            req.body.password = hashedPassword
+        }
         console.log(req.body)
         const updatedAuthor = await User.findByIdAndUpdate({_id: authorId},req.body, {new: true})
         return res.status(200).render('./user/userpage-edit.ejs', {
