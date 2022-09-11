@@ -113,11 +113,11 @@
       const pwd1 = document.getElementById("password-retyped").value
       const formElement = document.getElementById("pwd-change-form")
       if (pwd==="" || pwd1===""){
-        alert("Please enter and retype the password")
+        Swal.fire("Please enter and retype the password")
         return
       }
       if (pwd!==pwd1) {
-        alert("Passwords don't match")
+        Swal.fire("Passwords don't match")
         return
       }
       formElement.submit()
