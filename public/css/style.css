@@ -1,15 +1,19 @@
 :root {
     --bodybgd: #bae484;
-    --bodytextcolor: #61286f;
-    --navbgd: #61286f;
+    --bodytextcolor: rgb(207, 200, 192);
+    --navbgd: rgba(187, 231, 130, 0.1);
     --tablebgd: #ffd5cc;
     --votenumbgd: #6e9a34;
+    --fontcolor: rgb(207, 200, 192)
 }
 
 body {
-    background-color: var(--bodybgd);
-    color: var(--bodytextcolor);
+    /* background-color: var(--bodybgd);
+    color: var(--bodytextcolor); */
+    background: linear-gradient(90deg, rgb(14, 18, 15), #254b4e) fixed;
+    background-size: cover;
     overscroll-behavior-y: none;
+    color: var(--fontcolor)
 }
 
 .lead {
@@ -28,6 +32,8 @@ body {
 nav {
     background-color: var(--navbgd);
 }
+
+
 
 h1 {
     font-size: 5.9vw;
