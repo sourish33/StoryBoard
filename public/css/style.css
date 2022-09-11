@@ -1,19 +1,17 @@
 :root {
-    --bodybgd: #bae484;
-    --bodytextcolor: rgb(207, 200, 192);
-    --navbgd: rgba(187, 231, 130, 0.1);
-    --tablebgd: #ffd5cc;
-    --votenumbgd: #6e9a34;
-    --fontcolor: rgb(207, 200, 192)
+    --bodybgd: #95de84;
+    --bodytextcolor: #004d40;
+    --navbgd: #43ba97;
+    --tablebgd: #f9f871;
+    --votenumbgd: #26a69a;
 }
 
 body {
-    /* background-color: var(--bodybgd);
-    color: var(--bodytextcolor); */
-    background: linear-gradient(90deg, rgb(14, 18, 15), #254b4e) fixed;
+    background-color: var(--bodybgd);
+    /* background: linear-gradient(90deg, var(--bodybgd), #254b4e) fixed; */
     background-size: cover;
     overscroll-behavior-y: none;
-    color: var(--fontcolor)
+    color: var(--bodytextcolor)
 }
 
 .lead {
