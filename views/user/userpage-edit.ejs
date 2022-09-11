@@ -31,7 +31,7 @@
         </div>
 
         <div class="row">
-            <form method="POST" action="/users/edit/<%= author._id %>">
+            <form method="POST" action="/users/edit/<%= author._id %>" id="user-details-form">
               <div class="row">
                 <div class="input-field col s12 m6">
                   <input placeholder="Placeholder" id="firstName" type="text" class="validate" name= "firstName" value="<%= author.firstName %>">
@@ -56,7 +56,7 @@
           </div>
           <a class="waves-effect waves-light btn" id="toggle-btn" onclick="togglePwdForm()">Change Password</a>
           <div id="pwd-form" class="hidden">
-            <form method="POST" action="/users/edit/<%= author._id %> ">
+            <form method="POST" action="/users/edit/<%= author._id %> " id="pwd-change-form">
               <div class="row">
                 <div class="input-field col s12 m6">
                   <input id="password" type="password" name= "password" class="validate">
@@ -65,12 +65,12 @@
               </div>
               <div class="row">
                 <div class="input-field col s12 m6">
-                  <input id="password" type="password" class="validate">
+                  <input id="password-retyped" type="password" class="validate">
                   <label for="password">Re-Enter Password</label>
                 </div>
               </div>
               <div class="row">
-                <button class="btn waves-effect waves-light" type="submit">Submit</button>
+                <button class="btn waves-effect waves-light" type="button" onclick="handlePasswordChange()">Submit</button>
               </div>
             </form>
           </div>
@@ -106,6 +106,24 @@
           pwdForm.classList.remove("hidden")
           toggler.classList.add("hidden")
         }
+
+    const handlePasswordChange = () =>{
+
+      const pwd = document.getElementById("password").value
+      const pwd1 = document.getElementById("password-retyped").value
+      const formElement = document.getElementById("pwd-change-form")
+      if (pwd==="" || pwd1===""){
+        alert("Please enter and retype the password")
+        return
+      }
+      if (pwd!==pwd1) {
+        alert("Passwords don't match")
+        return
+      }
+      formElement.submit()
+
+
+    }
     </script>
 </body>
 </html>
