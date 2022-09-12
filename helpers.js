@@ -219,6 +219,13 @@ const processLikedBy = (likers, currentUser) =>{
         likerString += "and yourself"
     }
     if (likerString.slice(-2) === ", ") likerString = likerString.slice(0, -2) //remove trailing ", " if exists
+
+    //if the user hasn't liked their own story, and the there is more than one like
+    if (likerString.indexOf('You only') === -1 && likerString.indexOf('and yourself') === -1 && likerString.indexOf(',')!== -1 ){
+        // remove the last comma and replace it by an "and"
+        let ind = likerString.lastIndexOf(",")
+        likerString = ind === -1 ? likerString : likerString.substring(0, ind)+ " and " + likerString.substring(ind+1)
+    }
     return likerString
 }
 
