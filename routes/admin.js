@@ -10,7 +10,7 @@ router.patch('/addfield', async (req, res) =>{
     try {
         // const res = await Story.updateMany( { likedBy: { $exists: false } },{$set : {likedBy: []} })
         // const res = await Story.updateMany( { likes: { $exists: false } },{$set : {likes:0} })
-        const result = await User.updateMany( { role: { $exists: false } },{$set : {role: "user"} })
+        const result = await User.updateMany( { bio: { $exists: false } },{$set : {bio: ""} })
         console.log(result.matchedCount)
         return res.send({
             status: "Done",
@@ -19,7 +19,7 @@ router.patch('/addfield', async (req, res) =>{
 
     } catch (err) {
         res.send({
-            status:"Done",
+            status:"Error",
             error: err
         })
     }

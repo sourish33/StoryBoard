@@ -34,6 +34,13 @@
                 </div>
             </div>
         </div>
+        <% if (author.bio) { %>
+            <div class="row">
+                <div class="card">
+                    <h6><%= author.bio %></h6> 
+                </div>
+            </div>
+        <% } %>
         <div class="stories">
             <div class="row">
                 <div class="col s12">

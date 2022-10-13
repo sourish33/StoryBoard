@@ -37,6 +37,9 @@ const UserSchema = new mongoose.Schema({
         enum : ['guest', 'user','admin'],
         default: 'user'
     },
+    bio: {
+        type: String,
+    }
 })
 
 UserSchema.set('timestamps', true)
