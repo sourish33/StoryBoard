@@ -115,7 +115,6 @@ router.post("/edit/:id", ensureAuth, async (req, res) =>{
     try {
         const authorId = req.params.id
         console.log(authorId)
-        console.log(req.body)
         if (req.body.password) {
             const hashedPassword = await bcrypt.hash(req.body.password, 10)
             req.body.password = hashedPassword
