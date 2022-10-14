@@ -13,6 +13,10 @@ router.get(["/", "/login"], ensureGuest, (req, res) => {
     res.render("login.ejs")
 })
 
+router.get("/admin/admin-dashboard", (req, res) => {
+    res.render("./admin/admin-dashboard.ejs")
+})
+
 
 
 // GET ALL stories belonging to user
