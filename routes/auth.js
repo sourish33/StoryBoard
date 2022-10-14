@@ -23,9 +23,18 @@ router.get(
 
 router.get("/logout", async (req, res) => {
     if (req.user.role === 'guest'){
+        const guestDetails = {
+            firstName: "Anonymous",
+            lastName: "Guest",
+            email: "anon@anon.com",
+            image: "https://images.pexels.com/photos/3820281/pexels-photo-3820281.jpeg",
+            bio: ""
+        }
         await removeAllLikes(req.user._id)
         await deleteAllStories(req.user._id)
+        await User.findByIdAndUpdate({_id: req.user._id}, guestDetails)
     }
+    
     req.logout()
     res.redirect("/")
 })

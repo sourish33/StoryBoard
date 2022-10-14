@@ -60,6 +60,7 @@
             
             </form>
           </div>
+          <% if (author.role!=="guest") { %>
           <a class="waves-effect waves-light btn" id="toggle-btn" onclick="togglePwdForm()">Change Password</a>
           <div id="pwd-form" class="hidden">
             <form method="POST" action="/users/edit/<%= author._id %> " id="pwd-change-form">
@@ -80,6 +81,7 @@
               </div>
             </form>
           </div>
+          <% } %>
         </div>
 
 
