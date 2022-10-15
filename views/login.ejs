@@ -34,6 +34,40 @@
                 <a class="btn blue darken-1" onclick="onlyRegister()">
                     Register
                 </a>
+                <div class="divider"></div>
+                  <!-- Modal Trigger -->
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Admin</a>
+
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal">
+                        <div class="modal-header">
+                            <h2>Admin Login</h2>
+                            </div>
+                        <div class="modal-content">
+                            <form action="/auth/login" method="POST">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                      <input id="email" name="email" type="email" class="validate">
+                                      <label for="email">Email</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="input-field col s12">
+                                    <input id="password" name="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <a class="btn blue darken-1" onclick="formSubmit()">
+                                        Login
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
             </div>
         </div>
         <% if (messages) { %> 
