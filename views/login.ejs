@@ -7,10 +7,9 @@
 </head>
 <body>
     <%- include('partials/nav-login.ejs') %> 
-    <% if (messages) { %> 
-        <div class="login__animated">
-            <%= messages.error  %> 
-        </div>
+    <!-- If any flash messages are recived they are stored in a hidden div. A JS script displays them using Swal -->
+    <% if (messages.error) { %> 
+            <div style="display:none;" id="msg_div"><%= messages.error %> </div>      
     <% } %> 
     <div class="container login-container">
         <div class="card" id="home">
@@ -162,6 +161,12 @@
                     } 
             })
         }
+        //if any flash messages exist then show them using swal
+        const msg = document.getElementById("msg_div").innerHTML
+        if (msg) {
+            Swal.fire(msg)
+        }
+
         
     </script>
 
