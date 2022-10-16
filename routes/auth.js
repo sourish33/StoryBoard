@@ -53,7 +53,7 @@ router.post(
     "/login-admin",
     ensureGuest,
     passport.authenticate("admin-local", {
-        successRedirect: "/admin/admin-dashboard", //the route /admin-dashboard is under /admin
+        successRedirect: "/admin/dashboard", //the route /dashboard is under /admin
         failureRedirect: "/login",
         failureFlash: true,
     })

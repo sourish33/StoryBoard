@@ -6,7 +6,7 @@ const Story = require("../models/Story")
 const User = require("../models/User")
 
 
-router.get("/admin-dashboard", ensureAuthAdmin, (req, res) => {
+router.get("/dashboard", ensureAuthAdmin, (req, res) => {
     res.render("./admin/admin-dashboard.ejs")
 })
 
