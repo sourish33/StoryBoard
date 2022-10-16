@@ -41,12 +41,21 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
             stories = stories.slice(0, 5)
         }
         let likedStories = thisUser.liked.filter((el) => el.status === "public")
+        let likedStoryAuthorIds = likedStories.map(el => el.user)
+        const authorQueries = likedStoryAuthorIds.map(el =>{
+            return User.findOne({_id: el}).lean()
+        })
+        const likedStoryAuthors = await Promise.all(authorQueries)
+        const likedStoryAuthorNames = likedStoryAuthors.map(el=>el.displayName)
+        for (let i=0;i<likedStories.length;i++){
+            likedStories[i].authorName = likedStoryAuthorNames[i]
+        }
+
         let numLikedStories = likedStories.length
         if (numLikedStories > 5 && !(showAllLiked === "1")) {
             likedStories = likedStories.slice(0, 5)
         }
 
-        console.log(req.user.role)
 
         res.render("dashboard.ejs", {
             _id: req.user._id,
