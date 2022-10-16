@@ -1,4 +1,3 @@
-const e = require("express")
 const express = require("express")
 const {formatTimeShort, getPublicStories, getPopularAuthors, processText } = require("../helpers")
 const router = express.Router()
@@ -41,8 +40,8 @@ router.get("/dashboard", ensureAuth, getPublicStories, getPopularAuthors, async 
         if (numStories > 5 && !(showAllWrote === "1")) {
             stories = stories.slice(0, 5)
         }
-        likedStories = thisUser.liked.filter((el) => el.status === "public")
-        numLikedStories = likedStories.length
+        let likedStories = thisUser.liked.filter((el) => el.status === "public")
+        let numLikedStories = likedStories.length
         if (numLikedStories > 5 && !(showAllLiked === "1")) {
             likedStories = likedStories.slice(0, 5)
         }
