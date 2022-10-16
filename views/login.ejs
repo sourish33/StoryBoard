@@ -136,99 +136,11 @@
                 <%= messages.error  %> 
             </div>
         <% } %> 
-        <div class="card" id="register">
-            <div class="card-content">
-                <div class="main-icon-holder"><img class="main-icon-image" src="/images/logo-color.png" alt="Book-Image">  <div class="main-icon">StoryBoard</div></div>
-                <div class="divider"></div>
-                <form class="col s12" method="POST" action="/auth/register">
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <input id="firstNameR" name = "firstName" type="text" class="validate">
-                        <label for="firstNameR">First Name</label>
-                      </div>
-                      <div class="input-field col s6">
-                        <input id="lastNameR" type="text" name="lastName" class="validate">
-                        <label for="lastNameR">Last Name</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                          <input id="emailR" name="email" type="email" class="validate">
-                          <label for="emailR">Email</label>
-                        </div>
-                      </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <input id="passwordR" name="password" type="password" class="validate">
-                        <label for="passwordR">Password</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <a class="btn blue darken-1" onclick="formSubmit()">
-                            Register
-                        </a>
-                    </div>
-                    <div class="login__others">
-                        <a href="/login" >Home</a>
-                        <a class="login__fauxlink" onclick="onlyLogin()">Login with email</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="card" id="login">
-                <div class="card-content">
-                    <div class="main-icon-holder"><img class="main-icon-image" src="/images/logo-color.png" alt="Book-Image">  <div class="main-icon">StoryBoard</div></div>
-                    <form action="/auth/login" method="POST">
-                        <div class="row">
-                            <div class="input-field col s12">
-                              <input id="email" name="email" type="email" class="validate">
-                              <label for="email">Email</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                          <div class="input-field col s12">
-                            <input id="password" name="password" type="password" class="validate">
-                            <label for="password">Password</label>
-                          </div>
-                        </div>
-                        <div class="row">
-                            <a class="btn blue darken-1" onclick="formSubmit()">
-                                Login
-                            </a>
-                        </div>
-                        <div class="login__others">
-                            <a href="/login" >Home</a>
-                            <a class="login__fauxlink" onclick="onlyRegister()">Register</a>
-                        </div>
-                    </form>
-                </div>
-        </div>
+        
         
     </div>
     <%- include('partials/footer.ejs') %> 
     <script>
-        const home = document.getElementById("home")
-        const register = document.getElementById("register")
-        const login = document.getElementById("login")
-
-
-        const onlyHome = () =>{
-            register.style.display="none"
-            login.style.display="none"
-            home.style.display="block"
-        }
-
-        const onlyRegister = () =>{
-            home.style.display="none"
-            login.style.display="none"
-            register.style.display="block"
-
-        }
-        const onlyLogin = () =>{
-            home.style.display="none"
-            register.style.display="none"
-            login.style.display="block"
-        }
 
         const formSubmit = () =>{
             const form = event.currentTarget.parentNode.parentNode
@@ -247,7 +159,6 @@
                     } 
             })
         }
-        window.onload = onlyHome
         
     </script>
 
