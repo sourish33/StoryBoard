@@ -8,6 +8,16 @@ const ensureAuth = (req, res, next) =>{
     }
 }
 
+const ensureAuthAdmin = (req, res, next) =>{
+    if (req.isAuthenticated() && req.user.role==="admin") {
+        // console.log("EnsureAuth Speaking. The user is:")
+        // console.log(req.user)
+        return next()
+    } else {
+        res.redirect('/')
+    }
+}
+
 const ensureGuest = (req, res, next) =>{
     if (req.isAuthenticated()){
         console.log(req.user.firstName)
@@ -20,4 +30,5 @@ const ensureGuest = (req, res, next) =>{
 }
 
 module.exports.ensureAuth = ensureAuth
+module.exports.ensureAuthAdmin = ensureAuthAdmin
 module.exports.ensureGuest = ensureGuest
