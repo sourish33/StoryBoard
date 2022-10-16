@@ -19,9 +19,37 @@
                     <i class="fab fa-google left"></i> Log in with Google
                 </a>
                 <div class="divider"></div>
-                <a class="btn blue darken-1" onclick="onlyLogin()">
+                <!-- Modal Trigger -->
+                <a class="btn blue darken-1 modal-trigger" href="#modal-login">
                     <i class="fa fa-sign-in left" aria-hidden="true"></i> Log in with email
                 </a>
+                <!-- Modal Structure -->
+                    <div id="modal-login" class="modal">
+                        <div class="modal-header">
+                            <h4>Login</h4>
+                            </div>
+                        <div class="modal-content">
+                            <form action="/auth/login" method="POST">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                    <input id="email" name="email" type="email" class="validate">
+                                    <label for="email">Email</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="password" name="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <a class="btn blue darken-1" onclick="formSubmit()">
+                                        Login
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 <div class="divider"></div>
                 <form action="/auth/login" method="POST" id="guestLoginForm">
                     <input type="email" name="email" value="anon@anon.com"  class="validate" style="display:none;">
@@ -36,10 +64,10 @@
                 </a>
                 <div class="divider"></div>
                   <!-- Modal Trigger -->
-                    <a class="btn blue darken-1 modal-trigger" href="#modal1">Admin</a>
+                <a class="btn blue darken-1 modal-trigger" href="#modal-admin">Admin</a>
 
                     <!-- Modal Structure -->
-                    <div id="modal1" class="modal">
+                    <div id="modal-admin" class="modal">
                         <div class="modal-header">
                             <h4>Admin Login</h4>
                             </div>
@@ -63,9 +91,6 @@
                                     </a>
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
                         </div>
                     </div>
             </div>
