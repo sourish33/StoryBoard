@@ -7,7 +7,7 @@ const User = require("../models/User")
 
 
 router.get("/dashboard", ensureAuthAdmin, (req, res) => {
-    res.render("./admin/admin-dashboard.ejs")
+    res.render("./admin/admin-dashboard.ejs", {user: req.user})
 })
 
 module.exports = router
