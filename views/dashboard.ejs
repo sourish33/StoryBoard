@@ -154,6 +154,13 @@
             </div>
             <div>
                 <table class="highlight dashboard-table" id="likesTable">
+                    <thead>
+                        <tr>
+                            <th class="wrote-col-1">Title</th>
+                            <th class="wrote-col-4 hide-on-small">Author</th>
+                            <th class="wrote-col-5"></th>
+                        </tr>
+                    </thead>
                     <% for (let likedStory of likedStories ) { %>
                         <% if (likedStory.status==="public") { %>
                             <tr>
@@ -163,6 +170,9 @@
                                     <span id="hello" class="public__votenum hide-on-small"><%= likedStory.likes %> <%= likedStory.likes===1 ? "like" : "likes" %> </span>
                                 <% } %>
                                 
+                                </td>
+                                <td class="hide-on-small">
+                                   <a href="/users/profile/<%=likedStory.user%> "><%= likedStory.authorName %> </a>
                                 </td>
                                 <td>
                                     <form method="POST" action="/users/removeLike?_method=PATCH">
