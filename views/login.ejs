@@ -164,6 +164,7 @@
         //if any flash messages exist then show them using swal
         const msg = document.getElementById("msg_div").innerHTML
         if (msg) {
+            // M.toast({html: msg, classes: 'rounded', displayLength: 1000})
             Swal.fire(msg)
         }
 

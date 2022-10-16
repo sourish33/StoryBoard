@@ -8,6 +8,11 @@
 </head>
 <body class="viewstory__body">
     <%- include('../partials/nav.ejs') %> 
+    <% if (messages.info) { %>
+      <div class="hidden" id="msg_div">
+        <%= messages.info %> 
+      </div>
+    <% } %>
     <div class="container">
         <div class="userpage__top-panel">
             <% if (author.image) { %>
@@ -132,6 +137,13 @@
 
 
     }
+    //if any flash messages exist then show them using swal
+    const msg = document.getElementById("msg_div").innerHTML
+        if (msg) {
+            // Swal.fire(msg)
+            M.toast({html: msg, classes: 'rounded', displayLength: 1500})
+            
+        }
     </script>
 </body>
 </html>
