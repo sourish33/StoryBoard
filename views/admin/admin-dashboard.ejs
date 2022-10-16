@@ -6,14 +6,17 @@
     <script src="sweetalert2.all.min.js"></script>
 </head>
 <body>
-    <%- include('../partials/nav.ejs') %> 
+    <%- include('../partials/nav-admin.ejs') %> 
     <div class="container">
         <div class="header-box">
             <div>
-                <h5>Welcome, <%= user.firstName %>  </h5>
+                <h2>Welcome, <%= user.firstName %>  </h2>
             </div>
-
         </div>
+        
+    <h3>Select a Dashboard:</h3>
+    <a class="waves-effect waves-light btn">Users</a>
+    <a class="waves-effect waves-light btn">Stories</a>
 
     </div>
 
