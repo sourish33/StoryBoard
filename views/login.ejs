@@ -59,9 +59,45 @@
                     </a>
                 </form>
                 <div class="divider"></div>
-                <a class="btn blue darken-1" onclick="onlyRegister()">
-                    Register
-                </a>
+                <a class="btn blue darken-1  modal-trigger" href="#modal-register">Register</a>
+                    <!-- Modal Structure -->
+                    <div id="modal-register" class="modal">
+                        <div class="modal-header">
+                            <h4>Register</h4>
+                        </div>
+                        <div class="modal-content">
+                            <form class="col s12" method="POST" action="/auth/register">
+                                <div class="row">
+                                  <div class="input-field col s6">
+                                    <input id="firstNameR" name = "firstName" type="text" class="validate">
+                                    <label for="firstNameR">First Name</label>
+                                  </div>
+                                  <div class="input-field col s6">
+                                    <input id="lastNameR" type="text" name="lastName" class="validate">
+                                    <label for="lastNameR">Last Name</label>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                      <input id="emailR" name="email" type="email" class="validate">
+                                      <label for="emailR">Email</label>
+                                    </div>
+                                  </div>
+                                <div class="row">
+                                  <div class="input-field col s12">
+                                    <input id="passwordR" name="password" type="password" class="validate">
+                                    <label for="passwordR">Password</label>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <a class="btn blue darken-1" onclick="formSubmit()">
+                                        Register
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+  
                 <div class="divider"></div>
                   <!-- Modal Trigger -->
                 <a class="btn blue darken-1 modal-trigger" href="#modal-admin">Admin</a>
