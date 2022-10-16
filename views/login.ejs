@@ -7,10 +7,18 @@
 </head>
 <body>
     <%- include('partials/nav-login.ejs') %> 
+    <% if (messages) { %> 
+        <div class="login__animated">
+            <%= messages.error  %> 
+        </div>
+    <% } %> 
     <div class="container login-container">
-        <div class="card" id="home" style="display: block;">
+        <div class="card" id="home">
             <div class="card-content">
-                <div class="main-icon-holder"><img class="main-icon-image" src="/images/logo-color.png" alt="Book-Image">  <div class="main-icon">StoryBoard</div></div>
+                <div class="main-icon-holder">
+                    <img class="main-icon-image" src="/images/logo-color.png" alt="Book-Image">  
+                    <div class="main-icon">StoryBoard</div>
+                </div>
                 <div class="section">
                     <p class="lead">Create and share short stories</p>
                 </div>
@@ -23,7 +31,7 @@
                 <a class="btn blue darken-1 modal-trigger" href="#modal-login">
                     <i class="fa fa-sign-in left" aria-hidden="true"></i> Log in with email
                 </a>
-                <!-- Modal Structure -->
+                <!-- login Modal Structure -->
                     <div id="modal-login" class="modal">
                         <div class="modal-header">
                             <h4>Login</h4>
@@ -60,7 +68,7 @@
                 </form>
                 <div class="divider"></div>
                 <a class="btn blue darken-1  modal-trigger" href="#modal-register">Register</a>
-                    <!-- Modal Structure -->
+                    <!-- register Modal Structure -->
                     <div id="modal-register" class="modal">
                         <div class="modal-header">
                             <h4>Register</h4>
@@ -102,7 +110,7 @@
                   <!-- Modal Trigger -->
                 <a class="btn blue darken-1 modal-trigger" href="#modal-admin">Admin</a>
 
-                    <!-- Modal Structure -->
+                    <!-- Admin Modal Structure -->
                     <div id="modal-admin" class="modal">
                         <div class="modal-header">
                             <h4>Admin Login</h4>
@@ -131,11 +139,6 @@
                     </div>
             </div>
         </div>
-        <% if (messages) { %> 
-            <div class="login__animated">
-                <%= messages.error  %> 
-            </div>
-        <% } %> 
         
         
     </div>

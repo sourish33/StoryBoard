@@ -256,6 +256,7 @@ th {
 }
 
 .login__animated {
+    height: 2.5em;
     background-color: lightpink;
     display: flex;
     justify-content: center;
