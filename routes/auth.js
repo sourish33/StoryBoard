@@ -42,8 +42,18 @@ router.get("/logout", async (req, res) => {
 router.post(
     "/login",
     ensureGuest,
-    passport.authenticate("local", {
+    passport.authenticate("user-local", {
         successRedirect: "/dashboard",
+        failureRedirect: "/login",
+        failureFlash: true,
+    })
+)
+
+router.post(
+    "/login-admin",
+    ensureGuest,
+    passport.authenticate("admin-local", {
+        successRedirect: "/admin/admin-dashboard", //the route /admin-dashboard is under /admin
         failureRedirect: "/login",
         failureFlash: true,
     })

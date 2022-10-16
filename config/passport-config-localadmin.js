@@ -9,6 +9,9 @@ const initializePassport =  (passport, getUserByEmail, getUserById) =>{
         if (user == null){
             return done(null, false, {message: 'No user with that email'})
         }
+        if (user.role!=="admin"){
+            return done(null, false, {message: 'This resource is for Administrators only'})
+        }
         try {
            if (await bcrypt.compare(password, user.password)) {
                 return done(null, user, {message: "Passwords match"})
@@ -21,7 +24,7 @@ const initializePassport =  (passport, getUserByEmail, getUserById) =>{
 
 
     }
-    passport.use('user-local',new LocalStrategy({ 
+    passport.use('admin-local',new LocalStrategy({ 
         usernameField: 'email'
     }, authenticateUser))
 

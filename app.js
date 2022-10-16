@@ -24,9 +24,8 @@ const adminRoutes = require('./routes/admin')
 dotenv.config({path: './config/config.env'})
 connectDB()
 
-//Passport config
+//Local Passport config
 const initializePassportLocal = require('./config/passport-config-local')
-
 initializePassportLocal(passport, async email =>{
     try {
         const user = await User.findOne({email:email}).lean()
@@ -43,6 +42,27 @@ initializePassportLocal(passport, async email =>{
         throw new Error(error)
     }
 })
+
+//LocalAdmin Passport config
+const initializePassportLocalAdmin = require('./config/passport-config-localadmin')
+initializePassportLocalAdmin(passport, async email =>{
+    try {
+        const user = await User.findOne({email:email}).lean()
+        return user
+    } catch (error) {
+        throw new Error(error)
+    }
+
+}, async id =>{
+    try {
+        const user = await User.findById(id).lean()
+        return user
+    } catch (error) {
+        throw new Error(error)
+    }
+})
+
+//Google Passport config
 const initializePassportGoogle = require('./config/passport-config-google')
 initializePassportGoogle(passport)
 
