@@ -15,7 +15,7 @@
         </div>
         
     <h3>Select a Dashboard:</h3>
-    <a class="waves-effect waves-light btn">Users</a>
+    <form action="./users" method="GET" ><a class="waves-effect waves-light btn" onclick="formSubmit()">Users</a></form>
     <a class="waves-effect waves-light btn">Stories</a>
 
     </div>
@@ -24,6 +24,10 @@
     <script>
         const logout = () =>{
                 window.location.href = "/auth/logout" 
+        }
+        const formSubmit = () =>{
+            const form = event.currentTarget.parentNode
+            form.submit()
         }
 
 
