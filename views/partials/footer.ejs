@@ -4,6 +4,11 @@
     M.Sidenav.init(document.querySelector(".sidenav"))
     M.FormSelect.init(document.querySelector('#status'))
 
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, {});
+  });
+
     CKEDITOR.replace('body', {
         plugins: 'wysiwygarea, toolbar, basicstyles, link' 
     })
