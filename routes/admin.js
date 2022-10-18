@@ -1,13 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const { ensureAuth, ensureGuest, ensureAuthAdmin } = require("../middleware/auth")
+const { ensureAuthAdmin } = require("../middleware/auth")
 const bcrypt = require('bcrypt')
 const Story = require("../models/Story")
 const User = require("../models/User")
 const moment = require('moment');
 
 
-router.get(["/", "/dashboard"], ensureAuthAdmin, (req, res) => {
+router.get("/dashboard", ensureAuthAdmin, (req, res) => {
     res.status(200).render("./admin/admin-dashboard.ejs", {user: req.user})
 })
 

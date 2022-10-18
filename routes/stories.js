@@ -54,6 +54,7 @@ router.get("/", ensureAuth, getPublicStories, async (req, res) => {
         res.render(showfile, {
             retrievedStories: req.retrievedStories,
             user: req.user,
+            role: req.user.role,
             sortby: req.sortby,
             sortByAuthor: req.sortByAuthor,
             paginationData: req.paginationData,
