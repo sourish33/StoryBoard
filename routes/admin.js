@@ -13,8 +13,11 @@ router.get("/dashboard", ensureAuthAdmin, (req, res) => {
 
 router.get("/users", ensureAuthAdmin, async (req, res) =>{
     try {
+        const {sortby} = req.query
+        if (sortby){
+            const sortOptions = sortby.split(",")
+        }
         const users = await User.find({}).lean().exec()
-        console.log(users[4])
         //can't mutate users for some reason so creating a new array usersDateFormatted
         let usersDateFormatted = []
         for (let user of users) {
@@ -28,6 +31,7 @@ router.get("/users", ensureAuthAdmin, async (req, res) =>{
         res.status(500).render("./error/500.ejs", { error })
     }
 })
+
 
 router.get("/stories", ensureAuthAdmin, async (req, res) =>{
     try {
