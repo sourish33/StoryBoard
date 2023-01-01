@@ -7,7 +7,7 @@
     <script src="sweetalert2.all.min.js"></script>
 </head>
 <body class="viewstory__body">
-    <%- include('../partials/nav.ejs') %> 
+    <%- include('../partials/nav.ejs', {author: author}) %> 
     <div class="container">
         <div class="userpage__top-panel">
             <% if (author.image) { %>
