@@ -15,8 +15,8 @@
                   <a href="#" class="waves-effect waves-light btn">Filter</a>
                 </div>
         </div>
-        <div class="selected-box">
-          <p>Selected (7)</p>
+        <div id="selected-box" class= "hidden">
+          <p>Selected (<span id="numselected">4</span>)</p>
           <a class="waves-effect waves-light btn-small">Delete All</a>
         </div>
         <table class="responsive-table">
@@ -73,13 +73,15 @@
     <%- include('../partials/footer.ejs') %> 
     <script>
       let checkedIds = []
-        const logout = () =>{
-                window.location.href = "/auth/logout" 
-        }
 
-        const checkboxes = document.querySelectorAll(`[id^="sel"]`);
-        console.log(checkboxes.length)
+        const checkboxes = document.querySelectorAll(`[id^="sel"]`)
+        const selectedBox = document.getElementById('selected-box')
+        const numselected = document.getElementById('numselected')
+      
         for (let checkbox of checkboxes){
+          if (checkbox.checked === true){//reset all checkboxes when table loads
+            checkbox.checked=false
+          }
           checkbox.addEventListener('change', function() {
             const checkedId = this.id.split('_')[1]
             if (this.checked) {
@@ -87,11 +89,19 @@
             } else {
               checkedIds = checkedIds.filter(el=>el!==checkedId)
             }
-            console.log(checkedIds)
+            if (checkedIds.length>0){
+              selectedBox.classList.remove('hidden')
+              numselected.innerHTML = checkedIds.length
+            } else {
+              selectedBox.classList.add('hidden')
+            }
           })
           
         }
 
+        const logout = () =>{
+                window.location.href = "/auth/logout" 
+        }
 
     </script>
 
