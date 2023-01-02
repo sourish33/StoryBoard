@@ -128,6 +128,24 @@ th {
     z-index: 10;
 }
 
+.selected-box {
+    background-color: blue;
+    color:white;
+    display: flex;
+    align-items: center;
+}
+
+.selected-box p {
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.selected-box a {
+    background-color: red;
+    color: white;
+    margin-left: 10px;
+}
+
 
 
 .story-holder {
