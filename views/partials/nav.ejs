@@ -2,17 +2,19 @@
     <nav>
         <div class="nav-wrapper container">
             <a href="/stories" class="brand-logo center">StoryBoard</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-large"><i class="fas fa-bars"></i> </a>
+            <a
+                href="#"
+                data-target="mobile-demo"
+                class="sidenav-trigger show-on-large"
+                ><i class="fas fa-bars"></i>
+            </a>
             <ul class="sidenav" id="mobile-demo">
                 <li><a href="/stories">Public Stories</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a onclick="logout()">Logout</a></li>
-                <% if (locals.author) { %>
-                    <% if (author.role==="admin") { %>
-                        <li><a href="/admin/dashboard">Admin</a></li>
-                    <% } %>
+                <% if (locals.author && author.role==="admin") { %>
+                <li><a href="/admin/dashboard">Admin</a></li>
                 <% } %>
-
             </ul>
         </div>
     </nav>
