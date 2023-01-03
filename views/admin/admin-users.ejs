@@ -9,9 +9,9 @@
     <%- include('../partials/nav-admin.ejs') %> 
     <div class="container">
         <div class="header-box">
-                <h5>Users (<%= users.length %> ) </h5>
+                <h5 class="hide-on-small">Users (<%= users.length %> ) </h5>
                 <div class="top-right-btns">
-                  <a href="#" class="waves-effect waves-purple btn extra-button">Create New</a>
+                  <a href="#" class="waves-effect waves-purple btn">Create New</a>
                   <a href="#" class="waves-effect waves-light btn">Filter</a>
                 </div>
         </div>
@@ -19,7 +19,7 @@
           <p>Selected (<span id="numselected"></span>)</p>
           <a class="waves-effect waves-light btn-small">Delete</a>
         </div>
-        <div style="overflow-x:auto;">
+        <div class="table-holder">
           <table class="highlight" id="usertable">
           </table>
         </div>
