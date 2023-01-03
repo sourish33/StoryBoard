@@ -18,7 +18,7 @@ router.get("/users", ensureAuthAdmin, async (req, res) =>{
         let usersDateFormatted = []
         for (let user of users) {
             const formattedDate = moment(user.createdAt).format('YYYY-MM-DD');
-            const shortUser = {_id: user._id, email: user.email, firstName: user.firstName, lastName: user.lastName, joinDate: formattedDate}
+            const shortUser = {_id: user._id, email: user.email, firstName: user.firstName, lastName: user.lastName, liked: user.liked.length, joinDate: formattedDate}
             usersDateFormatted.push(shortUser)
         }
         res.status(200).render('./admin/admin-users.ejs', {users: usersDateFormatted})
