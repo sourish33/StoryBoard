@@ -15,27 +15,30 @@ router.get("/users", ensureAuthAdmin, async (req, res) => {
     try {
         const users = await User.find({}).lean().exec()
         //create querries for getting number of stories for each user
-        let storyQueries = []
-        for (let user of users) {
-            let storiesQuery = Story.find({ user: user._id }).lean().exec()
-            storyQueries.push(storiesQuery)
-        }
+        let storyQueries = users.map((el) =>
+            Story.find({ user: el._id }).lean().exec()
+        )
         const storyList = await Promise.all(storyQueries)
-        const storyNums = storyList.map((el) => el.length)
-        // console.log(storyNums)
-        //can't mutate users for some reason so creating a new array usersDateFormatted
-        let usersDateFormatted = []
+        //add two properties on each author totalStories and totalLikes
         for (let i = 0; i < users.length; i++) {
-            const formattedDate = moment(users[i].createdAt).format(
+            users[i].totalStories = storyList[i].length
+            users[i].totalLikes = storyList[i]
+                .map((el) => el.likes)
+                .reduce((acc, cur) => acc + cur, 0)
+        }
+        let usersDateFormatted = []
+        for (let user of users) {
+            const formattedDate = moment(user.createdAt).format(
                 "YYYY-MM-DD"
             )
             const shortUser = {
-                _id: users[i]._id,
-                Email: users[i].email,
-                "First Name": users[i].firstName,
-                "Last Name": users[i].lastName,
-                Wrote: storyNums[i],
-                Liked: users[i].liked.length,
+                _id: user._id,
+                Email: user.email,
+                "First Name": user.firstName,
+                "Last Name": user.lastName,
+                Wrote: user.totalStories,
+                "Liked By": user.totalLikes,
+                Liked: user.liked.length,
                 Joined: formattedDate,
             }
             usersDateFormatted.push(shortUser)
