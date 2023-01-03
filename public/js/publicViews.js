@@ -130,7 +130,7 @@ const fillTable = (tableId, data) => {
     if (data.length === 0) return
     let thead = document.createElement("thead")
     let tr = document.createElement("tr")
-    let checkbox = makeCheckbox("all-selected")
+    let checkbox = makeCheckbox("all-checkboxes")
     tr.appendChild(checkbox)
     for (const [key, value] of Object.entries(data[0])) {
         if (key !== "_id") {
