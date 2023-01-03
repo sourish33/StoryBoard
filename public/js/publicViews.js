@@ -124,6 +124,30 @@ const makeCheckbox = (id) => {
     return th
 }
 
+const makeDropdown = (id) => {
+    let s = document.createElement("select")
+    s.id = id
+    s.classList.add("browser-default")
+    let option = null
+    option = document.createElement("option")
+    option.value = ""
+    option.innerHTML = "..."
+    s.appendChild(option)
+    option = document.createElement("option")
+    option.value = "view"
+    option.innerHTML = "View"
+    s.appendChild(option)
+    option = document.createElement("option")
+    option.value = "create"
+    option.innerHTML = "Create"
+    s.appendChild(option)
+    option = document.createElement("option")
+    option.value = "delete"
+    option.innerHTML = "Delete"
+    s.appendChild(option)
+    return s
+}
+
 const fillTable = (tableId, data) => {
     let table = document.getElementById(tableId)
     removeAllChildNodes(table)
@@ -139,6 +163,8 @@ const fillTable = (tableId, data) => {
             tr.appendChild(th)
         }
     }
+    let th = document.createElement("th")
+    tr.appendChild(th)
     thead.appendChild(tr)
     table.appendChild(thead)
     let tbody = document.createElement("tbody")
@@ -153,6 +179,10 @@ const fillTable = (tableId, data) => {
                 tr.appendChild(td)
             }
         }
+        let td = document.createElement("td")
+        let dropdown = makeDropdown("dropdown_" + datarow._id)
+        td.appendChild(dropdown)
+        tr.appendChild(td)
         tbody.appendChild(tr)
         table.appendChild(tbody)
     }
