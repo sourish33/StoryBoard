@@ -13,17 +13,13 @@ router.get("/dashboard", ensureAuthAdmin, (req, res) => {
 
 router.get("/users", ensureAuthAdmin, async (req, res) =>{
     try {
-        const {sortby} = req.query
-        if (sortby){
-            const sortOptions = sortby.split(",")
-        }
         const users = await User.find({}).lean().exec()
         //can't mutate users for some reason so creating a new array usersDateFormatted
         let usersDateFormatted = []
         for (let user of users) {
             const formattedDate = moment(user.createdAt).format('YYYY-MM-DD');
-            user = {...user, joinDate: formattedDate}
-            usersDateFormatted.push(user)
+            const shortUser = {_id: user._id, email: user.email, firstName: user.firstName, lastName: user.lastName, joinDate: formattedDate}
+            usersDateFormatted.push(shortUser)
         }
         res.status(200).render('./admin/admin-users.ejs', {users: usersDateFormatted})
     } catch (error) {

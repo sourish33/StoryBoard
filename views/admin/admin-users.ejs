@@ -19,59 +19,16 @@
           <p>Selected (<span id="numselected"></span>)</p>
           <a class="waves-effect waves-light btn-small">Delete</a>
         </div>
-        <table class="responsive-table">
-            <thead style="border: 2px solid black;">
-              <tr>
-                  <th>
-                    <label>
-                      <input type="checkbox" class="filled-in" id="all-checkboxes"/>
-                      <span></span>
-                    </label>
-                  </th>
-                  <th>Email</th>
-                  <th style="cursor:pointer;">First Name <i class="fa-solid fa-sort-up "></i><i class="fa-solid fa-sort-down hidden"></i></th>
-                  <th>Last Name</th>
-                  <th>Joined </th>
-                  <th>Role</th>
-                  <th>Actions</th>
-              </tr>
-            </thead>
-    
-            <tbody>
-              <% for( let user of users ) { %>
-                <tr>
-                  <td>
-                    <label>
-                      <input type="checkbox" id=<%='sel_'+user._id %> >
-                      <span></span>
-                    </label>
-                  </td>
-                    <td><%= user.email %> </td>
-                    <td><%= user.firstName %> </td>
-                    <td><%= user.lastName %> </td>
-                    <td><%= user.joinDate %> </td>
-                    <td><%= user.role %> </td>
-                    <td>
-                        <!-- Dropdown Trigger -->
-                        <a class='dropdown-trigger btn' href='#' data-target=<%= user._id %>>...</a>
-
-                        <!-- Dropdown Structure -->
-                        <ul id=<%= user._id %> class='dropdown-content'>
-                          <li><a href="#!">View</a></li>
-                          <li><a href="#!">Edit</a></li>
-                          <li><a href="#!">Delete</a></li>
-                        </ul>
-                    </td>
-                  </tr>
-              
-              <% } %>
-            </tbody>
-          </table>
+        <table class="responsive-table" id="usertable">
+        </table>
 
     </div>
 
     <%- include('../partials/footer.ejs') %> 
+    <script src="/js/publicViews.js"></script>
     <script>
+      const data = <%- JSON.stringify(users) %>
+      fillTable('usertable', data)
       let checkedIds = []
 
         const checkboxes = document.querySelectorAll(`[id^="sel_"]`)
