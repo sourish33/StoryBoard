@@ -156,7 +156,36 @@ const makeDropdown = (id) => {
     a.setAttribute('href','#');
     a.setAttribute('data-target',id);
     a.innerHTML = "..."
+
+    let ul = document.createElement('ul')
+    ul.id = id
+    ul.classList.add('dropdown-content')
+    let li = null
+    let lia = null
+
+    li = document.createElement('li')
+    lia = document.createElement('a')
+    lia.setAttribute('href','#');
+    lia.innerHTML = "View"
+    li.appendChild(lia)
+    ul.appendChild(li)
+
+    li = document.createElement('li')
+    lia = document.createElement('a')
+    lia.setAttribute('href','#');
+    lia.innerHTML = "Edit"
+    li.appendChild(lia)
+    ul.appendChild(li)
+
+    li = document.createElement('li')
+    lia = document.createElement('a')
+    lia.setAttribute('href','#');
+    lia.innerHTML = "Delete"
+    li.appendChild(lia)
+    ul.appendChild(li)
+
     div.appendChild(a)
+    div.appendChild(ul)
     return div
 }
 
