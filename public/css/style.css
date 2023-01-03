@@ -352,6 +352,10 @@ th {
 
 }
 
+select {
+    appearance: none;
+}
+
 .dashboard-table {
     table-layout: auto;
     margin: 20px 0;

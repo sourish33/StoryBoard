@@ -124,28 +124,40 @@ const makeCheckbox = (id) => {
     return th
 }
 
+// const makeDropdown = (id) => {
+//     let s = document.createElement("select")
+//     s.id = id
+//     s.classList.add("browser-default")
+//     let option = null
+//     option = document.createElement("option")
+//     option.value = ""
+//     option.innerHTML = "..."
+//     s.appendChild(option)
+//     option = document.createElement("option")
+//     option.value = "view"
+//     option.innerHTML = "View"
+//     s.appendChild(option)
+//     option = document.createElement("option")
+//     option.value = "create"
+//     option.innerHTML = "Create"
+//     s.appendChild(option)
+//     option = document.createElement("option")
+//     option.value = "delete"
+//     option.innerHTML = "Delete"
+//     s.appendChild(option)
+//     return s
+// }
+
 const makeDropdown = (id) => {
-    let s = document.createElement("select")
-    s.id = id
-    s.classList.add("browser-default")
-    let option = null
-    option = document.createElement("option")
-    option.value = ""
-    option.innerHTML = "..."
-    s.appendChild(option)
-    option = document.createElement("option")
-    option.value = "view"
-    option.innerHTML = "View"
-    s.appendChild(option)
-    option = document.createElement("option")
-    option.value = "create"
-    option.innerHTML = "Create"
-    s.appendChild(option)
-    option = document.createElement("option")
-    option.value = "delete"
-    option.innerHTML = "Delete"
-    s.appendChild(option)
-    return s
+    let div = document.createElement('div')
+    let a = document.createElement('a')
+    a.classList.add('dropdown-trigger')
+    a.classList.add('btn')
+    a.setAttribute('href','#');
+    a.setAttribute('data-target',id);
+    a.innerHTML = "..."
+    div.appendChild(a)
+    return div
 }
 
 const fillTable = (tableId, data) => {
