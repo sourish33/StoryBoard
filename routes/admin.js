@@ -26,15 +26,17 @@ router.get("/users", ensureAuthAdmin, async (req, res) => {
         //can't mutate users for some reason so creating a new array usersDateFormatted
         let usersDateFormatted = []
         for (let i = 0; i < users.length; i++) {
-            const formattedDate = moment(users[i].createdAt).format("YYYY-MM-DD")
+            const formattedDate = moment(users[i].createdAt).format(
+                "YYYY-MM-DD"
+            )
             const shortUser = {
                 _id: users[i]._id,
-                email: users[i].email,
-                firstName: users[i].firstName,
-                lastName: users[i].lastName,
-                wrote: storyNums[i],
-                liked: users[i].liked.length,
-                joinDate: formattedDate,
+                Email: users[i].email,
+                "First Name": users[i].firstName,
+                "Last Name": users[i].lastName,
+                Wrote: storyNums[i],
+                Liked: users[i].liked.length,
+                Joined: formattedDate,
             }
             usersDateFormatted.push(shortUser)
         }
