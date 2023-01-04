@@ -29,11 +29,13 @@
                 </div>
                 <div class="navbtns">
                     <a href="/users/profile/<%=author._id %>" class="waves-effect waves-purple btn extra-button">View Profile</a>
+                  <% if ( user._id.equals(author._id) ) { %>
                     <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
                     <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
-                    <% if (user.role==="admin") { %>
-                      <a href="/admin/dashboard" class="waves-effect waves-purple btn extra-button">Admin Dashboard</a>
-                  <% } %>
+                <% } %>
+                <% if (user.role==="admin") { %>
+                  <a href="/admin/dashboard" class="waves-effect waves-purple btn extra-button">Admin Dashboard</a>
+              <% } %>
                 </div>
             </div>
         </div>

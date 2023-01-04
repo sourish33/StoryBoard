@@ -15,7 +15,7 @@
                   <a href="#" class="waves-effect waves-light btn">Filter</a>
                 </div>
         </div>
-        <div id="selected-box" class= "hidden">
+        <div id="selected-box" class= "invisible">
           <p>Selected (<span id="numselected"></span>)</p>
           <a class="waves-effect waves-light btn-small">Delete</a>
         </div>
@@ -50,10 +50,10 @@
               checkedIds = checkedIds.filter(el=>el!==checkedId)
             }
             if (checkedIds.length>0){
-              selectedBox.classList.remove('hidden')
+              selectedBox.classList.remove('invisible')
               numselected.innerHTML = checkedIds.length
             } else {
-              selectedBox.classList.add('hidden')
+              selectedBox.classList.add('invisible')
             }
           })
           
@@ -67,7 +67,7 @@
               const checkedId = checkbox.id.split('_')[1]
               checkedIds.push(checkedId)
             }
-            selectedBox.classList.remove('hidden')
+            selectedBox.classList.remove('invisible')
             numselected.innerHTML = checkedIds.length
           }
           else {
@@ -75,7 +75,7 @@
               checkbox.checked = false
             }
             checkedIds = []
-            selectedBox.classList.add('hidden')
+            selectedBox.classList.add('invisible')
             numselected.innerHTML = checkedIds.length
           }
           
