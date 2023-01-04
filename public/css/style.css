@@ -352,8 +352,8 @@ th {
 
 }
 
-select {
-    appearance: none;
+.dots{
+    font-size: 1.5em;
 }
 
 .dashboard-table {

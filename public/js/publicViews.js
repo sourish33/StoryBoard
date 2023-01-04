@@ -153,6 +153,7 @@ const makeDropdown = (id) => {
     let a = document.createElement('a')
     a.classList.add('dropdown-trigger')
     a.classList.add('btn')
+    a.classList.add('dots')
     a.setAttribute('href','#');
     a.setAttribute('data-target',id);
     a.innerHTML = "..."

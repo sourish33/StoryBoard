@@ -29,11 +29,13 @@
                     <% if (loggedIn || user.role ==="admin") { %>
                         <a href="/users/edit/<%= author._id %>"  class="waves-effect waves-purple btn extra-button">Edit Profile</span></a>
                     <% } %>
-                    <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
                     <% if (user.role==="admin") { %>
                         <a href="/admin/dashboard" class="waves-effect waves-purple btn extra-button">Admin Dashboard</a>
                     <% } %>
-                    <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
+                    <% if ( user._id.equals(author._id) ) { %>
+                        <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
+                        <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
+                    <% } %>
                 </div>
             </div>
         </div>
