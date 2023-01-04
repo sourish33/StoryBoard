@@ -21,6 +21,39 @@
         </div>
         <div class="table-holder">
           <table class="highlight" id="usertable">
+            <thead>
+              <tr>
+                <th>
+                  <label>
+                    <input type="checkbox" id="all-checkboxes">
+                    <span></span>
+                  </label>
+                </th>
+                <th>
+                  Email
+                </th>
+                <th style="cursor: pointer;" id='fname'>
+                  First Name
+                </th>
+                <th>
+                  Last Name
+                </th>
+                <th>
+                  Wrote
+                </th>
+                <th>
+                  Liked By
+                </th>
+                <th>
+                  Liked
+                </th>
+                <th>
+                  Joined
+                </th>
+                <th>
+                </th>
+              </tr>
+            </thead>
           </table>
         </div>
 
@@ -83,6 +116,19 @@
           }
           
         })
+
+        const sort = (data, col, dir) => {
+          window.alert("soring by "+col+" dir="+dir)
+        }
+
+        let fnameDir = 1
+        const fname = document.getElementById('fname')
+        fname.addEventListener('click', ()=>{
+          fnameDir *= -1
+          sort(data, 'fname', fnameDir)
+        })
+
+
 
         const logout = () =>{
                 window.location.href = "/auth/logout" 

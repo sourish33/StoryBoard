@@ -124,29 +124,6 @@ const makeCheckbox = (id) => {
     return th
 }
 
-// const makeDropdown = (id) => {
-//     let s = document.createElement("select")
-//     s.id = id
-//     s.classList.add("browser-default")
-//     let option = null
-//     option = document.createElement("option")
-//     option.value = ""
-//     option.innerHTML = "..."
-//     s.appendChild(option)
-//     option = document.createElement("option")
-//     option.value = "view"
-//     option.innerHTML = "View"
-//     s.appendChild(option)
-//     option = document.createElement("option")
-//     option.value = "create"
-//     option.innerHTML = "Create"
-//     s.appendChild(option)
-//     option = document.createElement("option")
-//     option.value = "delete"
-//     option.innerHTML = "Delete"
-//     s.appendChild(option)
-//     return s
-// }
 
 const makeDropdown = (id) => {
     let div = document.createElement('div')
@@ -191,24 +168,30 @@ const makeDropdown = (id) => {
 }
 
 const fillTable = (tableId, data) => {
-    let table = document.getElementById(tableId)
-    removeAllChildNodes(table)
     if (data.length === 0) return
-    let thead = document.createElement("thead")
-    let tr = document.createElement("tr")
-    let checkbox = makeCheckbox("all-checkboxes")
-    tr.appendChild(checkbox)
-    for (const [key, value] of Object.entries(data[0])) {
-        if (key !== "_id") {
-            let th = document.createElement("th")
-            th.innerHTML = key
-            tr.appendChild(th)
-        }
+    let table = document.getElementById(tableId)
+    //clear the table body if it exists
+    let existingBody = table.getElementsByTagName('tbody')
+    if (existingBody.length>0){
+        table.removeChild(existingBody[0])
     }
-    let th = document.createElement("th")
-    tr.appendChild(th)
-    thead.appendChild(tr)
-    table.appendChild(thead)
+    
+    // let thead = document.createElement("thead")
+    // let tr = document.createElement("tr")
+    // let checkbox = makeCheckbox("all-checkboxes")
+    // tr.appendChild(checkbox)
+    // for (const [key, value] of Object.entries(data[0])) {
+    //     if (key !== "_id") {
+    //         let th = document.createElement("th")
+    //         th.innerHTML = key
+    //         tr.appendChild(th)
+    //     }
+    // }
+    // let th = document.createElement("th")
+    // tr.appendChild(th)
+    // thead.appendChild(tr)
+    // table.appendChild(thead)
+
     let tbody = document.createElement("tbody")
     for (let datarow of data) {
         let tr = document.createElement("tr")
@@ -226,6 +209,8 @@ const fillTable = (tableId, data) => {
         td.appendChild(dropdown)
         tr.appendChild(td)
         tbody.appendChild(tr)
-        table.appendChild(tbody)
     }
+    console.log(tbody)
+    
+    table.appendChild(tbody)
 }
