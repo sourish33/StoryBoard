@@ -117,15 +117,27 @@
           
         })
 
-        const sort = (data, col, dir) => {
-          window.alert("soring by "+col+" dir="+dir)
+        const sort = (col, dir) => {
+          // window.alert("soring by "+col+" dir="+dir)
+          const key = col
+          let data1 = JSON.parse(JSON.stringify(data))
+          data1.sort((a,b)=>{
+            if (a[key] < b[key]) {
+              return -dir;
+            }
+            if (a[key] > b[key]) {
+              return dir;
+            }
+            return 0;
+          })
+          fillTable('usertable', data1)
         }
 
         let fnameDir = 1
         const fname = document.getElementById('fname')
         fname.addEventListener('click', ()=>{
           fnameDir *= -1
-          sort(data, 'fname', fnameDir)
+          sort('First Name', fnameDir)
         })
 
 
