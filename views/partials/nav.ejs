@@ -12,7 +12,7 @@
                 <li><a href="/stories">Public Stories</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a onclick="logout()">Logout</a></li>
-                <% if (locals.author && author.role==="admin") { %>
+                <% if (locals.user && user.role==="admin") { %>
                 <li><a href="/admin/dashboard">Admin</a></li>
                 <% } %>
             </ul>

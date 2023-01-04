@@ -165,14 +165,14 @@ const makeDropdown = (id) => {
 
     li = document.createElement('li')
     lia = document.createElement('a')
-    lia.setAttribute('href','#');
+    lia.setAttribute('href','/users/profile/'+id);
     lia.innerHTML = "View"
     li.appendChild(lia)
     ul.appendChild(li)
 
     li = document.createElement('li')
     lia = document.createElement('a')
-    lia.setAttribute('href','#');
+    lia.setAttribute('href','/users/edit/'+id);
     lia.innerHTML = "Edit"
     li.appendChild(lia)
     ul.appendChild(li)
@@ -221,7 +221,7 @@ const fillTable = (tableId, data) => {
             }
         }
         let td = document.createElement("td")
-        let dropdown = makeDropdown("dropdown_" + datarow._id)
+        let dropdown = makeDropdown(datarow._id)
         td.appendChild(dropdown)
         tr.appendChild(td)
         tbody.appendChild(tr)

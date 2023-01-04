@@ -7,7 +7,7 @@
     <script src="sweetalert2.all.min.js"></script>
 </head>
 <body class="viewstory__body">
-    <%- include('../partials/nav.ejs', {author: author}) %> 
+    <%- include('../partials/nav.ejs', {user: user}) %> 
     <div class="container">
         <div class="userpage__top-panel">
             <% if (author.image) { %>
@@ -26,10 +26,13 @@
                     
                 </div>
                 <div class="navbtns">
-                    <% if (loggedIn) { %>
+                    <% if (loggedIn || user.role ==="admin") { %>
                         <a href="/users/edit/<%= author._id %>"  class="waves-effect waves-purple btn extra-button">Edit Profile</span></a>
                     <% } %>
                     <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
+                    <% if (user.role==="admin") { %>
+                        <a href="/admin/dashboard" class="waves-effect waves-purple btn extra-button">Admin Dashboard</a>
+                    <% } %>
                     <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
                 </div>
             </div>

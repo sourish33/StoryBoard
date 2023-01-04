@@ -31,6 +31,9 @@
                     <a href="/users/profile/<%=author._id %>" class="waves-effect waves-purple btn extra-button">View Profile</a>
                     <a href="/dashboard" class="waves-effect waves-purple btn extra-button">Dashboard</a>
                     <a href="/stories" class="waves-effect waves-purple btn extra-button">Public Stories</a>
+                    <% if (user.role==="admin") { %>
+                      <a href="/admin/dashboard" class="waves-effect waves-purple btn extra-button">Admin Dashboard</a>
+                  <% } %>
                 </div>
             </div>
         </div>

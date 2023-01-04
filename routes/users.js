@@ -2,7 +2,7 @@ const express = require("express")
 const { removeLikes, addLikes, removeAllLikes, processStories, processLikedBy } = require("../helpers")
 const router = express.Router()
 const bcrypt = require('bcrypt')
-const { ensureAuth } = require("../middleware/auth")
+const { ensureAuth, ensureAuthOrAdmin } = require("../middleware/auth")
 const Story = require("../models/Story")
 const User = require("../models/User")
 
@@ -10,7 +10,6 @@ const User = require("../models/User")
 router.patch("/addRemoveLike", ensureAuth, async (req, res) => {
     const userid = req.body.userid
     const storyID = req.body.storyID
-    console.log(`userid=${userid}/nstoryid=${storyID}`)
     let likeButtonSize = "small"
     let updatedUser = null
     let updatedStory = null
@@ -37,7 +36,6 @@ router.patch("/addRemoveLike", ensureAuth, async (req, res) => {
             likeButtonSize,
             numLikes,
         }
-        console.log(data)
         res.status(200).json(data)
     } catch (err) {
         res.status(404).render("./error/500.ejs", { error: err })
@@ -87,7 +85,7 @@ router.get("/profile/:id", ensureAuth, async (req, res) =>{
 })
 
 //show edit page
-router.get("/edit/:id", ensureAuth, async (req, res) =>{
+router.get("/edit/:id", ensureAuthOrAdmin, async (req, res) =>{
 
     try {
         const authorId = req.params.id
@@ -96,7 +94,7 @@ router.get("/edit/:id", ensureAuth, async (req, res) =>{
             return res.render('./error/noaccess.ejs') 
         }
         const loggedIn =  author._id.equals(req.user._id)
-        if (loggedIn){
+        if (loggedIn || req.user.role==="admin"){
             return res.render('./user/userpage-edit.ejs', {
                 author, 
                 user: req.user, 
@@ -110,16 +108,14 @@ router.get("/edit/:id", ensureAuth, async (req, res) =>{
 })
 
 //edit user details
-router.post("/edit/:id", ensureAuth, async (req, res) =>{
+router.post("/edit/:id", ensureAuthOrAdmin, async (req, res) =>{
 
     try {
         const authorId = req.params.id
-        console.log(authorId)
         if (req.body.password) {
             const hashedPassword = await bcrypt.hash(req.body.password, 10)
             req.body.password = hashedPassword
         }
-        console.log(req.body)
         const updatedAuthor = await User.findByIdAndUpdate({_id: authorId},req.body, {new: true})
         req.flash('info', 'Updates made');
         return res.status(200).render('./user/userpage-edit.ejs', {
