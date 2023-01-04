@@ -35,7 +35,7 @@
                 <th style="cursor: pointer;" id='fname'>
                   First Name
                 </th>
-                <th>
+                <th style="cursor: pointer;" id='lname'>
                   Last Name
                 </th>
                 <th>
@@ -139,6 +139,14 @@
           fnameDir *= -1
           sort('First Name', fnameDir)
         })
+
+        let lnameDir = 1
+        const lname = document.getElementById('lname')
+        lname.addEventListener('click', ()=>{
+          sort('Last Name', lnameDir)
+          lnameDir *= -1
+        })
+        
 
 
 
