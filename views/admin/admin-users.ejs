@@ -106,8 +106,11 @@
     <%- include('../partials/footer.ejs') %> 
     <script src="/js/publicViews.js"></script>
     <script>
-      const data = <%- JSON.stringify(users) %>;
+      // const data = <%- JSON.stringify(users) %>;
       // fillTable('usertable', data)
+      const table = document.getElementById('usertable')
+      const tb = table.getElementsByTagName('tbody')[0]
+      const originalRows = Array.from(tb.getElementsByTagName('tr'))
 
       let checkedIds = []
       const checkboxes = document.querySelectorAll(`[id^="sel_"]`)
@@ -212,6 +215,30 @@
 
             removeAllChildNodes(tb)
             for (let row of rows){
+              tb.appendChild(row)
+          }
+
+        }
+
+        const filterRows = (keyword) => {
+          const table = document.getElementById('usertable')
+          const tb = table.getElementsByTagName('tbody')[0]
+          const rows = Array.from(tb.getElementsByTagName('tr'))
+
+          const filteredRows = rows.filter(row => {
+            return getValueInCol(row,2).includes(keyword)
+          })
+          if (filteredRows.length===0) return
+          removeAllChildNodes(tb)
+            for (let row of filteredRows){
+              tb.appendChild(row)
+          }
+        }
+        const resetRows = () => {
+          const table = document.getElementById('usertable')
+          const tb = table.getElementsByTagName('tbody')[0]
+          removeAllChildNodes(tb)
+            for (let row of originalRows){
               tb.appendChild(row)
           }
 
