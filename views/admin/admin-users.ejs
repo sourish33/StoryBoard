@@ -54,6 +54,47 @@
                 </th>
               </tr>
             </thead>
+            <tbody>
+              <% for( let user of users) { %>
+                <tr>
+                  <td>
+                    <label>
+                      <input type="checkbox" id=<%="sel_"+user["_id"] %>>
+                      <span></span>
+                    </label> 
+                  </td>
+                  <td>
+                    <%= user["First Name"] %> 
+                  </td>
+                  <td>
+                    <%= user["Last Name"] %> 
+                  </td>
+                  <td>
+                    <%= user["Wrote"] %> 
+                  </td>
+                  <td>
+                    <%= user["Liked By"] %> 
+                  </td>
+                  <td>
+                    <%= user["Liked"] %> 
+                  </td>
+                  <td>
+                    <%= user["Joined"] %> 
+                  </td>
+                  <td>
+                    <div>
+                      <a class='dropdown-trigger btn dots' href='#' data-target=<%= user["_id"] %> >...</a>
+                      <ul id=<%= user._id %> class='dropdown-content'>
+                        <li><a href=<%='/users/profile/'+ user._id %>>View</a></li>
+                        <li><a href=<%= '/users/edit/'+user._id %>>Edit</a></li>
+                        <li><a href="#!">Delete</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              
+              <% } %>
+            </tbody>
           </table>
         </div>
 
@@ -62,9 +103,10 @@
     <%- include('../partials/footer.ejs') %> 
     <script src="/js/publicViews.js"></script>
     <script>
-      const data = <%- JSON.stringify(users) %>
-      fillTable('usertable', data)
+      // const data = <%- JSON.stringify(users) %>
+      // fillTable('usertable', data)
       let checkedIds = []
+      const checkboxes = document.querySelectorAll(`[id^="sel_"]`)
 
         
         const selectAllCheckboxes = document.getElementById('all-checkboxes')
@@ -84,7 +126,6 @@
         }
 
         const handleCheckBoxes = () => {
-          const checkboxes = document.querySelectorAll(`[id^="sel_"]`)
           checkedIds = []
           hideSelectedBox()
           for (let checkbox of checkboxes){
@@ -121,7 +162,7 @@
               const checkedId = checkbox.id.split('_')[1]
               checkedIds.push(checkedId)
             }
-            selectedBox.classList.remove('invisible')
+            showSelectedBox()
             numselected.innerHTML = checkedIds.length
           }
           else {
@@ -129,7 +170,7 @@
               checkbox.checked = false
             }
             checkedIds = []
-            selectedBox.classList.add('invisible')
+            hideSelectedBox()
             numselected.innerHTML = checkedIds.length
           }
           
