@@ -64,6 +64,9 @@
                     </label> 
                   </td>
                   <td>
+                    <%= user["Email"] %> 
+                  </td>
+                  <td>
                     <%= user["First Name"] %> 
                   </td>
                   <td>
@@ -103,8 +106,9 @@
     <%- include('../partials/footer.ejs') %> 
     <script src="/js/publicViews.js"></script>
     <script>
-      // const data = <%- JSON.stringify(users) %>
+      const data = <%- JSON.stringify(users) %>;
       // fillTable('usertable', data)
+
       let checkedIds = []
       const checkboxes = document.querySelectorAll(`[id^="sel_"]`)
 
@@ -176,63 +180,83 @@
           
         })
 
-        const sort = (col, dir) => {
-          // window.alert("soring by "+col+" dir="+dir)
-          const key = col
-          let data1 = JSON.parse(JSON.stringify(data))
-          data1.sort((a,b)=>{
-            if (a[key] < b[key]) {
-              return -dir;
-            }
-            if (a[key] > b[key]) {
-              return dir;
-            }
-            return 0;
-          })
-          fillTable('usertable', data1)
-          handleCheckBoxes()
+        function isValidDate(date) {
+          return /^\d{4}-\d{2}-\d{2}$/.test(date);
+        }
+
+        function isOneOrTwoDigits(input) {
+          return /^\d{1,2}$/.test(input);
+        }
+
+        const getValueInCol = (row, n) => {
+          const cells = row.getElementsByTagName('td')
+          const str = cells[n].innerHTML
+          if (isValidDate(str)) return str
+          if (isOneOrTwoDigits(str)) return +str
+          return str
+        }
+
+        const sortRows = (col, dir) => {
+          const table = document.getElementById('usertable')
+          const tb = table.getElementsByTagName('tbody')[0]
+          const rows = Array.from(tb.getElementsByTagName('tr'))
+          rows.sort((a,b)=>{
+              if (  getValueInCol(a,col) < getValueInCol(b,col) ) {
+                return -1*dir;
+              }
+              if (  getValueInCol(a,col)  > getValueInCol(b,col) ) {
+                return dir;
+              }
+              return 0;
+            })
+
+            removeAllChildNodes(tb)
+            for (let row of rows){
+              tb.appendChild(row)
+          }
+
         }
 
         let fnameDir = 1
         const fname = document.getElementById('fname')
         fname.addEventListener('click', ()=>{
           fnameDir *= -1
-          sort('First Name', fnameDir)
+          sortRows(2, fnameDir)
         })
 
         let lnameDir = 1
         const lname = document.getElementById('lname')
         lname.addEventListener('click', ()=>{
-          sort('Last Name', lnameDir)
           lnameDir *= -1
+          sortRows(3, lnameDir)
         })
 
         let wroteDir = 1 
         const wrote = document.getElementById('wrote')
         wrote.addEventListener('click', ()=>{
           wroteDir *= -1
-          sort('Wrote', wroteDir)
+          sortRows(4, wroteDir)
         })
 
         let likedbyDir = 1 
         const likedby = document.getElementById('likedby')
         likedby.addEventListener('click', ()=>{
           likedbyDir *= -1
-          sort('Liked By', likedbyDir)
+          sortRows(5, likedbyDir)
         })
 
         let likedDir = 1 
         const liked = document.getElementById('liked')
         liked.addEventListener('click', ()=>{
           likedDir *= -1
-          sort('Liked', likedDir)
+          sortRows(6, likedDir)
         })
 
         let joinedDir = 1 
         const joined = document.getElementById('joined')
         joined.addEventListener('click', ()=>{
           joinedDir *= -1
-          sort('Joined', joinedDir)
+          sortRows(7, joinedDir)
         })
         
         
