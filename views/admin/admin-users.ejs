@@ -32,14 +32,14 @@
                 <th>
                   Email
                 </th>
-                <th style="cursor: pointer;" id='fname'>
-                  First Name
-                </th>
-                <th style="cursor: pointer;" id='lname'>
-                  Last Name
+                <th>
+                  First Name <i class="fas fa-sort" style="cursor: pointer;" id='fname'></i>
                 </th>
                 <th>
-                  Wrote
+                  Last Name <i class="fas fa-sort" style="cursor: pointer;" id='lname'></i>
+                </th>
+                <th>
+                  Wrote <i class="fas fa-sort" style="cursor: pointer;" id='wrote'></i>
                 </th>
                 <th>
                   Liked By
@@ -146,6 +146,14 @@
           sort('Last Name', lnameDir)
           lnameDir *= -1
         })
+
+        let wroteDir = 1 
+        const wrote = document.getElementById('wrote')
+        wrote.addEventListener('click', ()=>{
+          wroteDir *= -1
+          sort('Wrote', wroteDir)
+        })
+        
         
 
 
