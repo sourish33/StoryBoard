@@ -42,13 +42,13 @@
                   Wrote <i class="fas fa-sort" style="cursor: pointer;" id='wrote'></i>
                 </th>
                 <th>
-                  Liked By
+                  Liked By <i class="fas fa-sort" style="cursor: pointer;" id='likedby'></i>
                 </th>
                 <th>
-                  Liked
+                  Liked <i class="fas fa-sort" style="cursor: pointer;" id='liked'></i>
                 </th>
                 <th>
-                  Joined
+                  Joined <i class="fas fa-sort" style="cursor: pointer;" id='joined'></i>
                 </th>
                 <th>
                 </th>
@@ -152,6 +152,27 @@
         wrote.addEventListener('click', ()=>{
           wroteDir *= -1
           sort('Wrote', wroteDir)
+        })
+
+        let likedbyDir = 1 
+        const likedby = document.getElementById('likedby')
+        likedby.addEventListener('click', ()=>{
+          likedbyDir *= -1
+          sort('Liked By', likedbyDir)
+        })
+
+        let likedDir = 1 
+        const liked = document.getElementById('liked')
+        liked.addEventListener('click', ()=>{
+          likedDir *= -1
+          sort('Liked', likedDir)
+        })
+
+        let joinedDir = 1 
+        const joined = document.getElementById('joined')
+        joined.addEventListener('click', ()=>{
+          joinedDir *= -1
+          sort('Joined', joinedDir)
         })
         
         
