@@ -25,10 +25,10 @@ Admin users can view, edit or delete all stories.
 StoryBoard is available [here](https://wild-erin-woodpecker-cape.cyclic.app/dashboard) 
 
 To use the site you can
-    * Create a new account and login
-    * Login with google
-    * Use the guest login
-    * Login as a sample user with email: "a@a" and password: "pwd"
+* Create a new account and login
+* Login with google
+* Use the guest login
+* Login as a sample user with email: "a@a" and password: "pwd"
 
 
 ## Installation
