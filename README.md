@@ -1,7 +1,9 @@
 
 # StoryBoard
 
-StoryBoard is an application where users can create and share short stories. Once signed in, users can create or update their own stories and share them with other users. Users can also like and save stories. 
+StoryBoard is an application where users can create and share short stories. Once signed in (either through Google or by username and password), users can create or update (or delete) their profile. They can also create stories and optionally make them public. Users can read public stories shared by other users, view profiles of other users and also like and save stories.  
+
+Admin users can view, edit or delete all stories.
 
 # Technologies
 
@@ -20,9 +22,13 @@ StoryBoard is an application where users can create and share short stories. Onc
 
 ## Live Site 
 
-Play Tortoise Scrabble [here](https://sourish33.github.io/ScrabbleReact) 
+StoryBoard is available [here](https://wild-erin-woodpecker-cape.cyclic.app/dashboard) 
 
-While all screen sizes are supported, Desktops and Tablets are recommended for the best experience. Touch Screen is supported.
+To use the site you can
+    * Create a new account and login
+    * Login with google
+    * Use the guest login
+    * Login as a sample user with email: "a@a" and password: "pwd"
 
 
 ## Installation
@@ -32,10 +38,12 @@ While all screen sizes are supported, Desktops and Tablets are recommended for t
 ```bash
 npm install
 ```
-* Once all necessary packages are installed, start the game in development mode
+* Once all necessary packages are installed, launch the app in development mode
 ```bash
 npm run dev
 ```
+
+
 
 
 ## Contributing
